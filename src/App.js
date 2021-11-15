@@ -1,25 +1,17 @@
 import './App.css';
-import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 import AddTodo from "./components/AddTodo";
+import TodosProvider from "./context/TodoContext";
+import TodoList from "./components/TodoList";
 
 function App() {
-    // const list = [{
-    //     "text": "Main",
-    //     "href": "/",
-    // }, {
-    //     "text": "Apple",
-    //     "href": "/apple",
-    // }, {
-    //     "text": "iPad",
-    //     "href": "/apple/ipads",
-    // }, {
-    //     "text": "Air 2021",
-    //     "href": "/apple/ipads/air2021",
-    // }
-    // ]
+
     return (
-        <AddTodo/>
-        // <Breadcrumbs crumbList={list} divider={"/"}/>
+        <section className="container">
+            <TodosProvider>
+                <AddTodo/>
+                <TodoList/>
+            </TodosProvider>
+        </section>
     );
 }
 
