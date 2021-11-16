@@ -4,17 +4,20 @@ import {useTodos} from "../hooks/useTodo";
 const AddTodo = () => {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
-    const [todos, setTodo] = useTodos()
+    const [, dispatch] = useTodos()
 
     const addTodo = (e) => {
         e.preventDefault()
-        setTodo({
-            id: Date.now(),
-            title,
-            body,
-            createdAt: Date.now(),
-            isCompleted: false,
-            editedAt: null
+        dispatch({
+            action: "addTodo",
+            payload: {
+                id: Date.now(),
+                title,
+                body,
+                createdAt: Date.now(),
+                isCompleted: false,
+                editedAt: null
+            }
         })
     }
 
