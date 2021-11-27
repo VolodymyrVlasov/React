@@ -22,7 +22,7 @@ const AddTodo = () => {
     }
 
     return (
-        <form onSubmit={addTodo} className="row justify-content-center bg-light p-3">
+        <form onSubmit={addTodo} className="row justify-content-center ">
             <div className="py-3">
                 <label htmlFor="title" className="form-label">Email address</label>
                 <input type="text" className="form-control" id="title" name={"title"}

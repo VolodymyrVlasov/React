@@ -1,0 +1,32 @@
+
+.comments p {
+    line-height: 0.85rem;
+}
+
+.comments-add-comment {
+    border: 1px solid var(--color-text-gray);
+    border-radius: 8px;
+    width: 100%;
+    min-height: 32px;
+    height: auto;
+}
+
+.comments-new_message {
+    align-items: flex-end;
+}
+
+.comments-send-btn {
+    width: 32px;
+    height: 30px;
+    border-radius: 16px;
+    border: 1px solid gray;
+    color: gray;
+    background: transparent;
+    margin-left: 12px;
+    transition: 0.3s;
+}
+
+.comments-send-btn:hover {
+    color: #fff;
+    background: gray;
+}

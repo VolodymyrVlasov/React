@@ -1,0 +1,44 @@
+:root {
+    --color-bg-color: #fff;
+    --color-shadow: rgba(45, 83, 219, 0.1);
+    --border-radius: 18px;
+
+    --btn-padding: 3px 32px 3px 8px;
+    --color-bg-gray: #EFEFEF;
+    --color-text-gray: #B1B1B1;
+    --color-text-hover: #000;
+}
+
+.task {
+    width: 33%;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    background: var(--color-bg-color);
+    box-shadow: 0 4px 6px 3px var(--color-shadow);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.task--id {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.task--tasks-list span {
+    flex: 1;
+}
+
+.task--comments > li {
+    margin-bottom: 6px;
+}
+
+.manager-label {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.text-label--name {
+    font-weight: 600;
+}

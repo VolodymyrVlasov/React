@@ -1,26 +1,35 @@
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, Modal} from "react-bootstrap";
+import {useState} from "react";
 
-export default function ({title, content, children}) {
+export default function Popup({
+                                  callBtnText = "Show",
+                                  applyBtnText = "Ok",
+                                  cancelBtnText = "Cancel",
+                                  callBtnStyle = "primary",
+                                  modalHeading = "",
+                                  isBtn = true,
+                                  children
+                              }) {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
-        <div>
-            <Modal toggle={() => {
-            }}>
-                <ModalHeader toggle={() => {
-                }}>{title}</ModalHeader>
-                <ModalBody>{children}</ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={() => {
-                        console.log("Do Something")
-                    }}>
-                        Do Something
-                    </Button>{' '}
-                    <Button onClick={() => {
-                        console.log("Cancel")
-                    }}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
+        <>
+            <Button variant="primary" onClick={handleShow}>{callBtnText}</Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{modalHeading}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{children || <p>Close me</p>}</Modal.Body>
+
+                {isBtn && <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>{cancelBtnText}</Button>
+                    <Button variant="primary" onClick={handleClose}>{applyBtnText}</Button>
+                </Modal.Footer>}
+
             </Modal>
-        </div>
-    )
+        </>
+    );
 }

@@ -1,0 +1,24 @@
+.state_btn {
+    padding: 8px 32px;
+    border-radius: 999px;
+    color: #fff;
+    border: 0;
+    outline: 0;
+}
+
+.state_btn.todo {
+    background-color: purple;
+
+}
+
+.state_btn.in_progress {
+    background-color: coral;
+}
+
+.state_btn.done {
+    background-color: greenyellow;
+}
+
+.state_btn.finished {
+    background-color: gray;
+}
