@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {getTodoList, getUsers} from "../api/api";
+import {useState} from "react";
+import {getTodoList, getUsers, updateTask} from "../api/api";
 
-const useFetch = (type) => {
+const useFetch = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -15,28 +15,29 @@ const useFetch = (type) => {
         }
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
-            switch (type) {
-                case 'getAllTodos': {
-                    const [err, data] = await getTodoList();
-                    setResult(err, data)
-                    break;
-                }
-                case 'getUsers': {
-                    const [err, data] = await getUsers();
-                    setResult(err, data)
-                    break;
-                }
-                default:
+    const fetchData = async (type, payload) => {
+        setLoading(true)
+        switch (type) {
+            case 'getAllTodos': {
+                const [err, data] = await getTodoList();
+                setResult(err, data)
+                break
             }
-
-            setLoading(false)
+            case 'getUsers': {
+                const [err, data] = await getUsers();
+                setResult(err, data)
+                break
+            }
+            case "updateTask":
+                const [err, data] = await updateTask(payload)
+                setResult(err, data)
+                break
+            default:
         }
-        fetchData()
-    }, [])
-    return {data, error, loading};
+        setLoading(false)
+    }
+
+    return {data, error, loading, fetchData};
 }
 
 export default useFetch

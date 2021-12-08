@@ -1,5 +1,4 @@
-{
-  "taskList": [
+ [
     {
       "orderId": "ПФ-00012",
       "customer": "John Doe",
@@ -71,4 +70,4 @@
       "state": "Приступить"
     }
   ]
-}
+

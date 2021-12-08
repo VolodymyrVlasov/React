@@ -1,27 +1,38 @@
 import "./RedirectTask.css"
 import defaultAvatar from "../../img/ico-default-avatar.webp"
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useTodos} from "../../hooks/useTodos";
+import useFetch from "../../hooks/useFetch";
 
-const RedirectTask = ({users, avatarUrl, isCardFull, maker, setMaker}) => {
+const RedirectTask = (task) => {
+    const [{items}, dispatch] = useTodos()
+    const {data, error, loading, fetchData} = useFetch()
+
     const [isVisibleDropDown, setIsVisibleDropDown] = useState(false)
 
     const setNewMaker = (id) => {
-        const newMaker = users.find(e => e.id === id)
-        setMaker(newMaker)
+        const newMaker = items.find(e => e.id === id)
+        const updatedTask = {
+            ...task,
+            maker: newMaker
+        }
+        fetchData("updateTask", updatedTask)
         setIsVisibleDropDown(!isVisibleDropDown)
     }
 
+    useEffect(() => {
+        dispatch("updateTask", data)
+    }, [data])
+
     const getUserList = () => {
-        if (users) {
-            return users.map((user, index) => {
-                return (
-                    <li key={index}>
-                        <button onClick={(e) => setNewMaker(user.id)}
-                                className="redirect_task-drop_down-btn">{user.name}</button>
-                    </li>
-                )
-            })
-        }
+        return items?.map((user, index) => {
+            return (
+                <li key={index}>
+                    <button onClick={(e) => setNewMaker(user.id)}
+                            className="redirect_task-drop_down-btn">{user.name}</button>
+                </li>
+            )
+        })
     }
 
     const isMakerVisible = () => {
@@ -29,7 +40,7 @@ const RedirectTask = ({users, avatarUrl, isCardFull, maker, setMaker}) => {
             return (
                 <>
                     <button className="redirect_task-btn"
-                            onClick={() => setIsVisibleDropDown(!isVisibleDropDown)}>{maker.name}</button>
+                            onClick={() => setIsVisibleDropDown(!isVisibleDropDown)}>{task.maker.name}</button>
                     <ul className={isVisibleDropDown ? "redirect_task-drop_down" : "hide"}>{getUserList()}</ul>
                 </>
             )

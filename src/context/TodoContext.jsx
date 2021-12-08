@@ -1,20 +1,30 @@
-import {createContext, useEffect, useReducer} from "react";
+import {createContext, useReducer} from "react";
 
 const LC_KEY = "todos"
 
 export const TodosContext = createContext([])
 
-const initialState = JSON.parse(localStorage.getItem(LC_KEY)) || []
+const initialState = {
+    todos: [],
+    searchQuery: '',
+    sortParams: {
+        key: 'state',
+        order: 1
+    }
+};
 
-const reducer = (state, {action, payload}) => {
+const reducer = (state, {type, payload}) => {
     try {
-        switch (action) {
-            case "addTodo":
-                return [...state, payload]
-            case "completeTodo":
-                return [...state, payload]
-            case "removeTodo":
-                return [...state, payload]
+        switch (type) {
+            case "addTask":
+                return {...state, items: [...state.items, payload]}
+
+            case "updateTask":
+                const index = state.items.findIndex(payload.id)
+                const updatedTaskList = state.items.splice(index, 1)
+                updatedTaskList.push(payload)
+                return {...state, items: updatedTaskList}
+
             default:
                 throw new Error(`Invalid action: ${action}`)
         }
@@ -24,17 +34,7 @@ const reducer = (state, {action, payload}) => {
 }
 
 const TodosProvider = ({children}) => {
-    // const [todos, setTodos] = useState([])
-    const [state, dispatch] = useReducer(reducer, initialState,)
-
-    // const addTodo = (newTodo) => {
-    //     setTodos([...todos, newTodo])
-    // }
-
-    useEffect(() => {
-        localStorage.setItem(LC_KEY, JSON.stringify(state))
-    }, [state])
-
+    const [state, dispatch] = useReducer(reducer, initialState)
     return (
         <TodosContext.Provider value={[state, dispatch]}>{children}</TodosContext.Provider>
     )

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import "./StateButton.css"
 
-const StateButton = ({taskState, setTaskState}) => {
+const StateButton = () => {
 
     const [btnStyle, setBtnStyle] = useState("state_btn todo")
 
