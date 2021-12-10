@@ -1,14 +1,26 @@
+import useFetch from "../../hooks/useFetch";
+import Loading from "../../components/Loading/Loading";
+import {useEffect} from "react";
+import {useTasks} from "../../hooks/useTasks";
 import TaskCard from "../../components/TaskCard/TaskCard";
-import {useTodos} from "../../hooks/useTodos";
 
 const Dashboard = () => {
-    // const {todoList, error, loading} = useFetch("getAllTodos")
-    const [{items, searchQuery}, dispatch] = useTodos()
+    const {data, error, loading, fetchData} = useFetch()
+    const [{tasks, makers, searchParams}, dispatch] = useTasks()
+
+    useEffect(() => fetchData("getAllTodos"), [])
+
+    useEffect(() => {
+        !error && dispatch({type: "updateTaskList", payload: data})
+        console.log(error, data)
+
+    }, [data, error])
+
+    if (loading) return (<Loading/>)
 
     return (
-        <section>
-            {/*{loading ? <Loading/> : getTaskCards()}*/}
-            {items.map((task, index) => <TaskCard key={index} task={task}/>)}
+        <section className="container">
+            {tasks.map((t, i) => <TaskCard key={i} order={t}/>)}
         </section>
     )
 }

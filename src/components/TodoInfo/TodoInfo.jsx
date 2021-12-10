@@ -1,6 +1,6 @@
 import defaultAvatar from "../../img/ico-default-avatar.webp";
 
-const TodoInfo = ({todo}) => {
+const TodoInfo = ({task}) => {
     return (
         <div className="col">
             <div className="row-h-center_v-spb">
@@ -8,10 +8,10 @@ const TodoInfo = ({todo}) => {
                 <p className="text-label half">Поставил задачу</p>
             </div>
             <div className="row-h-center_v-spb">
-                <p className="half">{todo.customer}</p>
+                <p className="half">{task.customer?.name}</p>
                 <div className="row half manager-label">
                     <img className="xsm-avatar" src={defaultAvatar} alt="avatar"/>
-                    <span>{todo.manager.name}</span>
+                    <span>{task.manager?.name}</span>
                 </div>
             </div>
         </div>

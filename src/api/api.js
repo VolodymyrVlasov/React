@@ -10,8 +10,8 @@ api.interceptors.response.use(
     (err) => [err, null]
 )
 
-export const getTodoList = () => {
-    return api.get("/FakeDB/taskList.json");
+export const getTasks = () => {
+    return api.get("/orders");
 }
 
 export const getUsers = () => {
@@ -19,6 +19,6 @@ export const getUsers = () => {
 }
 
 export const updateTask = (task) => {
-    return api.patch("/tasks", task)
+    return api.patch("/orders", task)
 }
 

@@ -1,73 +1,71 @@
  [
-    {
-      "orderId": "ПФ-00012",
-      "customer": "John Doe",
-      "maker": {
-        "name": "Владимир Власов",
-        "id": "14f904d485cb4bc9a18c8b871c7a9568"
-      },
-      "manager": {
-        "name": "Иван Лубянко",
-        "hash": "hash3"
-      },
-      "taskList": [
-        {
-          "name": "Чашка белая 310 мл",
-          "amount": 500,
-          "folder": "/desktop/cups/00012"
-        },
-        {
-          "name": "Холст хлопок 30х40 + лак",
-          "amount": 1,
-          "folder": "/desktop/canvas/00012"
-        }
-      ],
-      "messages": [
-        {
-          "authorName": "Pawel Smolow",
-          "message": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."
-        },
-        {
-          "authorName": "Владимир Власов",
-          "message": "Да че ты такое несешь?"
-        }
-      ],
-      "state": "Завершить"
-    },
-    {
-      "orderId": "ПФ-00014",
-      "customer": "John Doe",
-      "maker": {
-        "name": "Pavel Smolow",
-        "hash": "hash3"
-      },
-      "manager": {
-        "name": "Иван Лубянко",
-        "hash": "hash3"
-      },
-      "taskList": [
-        {
-          "name": "Чашка белая 310 мл",
-          "amount": 50,
-          "folder": "/desktop/cups/00012"
-        },
-        {
-          "name": "Холст хлопок 30х40 + лак",
-          "amount": 1,
-          "folder": "/desktop/canvas/00012"
-        }
-      ],
-      "messages": [
-        {
-          "authorName": "Pawel Smolow",
-          "message": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."
-        },
-        {
-          "authorName": "Владимир Власов",
-          "message": "Да че ты такое несешь?"
-        }
-      ],
-      "state": "Приступить"
-    }
-  ]
+   {
+     "customer": {
+       "name": "Ivan",
+       "lastName": "Petrov",
+       "email": "ivanpetron@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "maker": {
+       "name": "Volodymyr",
+       "lastName": "Vlasov",
+       "email": "volodymyr@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "manager": {
+       "name": "Dmytro",
+       "lastName": "Ivanenko",
+       "email": "ivanenko@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "tasks": [
+       {
+         "category": "CALENDAR",
+         "itemName": "A3 matte",
+         "amount": "2",
+         "price": "700",
+         "paid": "350",
+         "paymentType": "LIQPAY"
+       }
+     ],
+     "status": "IN_PROGRESS"
+   },
+   {
+     "customer": {
+       "name": "Ivan",
+       "lastName": "Petrov",
+       "email": "ivanpetron@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "maker": {
+       "name": "Volodymyr",
+       "lastName": "Vlasov",
+       "email": "volodymyr@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "manager": {
+       "name": "Dmytro",
+       "lastName": "Ivanenko",
+       "email": "ivanenko@gmail.com",
+       "phone": "095111222333",
+       "telegramId": "2454631"
+     },
+     "tasks": [
+       {
+         "category": "CALENDAR",
+         "itemName": "A3 matte",
+         "amount": "2",
+         "price": "700",
+         "paid": "350",
+         "paymentType": "LIQPAY"
+       }
+     ],
+     "status": "IN_PROGRESS"
+   }
+ ]
 

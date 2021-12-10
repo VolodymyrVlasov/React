@@ -1,31 +1,32 @@
 import {useState} from "react";
 import "./StateButton.css"
 
-const StateButton = () => {
-
+const StateButton = ({task}) => {
+    // const [, dispatch] = useTasks()
     const [btnStyle, setBtnStyle] = useState("state_btn todo")
 
+    // console.log(TaskStatus.FINISHED)
     const setTodoState = (e) => {
         e.stopPropagation()
-        switch (taskState) {
+        switch (task.status) {
             case "Приступить":
-                setTaskState("Завершить")
+                // setTaskState("Завершить")
                 setBtnStyle("state_btn in_progress")
                 break
             case "Завершить":
-                setTaskState("Готов")
+                // setTaskState("Готов")
                 setBtnStyle("state_btn done")
                 break
             case "Готов":
                 if (window.confirm("Заказ выдан?")) {
-                    setTaskState("Выдан")
+                    // setTaskState("Выдан")
                     setBtnStyle("state_btn finished")
                 }
                 break
         }
     }
 
-    return (<button onClick={(e) => setTodoState(e)} className={btnStyle}>{taskState}</button>)
+    return (<button onClick={(e) => setTodoState(e)} className={btnStyle}>{task.status}</button>)
 
 }
 export default StateButton

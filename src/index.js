@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
 import App from "./App";
-import TodosProvider from "./context/TodoContext";
+import TasksProvider from "./context/TasksContext";
 
 
 ReactDOM.render(
     <React.StrictMode>
-        <TodosProvider>
+        <TasksProvider>
             <App/>
-        </TodosProvider>
+        </TasksProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {getTodoList, getUsers, updateTask} from "../api/api";
+import {getTasks, getUsers, updateTask} from "../api/api";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -7,6 +7,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
 
     const setResult = (err, data) => {
+        console.log("useFetch -> error:", err, "data:", data)
         if (!err) {
             setData(data)
         }
@@ -19,7 +20,7 @@ const useFetch = () => {
         setLoading(true)
         switch (type) {
             case 'getAllTodos': {
-                const [err, data] = await getTodoList();
+                const [err, data] = await getTasks();
                 setResult(err, data)
                 break
             }
@@ -36,7 +37,6 @@ const useFetch = () => {
         }
         setLoading(false)
     }
-
     return {data, error, loading, fetchData};
 }
 
