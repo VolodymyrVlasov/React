@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    position: sticky;
+    top: 24px;
+    background-color: #fff;
+    z-index: 1000;
+    margin-bottom: 24px;
+    border-radius: 999px;
+    box-shadow: 0 4px 6px 3px var(--color-shadow);
+    padding: 0 24px;
+}
+
+.logo {
+    width: 110px;
+    height: 42px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.button-new-task {
+    padding: 8px 32px;
+    border-radius: 999px;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    background-color: purple;
+}
+
+.button-profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+}

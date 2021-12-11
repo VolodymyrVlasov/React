@@ -20,31 +20,6 @@ const RedirectTask = ({task}) => {
             })
     }, [])
 
-    // const setNewMaker = (id) => {
-    //     const newMaker = items.find(e => e.id === id)
-    //     const taskToUpdate = {
-    //         ...task,
-    //         maker: newMaker
-    //     }
-    //     fetchData("updateTask", taskToUpdate)
-    //     setIsVisibleDropDown(!isVisibleDropDown)
-    // }
-
-    // useEffect(() => {
-    //     dispatch("updateTask", data)
-    // }, [data])
-    // const getUserList = () => {
-    //     return items?.map((user, index) => {
-    //         return (
-    //             <li key={index}>
-    //                 <button onClick={(e) => setNewMaker(user.id)}
-    //                         className="redirect_task-drop_down-btn">{loading && <Loading/> || user.name}</button>
-    //             </li>
-    //         )
-    //     })
-    // }
-
-
     return (
         <div className="redirect_task">
             <button className="redirect_task-btn"
