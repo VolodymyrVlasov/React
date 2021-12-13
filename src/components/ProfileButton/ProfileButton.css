@@ -1,0 +1,25 @@
+.profile-cnt {
+    position: relative;
+}
+
+.profile-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    outline: 0;
+    border: 0;
+}
+
+.profile-point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: 1px solid white;
+    background: var(--gradient-purple);
+    top: 0;
+    right: 0;
+}

@@ -6,6 +6,11 @@
     padding: 8px 16px;
     border-radius: 999px;
     width: 600px;
+    border: 1px solid transparent;
+}
+
+.search:focus-within {
+    border: 1px solid lightgreen;
 }
 
 .search-ico {

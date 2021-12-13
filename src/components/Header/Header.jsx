@@ -1,6 +1,8 @@
 import "./Header.css"
 import logo from "../../img/logo.svg"
 import Search from "../Searh/Searh";
+import Button from "../Button/Button";
+import ProfileButton from "../ProfileButton/ProfileButton";
 
 const Header = () => {
     return (
@@ -13,10 +15,8 @@ const Header = () => {
             </a>
             <Search/>
             <div className="row gap-24">
-                <button className="button-new-task">Новый заказ</button>
-                <div>
-                    <button className="button-profile"/>
-                </div>
+               <Button text="Add order"/>
+                <ProfileButton/>
             </div>
         </header>
     )

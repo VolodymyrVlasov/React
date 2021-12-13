@@ -5,7 +5,6 @@ const StateButton = ({task}) => {
     // const [, dispatch] = useTasks()
     const [btnStyle, setBtnStyle] = useState("state_btn todo")
 
-    // console.log(TaskStatus.FINISHED)
     const setTodoState = (e) => {
         e.stopPropagation()
         switch (task.status) {

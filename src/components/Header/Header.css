@@ -19,18 +19,3 @@
     object-fit: contain;
     object-position: center;
 }
-
-.button-new-task {
-    padding: 8px 32px;
-    border-radius: 999px;
-    color: #fff;
-    border: 0;
-    outline: 0;
-    background-color: purple;
-}
-
-.button-profile {
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-}

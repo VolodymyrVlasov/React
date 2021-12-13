@@ -5,7 +5,6 @@ import TodoTaskList from "../TaskList/TaskList";
 import TodoInfo from "../TodoInfo/TodoInfo";
 
 const TaskCard = ({order}) => {
-    console.log("TaskCard", order)
     return (
         <div className="task col col-gap">
             <div className="row-h-center_v-spb">

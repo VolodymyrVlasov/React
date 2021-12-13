@@ -29,6 +29,10 @@ const reducer = (state, {type, payload}) => {
 
             case "updateMakers":
                 return {...state, makers: payload}
+
+            case "addToSearchParams":
+                return {...state, searchQuery: payload}
+
             default:
                 throw new Error(`Invalid action: ${{type, payload}}`)
         }

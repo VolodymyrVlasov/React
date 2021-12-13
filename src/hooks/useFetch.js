@@ -6,15 +6,7 @@ const useFetch = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const setResult = (err, data) => {
-        console.log("useFetch -> error:", err, "data:", data)
-        if (!err) {
-            setData(data)
-        }
-        if (err) {
-            setError(err)
-        }
-    }
+    const setResult = (err, data) => !err ? setData(data) : setError(err)
 
     const fetchData = async (type, payload) => {
         setLoading(true)

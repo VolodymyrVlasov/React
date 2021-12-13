@@ -7,4 +7,6 @@
     --color-bg-gray: #EFEFEF;
     --color-text-gray: #B1B1B1;
     --color-text-hover: #000;
+
+    --gradient-purple: linear-gradient(60deg, #7A1DC4 25%, #FF579E 140%);
 }

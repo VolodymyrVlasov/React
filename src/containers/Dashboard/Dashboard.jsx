@@ -12,15 +12,13 @@ const Dashboard = () => {
 
     useEffect(() => {
         !error && dispatch({type: "updateTaskList", payload: data})
-        console.log(error, data)
-
     }, [data, error])
 
     if (loading) return (<Loading/>)
 
     return (
         <section className="container">
-            {tasks.map((t, i) => <TaskCard key={i} order={t}/>)}
+            {tasks != null && tasks.map((t, i) => <TaskCard key={i} order={t}/>)}
         </section>
     )
 }
