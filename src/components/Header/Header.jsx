@@ -3,8 +3,15 @@ import logo from "../../img/logo.svg"
 import Search from "../Searh/Searh";
 import Button from "../Button/Button";
 import ProfileButton from "../ProfileButton/ProfileButton";
+import {useTasks} from "../../hooks/useTasks";
 
 const Header = () => {
+    const [{isNewTaskPopup}, dispatch] = useTasks()
+
+    const handleClose = () => {
+        dispatch({type: "changeNewTaskPopup"})
+    }
+
     return (
         <header className="header container row">
             <a href="/" aria-label="logo">
@@ -15,7 +22,7 @@ const Header = () => {
             </a>
             <Search/>
             <div className="row gap-24">
-               <Button text="Add order"/>
+                <Button text="Add order" onClickFunc={handleClose}/>
                 <ProfileButton/>
             </div>
         </header>

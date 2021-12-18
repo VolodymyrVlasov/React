@@ -5,6 +5,7 @@ export const TasksContext = createContext([])
 const initialState = {
     tasks: [],
     makers: [],
+    isNewTaskPopup: false,
     searchQuery: '',
     sortParams: {
         key: 'state',
@@ -33,8 +34,10 @@ const reducer = (state, {type, payload}) => {
             case "addToSearchParams":
                 return {...state, searchQuery: payload}
 
+            case "changeNewTaskPopup":
+                return {...state, isNewTaskPopup: !state.isNewTaskPopup}
             default:
-                throw new Error(`Invalid action: ${{type, payload}}`)
+                return new Error(`Invalid action: ${{type, payload}}`)
         }
     } catch (error) {
         console.error(error)

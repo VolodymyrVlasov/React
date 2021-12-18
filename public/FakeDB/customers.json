@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Iryna",
+    "lastname": "Hryhorenko",
+    "phone": "073 333 33 22",
+    "email": " iryna@domain.com"
+  },
+  {
+    "name": "Татьяна",
+    "lastname": "Григоренко",
+    "phone": "093 111 33 22",
+    "email": "tatiana@domain.com"
+  },
+  {
+    "name": "Сергей",
+    "lastname": "Григоренко",
+    "phone": "073 222 33 22",
+    "email": "sergey@domain.com"
+  },
+  {
+    "name": "Иван",
+    "lastname": "Лубянко",
+    "phone": "073 232 33 22",
+    "email": "ivan@domain.com"
+  },
+  {
+    "name": "Александр",
+    "lastname": "Гребенюк",
+    "phone": "073 222 99 22",
+    "email": "alex@domain.com"
+  },
+  {
+    "name": "Алена",
+    "lastname": "Кнопка",
+    "phone": "073 022 33 22",
+    "email": "knopka@domain.com"
+  }
+]

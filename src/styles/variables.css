@@ -4,9 +4,14 @@
     --border-radius: 18px;
 
     --btn-padding: 3px 32px 3px 8px;
+    --input-padding: 8px 16px;
     --color-bg-gray: #EFEFEF;
     --color-text-gray: #B1B1B1;
     --color-text-hover: #000;
-
+    --color-purple: #7A1DC4;
     --gradient-purple: linear-gradient(60deg, #7A1DC4 25%, #FF579E 140%);
+
+    --shadow: 0 4px 6px 3px var(--color-shadow);
+
+    --transition-time:300ms;
 }

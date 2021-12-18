@@ -7,7 +7,7 @@ const Search = () => {
     const [{searchQuery}, dispatch] = useTasks()
     let delayedSearch
 
-    searchCnt.current.style.border = "1px solid transparent"
+    useEffect(() => {searchCnt.current.style.border = "1px solid transparent"})
 
     const addToSearchParams = (e) => {
         let searchQuery = e?.target?.value
