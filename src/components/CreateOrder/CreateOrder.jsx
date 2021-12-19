@@ -1,7 +1,7 @@
 import {useAuth} from "../../hooks/useAuth";
 import {useEffect, useState} from "react";
 import useFetch from "../../hooks/useFetch";
-import AutoSearchSelect from "../AutoSearchSelect/AutoSearchSelect";
+import SelectCustomer from "../AutoSearchSelect/SelectCustomer";
 import OrderProvider from "../../context/OrderContext";
 import {useOrder} from "../../hooks/useOrder";
 
@@ -24,9 +24,9 @@ const CreateOrder = () => {
                     <p>Order number</p>
                     <input type="text" name="orderId"/>
                 </div>
-                <div id="customer">
+                <div id="customer" className="col col-gap">
                     <p>Customer</p>
-                    <AutoSearchSelect/>
+                    <SelectCustomer/>
                 </div>
                 <div id="maker">
                     <p>Maker</p>
