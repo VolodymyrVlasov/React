@@ -1,7 +1,9 @@
 import "./AddCustomer.css"
 import {createRef, useEffect, useState} from "react";
+import Button from "../Button/Button";
 
-const AddCustomer = ({addCustomer}) => {
+const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
+    const [isBtnAdd, setIsBtnAdd] = useState(false)
     const [name, setName] = useState(null)
     const [lastname, setLastname] = useState(null)
     const [phone, setPhone] = useState(null)
@@ -14,11 +16,34 @@ const AddCustomer = ({addCustomer}) => {
     let delayTimer
 
     useEffect(() => {
-            if ((name && lastname) && (phone || email)) {
-                addCustomer({name, lastname, phone, email})
+            if (isBtnAdd) {
+                if ((name && lastname) && (phone || email)) {
+                    addCustomer({name, lastname, phone, email})
+                } else {
+                    if (!name) {
+                        nameRef.current.style.border = "1px solid red"
+                    } else {
+                        lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
+                    }
+                    if (!lastname) {
+                        lastnameRef.current.style.border = "1px solid red"
+                    } else {
+                        lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
+                    }
+                    if (!phone) {
+                        phoneRef.current.style.border = "1px solid red"
+                    } else {
+                        lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
+                    }
+                    if (!email) {
+                        emailRef.current.style.border = "1px solid red"
+                    } else {
+                        lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
+                    }
+                }
             }
         },
-        [name, lastname, phone, email])
+        [isBtnAdd])
 
     const validateEmail = (email) => {
         const regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -93,18 +118,18 @@ const AddCustomer = ({addCustomer}) => {
         }
     }
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <>
-            <input ref={nameRef} type="text" placeholder="Name" onInput={() => addName()}/>
-            <input ref={lastnameRef} type="text" placeholder="Lastname" onInput={() => addLastname()}/>
+            <input ref={nameRef} type="text" placeholder="Name" className="add_customer-input"
+                   onInput={() => addName()}/>
+            <input ref={lastnameRef} type="text" placeholder="Lastname" className="add_customer-input"
+                   onInput={() => addLastname()}/>
             <input ref={phoneRef} type="tel" placeholder="Phone" pattern="[0-9] {3} - [0-9] {2} - [0-9] {3}"
-                   onInput={() => addPhone()}/>
-            <input ref={emailRef} type="email" placeholder="e-mail" onInput={() => addEmail()}/>
-            <button>x</button>
+                   onInput={() => addPhone()} className="add_customer-input"/>
+            <input ref={emailRef} type="email" placeholder="e-mail" className="add_customer-input"
+                   onInput={() => addEmail()}/>
+            <button onClick={() => setIsNewCustomer(false)} className="add_customer-cancel_button">+</button>
+            <Button onClickFunc={() => setIsBtnAdd(true)} text={"Add"}/>
         </>
     )
 }

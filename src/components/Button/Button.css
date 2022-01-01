@@ -1,8 +1,16 @@
-.button-new-task {
+.button {
     padding: 8px 32px;
     border-radius: 999px;
     color: #fff;
-    border: 0;
     outline: 0;
     background: var(--gradient-purple);
+    border: 1px solid transparent;
+    transition: var(--transition-time);
+}
+
+.button:hover,
+.button:focus {
+    border: 1px solid var(--color-purple);
+    background: #fff;
+    color: var(--color-purple)
 }

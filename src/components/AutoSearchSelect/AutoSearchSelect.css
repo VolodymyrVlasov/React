@@ -2,10 +2,10 @@
     position: relative;
     background-color: var(--color-bg-gray);
     border-radius: 999px;
-    padding: var(--input-padding);
+    padding: 8px;
     display: flex;
     justify-content: space-between;
-    gap: 24px;
+    gap: var(--small-gap);
     width: 100%;
     border: 1px solid transparent;
 }

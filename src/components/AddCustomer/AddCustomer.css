@@ -1,0 +1,31 @@
+.add_customer-input {
+    width: 100%;
+    outline: 0;
+    border: 1px solid var(--color-text-gray);
+    padding: 8px 8px;
+    border-radius: 999px;
+}
+
+.add_customer-input:hover {
+
+}
+
+.add_customer-input:focus {
+    border: 1px solid var(--color-purple);
+}
+
+.add_customer-cancel_button {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    transition: var(--transition-time);
+    transform: rotateZ(45deg);
+    cursor: pointer;
+}
+
+.add_customer-cancel_button:hover,
+.add_customer-cancel_button:focus {
+    transform: scale(1.5) rotateZ(135deg);
+    color: var(--color-purple);
+}

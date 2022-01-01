@@ -9,7 +9,7 @@ const Button = ({onClickFunc, text}) => {
 
     return (<button
         onClick={(e) => callAction(e)}
-        className="button-new-task">{text}</button>)
+        className="button">{text}</button>)
 }
 
 export default Button

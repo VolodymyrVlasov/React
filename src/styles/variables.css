@@ -1,10 +1,13 @@
 :root {
-    --color-bg-color: #fff;
     --color-shadow: rgba(45, 83, 219, 0.1);
     --border-radius: 18px;
+    --small-gap: 12px;
+    --medium-gap: 24px;
+    --big-gap: 48px;
 
     --btn-padding: 3px 32px 3px 8px;
     --input-padding: 8px 16px;
+    --color-bg-color: #fff;
     --color-bg-gray: #EFEFEF;
     --color-text-gray: #B1B1B1;
     --color-text-hover: #000;

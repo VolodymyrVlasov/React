@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import useFetch from "../../hooks/useFetch";
 
-const SearchCustomer = () => {
+const SearchCustomer = ({selectedCustomer}) => {
     let delayedSearch
 
     const fetchCustomers = useFetch()
@@ -28,6 +28,8 @@ const SearchCustomer = () => {
             fetchCustomers.fetchData("findCustomers", query)
         }
     }, [query])
+
+
 
     useEffect(() => {
         if (fetchCustomers.data && fetchCustomers.data.length > 0) {
@@ -57,7 +59,7 @@ const SearchCustomer = () => {
                    onChange={(e) => addToSearchParams(e)}/>
             {
                 isResultDropVisible && resultList != null &&
-                <DropDownResult resultList={resultList} changeVisibility={setIsResultDropVisible}/>
+                <DropDownResult resultList={resultList} changeVisibility={setIsResultDropVisible} setCustomer={selectedCustomer}/>
             }
         </>
     )
@@ -65,8 +67,7 @@ const SearchCustomer = () => {
 
 export default SearchCustomer
 
-
-const DropDownResult = ({resultList, changeVisibility}) => {
+const DropDownResult = ({resultList, changeVisibility, setCustomer}) => {
     const ref = useRef()
 
     const onOutSideClick = (e) => {
@@ -85,7 +86,7 @@ const DropDownResult = ({resultList, changeVisibility}) => {
             <ul ref={ref} className="auto-search-dropdown">{
                 resultList.map((customer, index) => {
                     return (
-                        <li key={index} className="auto-search-dropdown--item">
+                        <li key={index} onClick={() => setCustomer(customer)} className="auto-search-dropdown--item">
                             {customer.name} {customer.lastname} {customer.phone && customer.phone}
                             {customer.email && customer.email}</li>
                     )
