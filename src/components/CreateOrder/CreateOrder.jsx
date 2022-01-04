@@ -4,6 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import SelectCustomer from "../AutoSearchSelect/SelectCustomer";
 import OrderProvider from "../../context/OrderContext";
 import {useOrder} from "../../hooks/useOrder";
+import "./CreateOrder.css"
+import Select from "../Select/Select";
 
 const CreateOrder = () => {
     const {order} = useOrder()
@@ -13,31 +15,28 @@ const CreateOrder = () => {
 
     useEffect(() => {
         !fetchMakers.data && fetchMakers.fetchData("getUsers")
-        setMakers(fetchMakers.data)
+        setMakers(fetchMakers.data?.users)
     }, [fetchMakers])
 
+
+    const maker = (maker) => {
+        console.log("current maker -> ", maker)
+    }
 
     return (
         <OrderProvider>
             <div className="col col-gap">
-                <div>
-                    <p>Order number</p>
-                    <input type="text" name="orderId"/>
-                </div>
-                <div id="customer" className="col col-gap">
+                <h2 className="create_order-title">New order form</h2>
+
+                <div id="customer" className="col col-gap create_order-customer_cnt">
                     <p>Customer</p>
                     <SelectCustomer/>
                 </div>
-                <div id="maker">
+                <div id="maker" className="col col-gap create_order-maker_cnt">
                     <p>Maker</p>
-                    <select name="maker" id="maker">{
-                        makers?.users?.map((maker, index) => {
-                            return (
-                                <option key={index} id={maker.id}>{maker.name}</option>
-                            )
-                        })}
-                    </select>
+                    <Select list={makers ? makers : []} handleSelected={maker}/>
                 </div>
+
                 <div>
                     <p>Tasks</p>
                     <div>

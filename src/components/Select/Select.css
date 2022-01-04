@@ -1,4 +1,4 @@
-.auto-search {
+.select-cnt {
     position: relative;
     background-color: var(--color-bg-gray);
     border-radius: 999px;
@@ -10,24 +10,25 @@
     border: 1px solid transparent;
 }
 
-.auto-search:focus-within {
+.select-cnt:focus-within {
     background-color: white;
     border: 1px solid var(--color-purple);
 }
 
-.auto-search:focus-within > .auto-search--btn-add {
+.select-cnt:focus-within > .auto-search--btn-add {
     color: var(--color-purple);
 }
 
-.auto-search--input {
+.select--input {
     border: 0;
     outline: 0;
     width: 100%;
     background-color: transparent;
+
 }
 
 
-.auto-search--btn-add {
+.select--btn {
     border: 0;
     outline: 0;
     font-size: 14px;
@@ -38,8 +39,8 @@
     transition: var(--transition-time);
 }
 
-.auto-search--btn-add:hover,
-.auto-search--btn-add:focus {
+.select--btn:hover,
+.select--btn:focus {
     background: var(--gradient-purple);
     color: #fff !important;
 }

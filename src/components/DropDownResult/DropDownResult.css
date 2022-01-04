@@ -1,0 +1,22 @@
+
+.drop_down_result-dropdown {
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 4px);
+    left: 0;
+    border-radius: var(--border-radius);
+    background-color: #fff;
+    box-shadow: var(--shadow);
+    z-index: 999;
+}
+
+
+.drop_down_result-dropdown--item {
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+}
+
+.drop_down_result-dropdown--item:hover {
+    background-color: lightgrey;
+}

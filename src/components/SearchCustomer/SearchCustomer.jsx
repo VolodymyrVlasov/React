@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import useFetch from "../../hooks/useFetch";
+import DropDownResult from "../DropDownResult/DropDownResult";
 
 const SearchCustomer = ({selectedCustomer}) => {
     let delayedSearch
@@ -59,46 +60,10 @@ const SearchCustomer = ({selectedCustomer}) => {
                    onChange={(e) => addToSearchParams(e)}/>
             {
                 isResultDropVisible && resultList != null &&
-                <DropDownResult resultList={resultList} changeVisibility={setIsResultDropVisible} setCustomer={selectedCustomer}/>
+                <DropDownResult resultList={resultList} setIsVisibleFunc={setIsResultDropVisible} setSelectedItemFunc={selectedCustomer}/>
             }
         </>
     )
 }
 
 export default SearchCustomer
-
-const DropDownResult = ({resultList, changeVisibility, setCustomer}) => {
-    const ref = useRef()
-
-    const onOutSideClick = (e) => {
-        if (ref.current && !ref.current?.contains(e.target)) {
-            changeVisibility(false)
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('click', onOutSideClick)
-        return () => document.removeEventListener('click', onOutSideClick)
-    })
-
-    if (resultList.length > 0) {
-        return (
-            <ul ref={ref} className="auto-search-dropdown">{
-                resultList.map((customer, index) => {
-                    return (
-                        <li key={index} onClick={() => setCustomer(customer)} className="auto-search-dropdown--item">
-                            {customer.name} {customer.lastname} {customer.phone && customer.phone}
-                            {customer.email && customer.email}</li>
-                    )
-                })
-            }
-            </ul>
-        )
-    }
-
-    return (
-        <ul className="auto-search-dropdown">
-            <li className="auto-search-dropdown--item">No matches</li>
-        </ul>
-    )
-}

@@ -1,0 +1,15 @@
+.create_order-title {
+    font-size: 24px;
+}
+
+.create_order-customer_cnt {
+ flex: 2;
+}
+
+.create_order-maker_cnt {
+    flex: 2;
+}
+
+.w-100 {
+    width: 100%;
+}

@@ -15,7 +15,7 @@ const SelectCustomer = () => {
         setCustomer(customer)
     }
 
-    const addNewCustomer = (customer) => {
+    const createCustomer = (customer) => {
         // todo: add customer to db
         addCustomer(customer)
     }
@@ -33,7 +33,7 @@ const SelectCustomer = () => {
         <div className="auto-search" id="auto-search-customer">
             {!customer ?
                 isNewCustomer ?
-                    <AddCustomer addCustomer={addNewCustomer} setIsNewCustomer={setIsNewCustomer}/> :
+                    <AddCustomer addCustomer={createCustomer} setIsNewCustomer={setIsNewCustomer}/> :
                     <SearchCustomer selectedCustomer={addCustomer}/>
                 : <SelectedItem item={customer} deleteItem={deleteCustomer}/>
             }
