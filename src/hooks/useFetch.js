@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {getCustomers, getTasks, getTaskTypes, getUsers, updateTask} from "../api/api";
+import {createOrder, getCustomers, getTasks, getTaskTypes, getUsers, updateTask} from "../api/api";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -11,6 +11,11 @@ const useFetch = () => {
     const fetchData = async (type, payload) => {
         setLoading(true)
         switch (type) {
+            case 'createOrder': {
+                const [err, data] = await createOrder(payload);
+                setResult(err, data)
+                break
+            }
             case 'getAllTodos': {
                 const [err, data] = await getTasks();
                 setResult(err, data)

@@ -45,3 +45,22 @@
     transform: scale(1.5) rotateZ(180deg);
     color: var(--color-purple);
 }
+
+.button-drop {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    transition: var(--transition-time);
+    transform: rotateZ(90deg);
+    cursor: pointer;
+}
+
+.button-drop:hover,
+.button-drop:focus {
+    transform: scale(1.5) rotateZ(90deg);
+    color: var(--color-purple);
+}
+
+
+

@@ -15,6 +15,10 @@ const Button = ({onClickFunc, buttonText, type = "default"}) => {
                 setStyle("cancel")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("+")
                 break
+            case "drop":
+                setStyle("drop")
+                buttonText && buttonText !== "" ? setText(buttonText) : setText("›")
+                break
             default:
                 setStyle("default")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("click me")

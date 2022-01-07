@@ -1,17 +1,15 @@
-import {createContext, useReducer} from "react";
+import {createContext, useEffect, useReducer} from "react";
 
 export const OrderContext = createContext({})
 
 const initialState = {
-    order: {
-        orderId: "",
-        customer: {},
-        manager: {},
-        maker: {},
-        tasks: [],
-        comments: []
-    }
-};
+    orderId: "",
+    customer: {},
+    manager: {},
+    maker: {},
+    tasks: [],
+    comments: []
+}
 
 const reducer = (state, {type, payload}) => {
     try {
@@ -24,8 +22,9 @@ const reducer = (state, {type, payload}) => {
                 return {...state, manager: payload}
             case "addMaker":
                 return {...state, maker: payload}
-            case "addTask":
-                return {...state, tasks: [...state.tasks, payload]}
+            case "addTasks":
+                console.log("addTasks")
+                return {...state, tasks: payload}
             case "addComment":
                 return {...state, comments: [...state.comments, payload]}
             default:
@@ -38,6 +37,12 @@ const reducer = (state, {type, payload}) => {
 
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+        console.clear()
+        console.log(state)
+    }, [state])
+
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>
     )

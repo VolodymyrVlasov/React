@@ -3,8 +3,9 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    min-height: 48px;
     gap: var(--medium-gap);
     border-radius: 999px;
     background-color: var(--color-bg-gray);
-    padding: 4px 24px 4px 4px;
+    padding: 0 24px 0 0 ;
 }

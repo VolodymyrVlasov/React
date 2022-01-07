@@ -20,6 +20,10 @@ apiFr.interceptors.response.use(
     (err) => [err, null]
 )
 
+export const createOrder = (order) => {
+    return api.post("/orders", order);
+}
+
 export const getTasks = () => {
     return api.get("/orders");
 }

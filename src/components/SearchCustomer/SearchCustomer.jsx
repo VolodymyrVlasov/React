@@ -40,7 +40,7 @@ const SearchCustomer = ({selectedCustomer}) => {
                 const searchResult = data.filter(customer => {
                     return (
                         customer.name.includes(query) ||
-                        customer.lastname.toLowerCase().includes(query.toLowerCase()) ||
+                        customer.lastName.toLowerCase().includes(query.toLowerCase()) ||
                         customer.phone.replaceAll(" ", "").includes(query.replaceAll(" ", "")) ||
                         customer.email.toLowerCase().includes(query.toLowerCase())
                     )

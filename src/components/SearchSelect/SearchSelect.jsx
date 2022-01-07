@@ -2,8 +2,11 @@ import {createRef, useEffect, useState} from "react";
 import DropDownResult from "../DropDownResult/DropDownResult";
 import "./SearchSelect.css"
 import SelectedItem from "../SelectedItem/SelectedItem";
+import Button from "../Button/Button";
+import {useOrder} from "../../hooks/useOrder";
 
-const SearchSelect = ({list = [], handleSelected}) => {
+const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
+    const [, dispatch] = useOrder()
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
     const [selectedItem, setSelectedItem] = useState(null)
     const [resultList, setResultList] = useState(null)
@@ -14,7 +17,7 @@ const SearchSelect = ({list = [], handleSelected}) => {
         if (target) {
             let result = list.filter(item => {
                 return item?.name?.toLowerCase().includes(target.toLowerCase()) ||
-                    item.lastname?.toLowerCase().includes(target.toLowerCase()) ||
+                    item.lastName?.toLowerCase().includes(target.toLowerCase()) ||
                     item.title?.toLowerCase().includes(target.toLowerCase()) ||
                     item.phone?.toLowerCase().includes(target.toLowerCase()) ||
                     item.email?.toLowerCase().includes(target.toLowerCase())
@@ -36,15 +39,25 @@ const SearchSelect = ({list = [], handleSelected}) => {
 
     const onButtonClick = () => {
         if (!isDropDownVisible) {
-            setSelectedItem(undefined)
+            setSelectedItem(null)
         }
         setResultList(null)
         setIsDropDownVisible(!isDropDownVisible)
     }
 
-    const removeSelected = () => {
+    const removeSelected = (event) => {
+        event.stopPropagation()
         setSelectedItem(null)
     }
+
+    useEffect(() => {
+        if (clearSelected) {
+            setIsDropDownVisible(false)
+            setSelectedItem(null)
+            setResultList(null)
+            inputRef.current.value = null
+        }
+    }, [clearSelected])
 
     useEffect(() => {
         if (handleSelected) {
@@ -58,19 +71,20 @@ const SearchSelect = ({list = [], handleSelected}) => {
     return (
         <div className="select-cnt" onClick={() => onButtonClick()}>
             {
-                selectedItem != null ?
+                selectedItem != null && !clearSelected ?
                     <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
                     :
                     <input type="text"
                            ref={inputRef}
                            className="select--input"
-                           placeholder="Enter name or lastname"
-                           value={selectedItem?.name}
+                           placeholder="Start type to search"
+                        // value={selectedItem?.name}
                            onInput={(event) => searchItem(event.target?.value)}/>
             }
 
-            <button className="select--btn"
-                    onClick={() => onButtonClick()}>{isDropDownVisible ? "-" : "+"}</button>
+            <Button onClickFunc={onButtonClick} type={"drop"}/>
+            {/*<button className="select--btn"*/}
+            {/*        onClick={() => onButtonClick()}>{isDropDownVisible ? "-" : "+"}</button>*/}
             {isDropDownVisible ?
                 <DropDownResult
                     resultList={resultList ? resultList : list}

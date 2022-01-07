@@ -5,6 +5,7 @@ import "./styles/variables.css"
 import {useTasks} from "./hooks/useTasks";
 import Popup from "./containers/Popup/Popup";
 import CreateOrder from "./components/CreateOrder/CreateOrder";
+import OrderProvider from "./context/OrderContext";
 
 
 const App = () => {
@@ -15,8 +16,11 @@ const App = () => {
     return (
         <>
             {
-                isNewTaskPopup && <Popup handleClose={handleClose}>
-                    <CreateOrder/>
+                isNewTaskPopup &&
+                <Popup handleClose={handleClose}>
+                    <OrderProvider>
+                        <CreateOrder/>
+                    </OrderProvider>
                 </Popup>
             }
             <Header/>

@@ -29,7 +29,6 @@ const Search = () => {
 
     useEffect(() => {
         //todo: call useFetch dispatch function to find some on backend and write it in Context
-        console.log("searchQuery -> ", searchQuery)
     }, [searchQuery])
 
     return (

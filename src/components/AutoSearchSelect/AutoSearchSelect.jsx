@@ -3,8 +3,10 @@ import "./AutoSearchSelect.css"
 import AddCustomer from "../AddCustomer/AddCustomer";
 import SearchCustomer from "../SearchCustomer/SearchCustomer";
 import SelectedItem from "../SelectedItem/SelectedItem";
+import {useOrder} from "../../hooks/useOrder";
 
 const AutoSearchSelect = () => {
+    const [, dispatch] = useOrder()
     const [customer, setCustomer] = useState(null)
     const [isNewCustomer, setIsNewCustomer] = useState(false)
 
@@ -26,7 +28,7 @@ const AutoSearchSelect = () => {
 
     useEffect(() => {
         // todo: add customer to order context
-        console.table(customer)
+        dispatch({type: "addCustomer", payload: customer})
     }, [customer])
 
     return (

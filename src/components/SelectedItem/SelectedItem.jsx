@@ -7,7 +7,7 @@ const SelectedItem = ({item, deleteItem}) => {
             {item.title ? item.title :
                 item.name ? item.name : null}
             {item.name && item.lastname ? <> {item.lastname}</> : null}</span>
-            <button onClick={() => deleteItem && deleteItem()} className="selected_item-button">+</button>
+            <button onClick={(event) => deleteItem && deleteItem(event)} className="selected_item-button">+</button>
         </div>
     )
 }

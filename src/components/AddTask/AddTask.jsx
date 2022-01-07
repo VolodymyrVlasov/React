@@ -4,8 +4,10 @@ import SearchSelect from "../SearchSelect/SearchSelect";
 import SelectedItem from "../SelectedItem/SelectedItem";
 import useFetch from "../../hooks/useFetch";
 import FormRowWrapper from "../FormRowWrapper/FormRowWrapper";
+import {useOrder} from "../../hooks/useOrder";
 
 const AddTask = () => {
+    const [state, dispatch] = useOrder()
     const fetchTaskTypes = useFetch()
     const [tasks, setTasks] = useState([])
     const [taskTypes, setTaskTypes] = useState(fetchTaskTypes.data)
@@ -20,6 +22,11 @@ const AddTask = () => {
         }
     }, [fetchTaskTypes.data])
 
+    useEffect(() => {
+        dispatch({type: "addTasks", payload: tasks})
+
+    }, [tasks])
+
     const onRemoveBtnClick = (id) => {
         const filteredTasks = tasks.filter(task => task.item.id !== String(id))
         filteredTasks.length === 0 ? setTasks([]) : setTasks(filteredTasks)
@@ -30,6 +37,7 @@ const AddTask = () => {
 
         if (tasks.length === 0) {
             setTasks([task])
+
         } else if (index > -1) {
             const editedTask = {
                 "item": tasks[index].item,
@@ -39,6 +47,7 @@ const AddTask = () => {
             const tasksWithMerged = [...tasks]
             tasksWithMerged.splice(index, 1, editedTask)
             setTasks(tasksWithMerged)
+
         } else {
             setTasks(prevState => [...prevState, task])
         }
@@ -76,33 +85,35 @@ const TaskForm = ({list, addTaskFunk}) => {
     const [amount, setAmount] = useState(1)
     const [totalPrice, setTotalPrice] = useState(null)
     const [task, setTask] = useState(null)
+    const [clear, setClear] = useState()
 
     const setSelectedItem = (item) => setItem(item)
 
-    const onAmountChange = (value) => item && setAmount(value)
+    const onAmountChange = (value) => item && setAmount(Number(value))
 
     const addTask = () => {
         task && addTaskFunk(task)
+        setTask(null)
         setItem(null)
+        setClear(true)
     }
 
     useEffect(() => {
-        item && setTotalPrice(amount * item?.price[0])
-    }, [amount])
-
-    useEffect(() => {
-        setTotalPrice(item?.price[0] * amount)
-    }, [item])
+        if (amount && item) {
+            setTotalPrice(item?.price[0] * amount)
+        }
+    }, [item, amount])
 
     useEffect(() => {
         if (item && amount && totalPrice) {
             setTask({item, amount, totalPrice})
         }
+        setClear(false)
     }, [item, amount, totalPrice])
 
     return (
         <FormRowWrapper callback={addTask} buttonType={"add"}>
-            <SearchSelect list={list} handleSelected={setSelectedItem}/>
+            <SearchSelect list={list} handleSelected={setSelectedItem} clearSelected={clear}/>
             {item &&
             <input type="text" min={"1"}
                    onChange={(event) => onAmountChange(event?.target?.value)}
