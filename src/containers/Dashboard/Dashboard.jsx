@@ -1,9 +1,8 @@
 import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading/Loading";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useTasks} from "../../hooks/useTasks";
 import TaskCard from "../../components/TaskCard/TaskCard";
-import Popup from "reactjs-popup";
 
 const Dashboard = () => {
 

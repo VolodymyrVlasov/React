@@ -1,11 +1,11 @@
 import {createRef, useEffect, useState} from "react";
 import DropDownResult from "../DropDownResult/DropDownResult";
-import "./Select.css"
+import "./SearchSelect.css"
 import SelectedItem from "../SelectedItem/SelectedItem";
 
-const Select = ({list, handleSelected}) => {
+const SearchSelect = ({list = [], handleSelected}) => {
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
-    const [selectedItem, setSelectedItem] = useState(list[0])
+    const [selectedItem, setSelectedItem] = useState(null)
     const [resultList, setResultList] = useState(null)
     const inputRef = createRef()
 
@@ -13,12 +13,11 @@ const Select = ({list, handleSelected}) => {
         setIsDropDownVisible(true)
         if (target) {
             let result = list.filter(item => {
-                return item.name?.toLowerCase().includes(target.toLowerCase()) ||
+                return item?.name?.toLowerCase().includes(target.toLowerCase()) ||
                     item.lastname?.toLowerCase().includes(target.toLowerCase()) ||
                     item.title?.toLowerCase().includes(target.toLowerCase()) ||
                     item.phone?.toLowerCase().includes(target.toLowerCase()) ||
                     item.email?.toLowerCase().includes(target.toLowerCase())
-
             })
             if (result?.length > 0) {
                 setResultList(result)
@@ -43,6 +42,10 @@ const Select = ({list, handleSelected}) => {
         setIsDropDownVisible(!isDropDownVisible)
     }
 
+    const removeSelected = () => {
+        setSelectedItem(null)
+    }
+
     useEffect(() => {
         if (handleSelected) {
             handleSelected(selectedItem)
@@ -55,8 +58,8 @@ const Select = ({list, handleSelected}) => {
     return (
         <div className="select-cnt" onClick={() => onButtonClick()}>
             {
-                selectedItem ?
-                    <SelectedItem item={selectedItem}/>
+                selectedItem != null ?
+                    <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
                     :
                     <input type="text"
                            ref={inputRef}
@@ -78,4 +81,4 @@ const Select = ({list, handleSelected}) => {
     )
 }
 
-export default Select
+export default SearchSelect

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {getCustomers, getTasks, getUsers, updateTask} from "../api/api";
+import {getCustomers, getTasks, getTaskTypes, getUsers, updateTask} from "../api/api";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -31,6 +31,10 @@ const useFetch = () => {
                 setResult(err, data)
                 break
             }
+            case "taskTypes":
+                const [err, data] = await getTaskTypes()
+                setResult(err, data)
+                break
             default:
                 setResult(new Error(`Type "${type}" not found`))
         }

@@ -1,4 +1,4 @@
-.button {
+.button-default {
     padding: 8px 32px;
     border-radius: 999px;
     color: #fff;
@@ -8,9 +8,40 @@
     transition: var(--transition-time);
 }
 
-.button:hover,
-.button:focus {
+.button-default:hover,
+.button-default:focus {
     border: 1px solid var(--color-purple);
     background: #fff;
     color: var(--color-purple)
+}
+
+.button-cancel {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    transition: var(--transition-time);
+    transform: rotateZ(45deg);
+    cursor: pointer;
+}
+
+.button-cancel:hover,
+.button-cancel:focus {
+    transform: scale(1.5) rotateZ(135deg);
+    color: var(--color-purple);
+}
+
+.button-add {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    transition: var(--transition-time);
+    cursor: pointer;
+}
+
+.button-add:hover,
+.button-add:focus {
+    transform: scale(1.5) rotateZ(180deg);
+    color: var(--color-purple);
 }

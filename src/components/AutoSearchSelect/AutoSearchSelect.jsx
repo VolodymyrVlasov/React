@@ -4,7 +4,7 @@ import AddCustomer from "../AddCustomer/AddCustomer";
 import SearchCustomer from "../SearchCustomer/SearchCustomer";
 import SelectedItem from "../SelectedItem/SelectedItem";
 
-const SelectCustomer = () => {
+const AutoSearchSelect = () => {
     const [customer, setCustomer] = useState(null)
     const [isNewCustomer, setIsNewCustomer] = useState(false)
 
@@ -45,5 +45,5 @@ const SelectCustomer = () => {
     )
 }
 
-export default SelectCustomer
+export default AutoSearchSelect
 

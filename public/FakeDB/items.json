@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Cup white 200ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "1"
+  },
+  {
+    "name": "Cup white 310ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "2"
+  },
+  {
+    "name": "Cup white 425ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "3"
+  },
+  {
+    "name": "Cup with color elements 200ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "4"
+  },
+  {
+    "name": "Cup with color elements 310ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "5"
+  },
+  {
+    "name": "Cup with color elements 425ml",
+    "price": [
+      120,
+      110,
+      100,
+      90,
+      80,
+      70
+    ],
+    "category": "CUP",
+    "id": "6"
+  }
+,
+  {
+    "name": "UPM 300gsm SRA3 4+0",
+    "price": [
+      30,
+      25,
+      23,
+      20,
+      17,
+      12
+    ],
+    "category": "DIGITAL_PRINT",
+    "id": "7"
+  }
+]

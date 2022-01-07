@@ -36,3 +36,7 @@ export const getCustomers = () => {
     return apiFr.get("/FakeDB/customers.json")
 }
 
+export const getTaskTypes = () => {
+    return apiFr.get("/FakeDB/items.json")
+}
+

@@ -1,11 +1,12 @@
 import {useAuth} from "../../hooks/useAuth";
 import {useEffect, useState} from "react";
 import useFetch from "../../hooks/useFetch";
-import SelectCustomer from "../AutoSearchSelect/SelectCustomer";
+import AutoSearchSelect from "../AutoSearchSelect/AutoSearchSelect";
 import OrderProvider from "../../context/OrderContext";
 import {useOrder} from "../../hooks/useOrder";
 import "./CreateOrder.css"
-import Select from "../Select/Select";
+import SearchSelect from "../SearchSelect/SearchSelect";
+import AddTask from "../AddTask/AddTask";
 
 const CreateOrder = () => {
     const {order} = useOrder()
@@ -30,38 +31,21 @@ const CreateOrder = () => {
 
                 <div id="customer" className="col col-gap create_order-customer_cnt">
                     <p>Customer</p>
-                    <SelectCustomer/>
+                    <AutoSearchSelect/>
                 </div>
                 <div id="maker" className="col col-gap create_order-maker_cnt">
                     <p>Maker</p>
-                    <Select list={makers ? makers : []} handleSelected={maker}/>
+                    <SearchSelect list={makers ? makers : []} handleSelected={maker}/>
                 </div>
-
-                <div>
+                <div className="col col-gap">
                     <p>Tasks</p>
-                    <div>
-                        <select name="product" id="product">
-                            <option value="business-card">Biz cards</option>
-                            <option value="digital-printing">Digital printing</option>
-                            <option value="cup">Cups</option>
-                            <option value="poster">Posters</option>
-                        </select>
-                        <label htmlFor="amount">
-                            <span>Amount</span>
-                            <input type="number" id="amount"/>
-                        </label>
-                        <label htmlFor="price">
-                            <span>Price</span>
-                            <input type="number" id="price"/>
-                        </label>
-                    </div>
-                    <button>+</button>
+                    <AddTask/>
                 </div>
-                <div>
+                <div className="col col-gap">
                     <p>Comment</p>
                     <textarea name="" id="message" cols="30" rows="3"/>
                 </div>
-                <div>
+                <div className="col col-gap">
                     <p>Summary</p>
                     <span>Total price: <strong>777</strong></span>
                     <label htmlFor="paid">
@@ -76,7 +60,7 @@ const CreateOrder = () => {
                     </select>
                     <span>Payable: <strong>111</strong></span>
                 </div>
-                <div>
+                <div className="col col-gap">
                     <p>Delivery</p>
                     <select name="delivery" id="delivery">
                         <option value="pick">pick</option>

@@ -12,7 +12,7 @@ const TaskList = ({task}) => {
                             <span className="half">• {task.itemName}</span>
                             <div className="half row-h-center_v-spb">
                                 <span>{task.amount} шт</span>
-                                {task.path != null && <a className="sm-link-to-folder" href={`file://${task.path}`}/>}
+                                {task.path != null && <a aria-label="-sdd" className="sm-link-to-folder" href={`file://${task.path}`}/>}
                             </div>
                         </li>
                     )
