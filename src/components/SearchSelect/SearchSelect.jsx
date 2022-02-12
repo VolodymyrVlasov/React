@@ -78,16 +78,14 @@ const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
                            ref={inputRef}
                            className="select--input"
                            placeholder="Start type to search"
-                        // value={selectedItem?.name}
                            onInput={(event) => searchItem(event.target?.value)}/>
             }
 
             <Button onClickFunc={onButtonClick} type={"drop"}/>
-            {/*<button className="select--btn"*/}
-            {/*        onClick={() => onButtonClick()}>{isDropDownVisible ? "-" : "+"}</button>*/}
+
             {isDropDownVisible ?
                 <DropDownResult
-                    resultList={resultList ? resultList : list}
+                    list={resultList ? resultList : list}
                     setIsVisibleFunc={setIsDropDownVisible}
                     setSelectedItemFunc={setSelected}/>
                 : null}

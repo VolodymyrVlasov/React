@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+const CUSTOMER_ENDPOINT = '/customers'
+
 const api = axios.create({
     baseURL: 'http://localhost:8080',
     headers: {'Content-type': 'application/json;charset=utf-8'},
@@ -33,14 +35,26 @@ export const updateTask = (task) => {
 }
 
 export const getUsers = () => {
-    return apiFr.get("/FakeDB/users.json")
+    return api.get(CUSTOMER_ENDPOINT)
+}
+
+export const addCustomer = (customer) => {
+    return api.post(CUSTOMER_ENDPOINT, customer)
 }
 
 export const getCustomers = () => {
-    return apiFr.get("/FakeDB/customers.json")
+    return api.get(CUSTOMER_ENDPOINT)
+}
+
+export const searchCustomersByKey = (key) => {
+    return api.get(`${CUSTOMER_ENDPOINT}/key=${key}`)
+}
+
+export const searchCustomersByRole = (role) => {
+    return api.get(`${CUSTOMER_ENDPOINT}/role=${role}`)
 }
 
 export const getTaskTypes = () => {
-    return apiFr.get("/FakeDB/items.json")
+    return api.get("/items")
 }
 

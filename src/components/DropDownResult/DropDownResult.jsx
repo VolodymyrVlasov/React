@@ -1,7 +1,7 @@
 import {useEffect, useRef} from "react";
 import "./DropDownResult.css"
 
-const DropDownResult = ({resultList, setIsVisibleFunc, setSelectedItemFunc, ifNotFound = "No matches"}) => {
+const DropDownResult = ({list, setIsVisibleFunc, setSelectedItemFunc, ifNotFound = "No matches"}) => {
     const ref = useRef()
 
     const onOutSideClick = (e) => {
@@ -15,10 +15,10 @@ const DropDownResult = ({resultList, setIsVisibleFunc, setSelectedItemFunc, ifNo
         return () => document.removeEventListener('click', onOutSideClick)
     })
 
-    if (resultList?.length > 0) {
+    if (list?.length > 0) {
         return (
             <ul ref={ref} className="drop_down_result-dropdown">{
-                resultList.map((item, index) => {
+                list.map((item, index) => {
                     return (
                         <li key={index} onClick={() => setSelectedItemFunc(item)}
                             className="drop_down_result-dropdown--item">

@@ -1,5 +1,14 @@
-import {useState} from "react";
-import {createOrder, getCustomers, getTasks, getTaskTypes, getUsers, updateTask} from "../api/api";
+import {useEffect, useState} from "react";
+import {
+    addCustomer,
+    createOrder,
+    getCustomers,
+    getTasks,
+    getTaskTypes,
+    getUsers,
+    searchCustomersByKey, searchCustomersByRole,
+    updateTask
+} from "../api/api";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -26,11 +35,27 @@ const useFetch = () => {
                 setResult(err, data)
                 break
             }
-            case 'findCustomers': {
-                const [err, data] = await getCustomers(payload)
+            case 'addCustomer': {
+                const [err, data] = await addCustomer(payload)
                 setResult(err, data)
                 break
             }
+            case 'searchCustomersByKey': {
+                const [err, data] = await searchCustomersByKey(payload)
+                setResult(err, data)
+                break
+            }
+            case 'searchCustomersByRole': {
+                const [err, data] = await searchCustomersByRole(payload)
+                setResult(err, data)
+                break
+            }
+            case 'getCustomers': {
+                const [err, data] = await getCustomers()
+                setResult(err, data)
+                break
+            }
+
             case "updateTask": {
                 const [err, data] = await updateTask(payload)
                 setResult(err, data)

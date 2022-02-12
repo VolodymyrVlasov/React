@@ -8,16 +8,17 @@ import {useOrder} from "../../hooks/useOrder";
 import Button from "../Button/Button";
 
 const CreateOrder = () => {
-    const fetchMakers = useFetch()
-    const fetchOrder = useFetch()
-    const [makers, setMakers] = useState([])
+    // const fetchMakers = useFetch()
+
+    const {data: makers, loading: makersLoading, error: makersError, fetchData: makersFetch} = useFetch()
+    // const fetchOrder = useFetch()
+    // const [makers, setMakers] = useState([])
     const [state, dispatch] = useOrder()
 
 
     useEffect(() => {
-        !fetchMakers.data && fetchMakers.fetchData("getUsers")
-        setMakers(fetchMakers.data?.users)
-    }, [fetchMakers])
+        makersFetch('searchCustomersByRole', 'MAKER')
+    }, [])
 
     const maker = (maker) => {
         dispatch({type: "addMaker", payload: maker})
@@ -25,13 +26,14 @@ const CreateOrder = () => {
 
     const createOrder = () => {
         if (state.customer && state.maker && state.tasks) {
-            fetchOrder.fetchData("createOrder", state)
+            // fetchOrder.fetchData("createOrder", state)
         }
     }
 
     useEffect(() => {
-        console.log("response ->", fetchOrder.data)
-    }, [fetchOrder.data])
+        console.log('In CreateOrder makers are: ', makers)
+    }, [makers])
+
 
     return (
         <div className="col col-gap">
@@ -43,7 +45,7 @@ const CreateOrder = () => {
             </div>
             <div id="maker" className="col col-gap create_order-maker_cnt">
                 <p>Maker</p>
-                <SearchSelect list={makers ? makers : []} handleSelected={maker}/>
+                <SearchSelect list={makers} handleSelected={maker}/>
             </div>
             <div className="col col-gap">
                 <p>Tasks</p>

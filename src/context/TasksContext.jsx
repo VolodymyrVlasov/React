@@ -3,7 +3,7 @@ import {createContext, useReducer} from "react";
 export const TasksContext = createContext([])
 
 const initialState = {
-    tasks: [],
+    orders: [],
     makers: [],
     isNewTaskPopup: false,
     searchQuery: '',
@@ -16,15 +16,15 @@ const initialState = {
 const reducer = (state, {type, payload}) => {
     try {
         switch (type) {
-            case "updateTaskList":
-                return {...state, tasks: payload}
+            case "updateOrderList":
+                return {...state, orders: payload}
 
             case "addTask":
-                return {...state, tasks: [...state.tasks, payload]}
+                return {...state, orders: [...state.orders, payload]}
 
             case "updateTask":
-                const index = state.tasks.findIndex(payload.id)
-                const updatedTaskList = state.tasks.splice(index, 1)
+                const index = state.orders.findIndex(payload.id)
+                const updatedTaskList = state.orders.splice(index, 1)
                 updatedTaskList.push(payload)
                 return {...state, tasks: updatedTaskList}
 

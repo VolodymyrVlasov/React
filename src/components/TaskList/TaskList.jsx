@@ -1,4 +1,11 @@
-const TaskList = ({task}) => {
+import {useEffect} from "react";
+
+const TaskList = ({order}) => {
+
+    useEffect(() => {
+        console.log(order)
+    }, [])
+
     return (
         <div className="col">
             <div className="row-h-center_v-spb">
@@ -6,13 +13,13 @@ const TaskList = ({task}) => {
                 <span className="half text-label">Тираж</span>
             </div>
             <ul className="task--tasks-list col col-gap">
-                {task.tasks.map((task, index) => {
+                {order.cartItems?.map(cartItem => {
                     return (
-                        <li key={index} className="row">
-                            <span className="half">• {task.itemName}</span>
+                        <li key={cartItem.cartItemId} className="row">
+                            <span className="half">• {cartItem.product.name}</span>
                             <div className="half row-h-center_v-spb">
-                                <span>{task.amount} шт</span>
-                                {task.path != null && <a aria-label="-sdd" className="sm-link-to-folder" href={`file://${task.path}`}/>}
+                                <span>{cartItem.amount} шт</span>
+                                {/*{task.path != null && <a aria-label="-sdd" className="sm-link-to-folder" href={`file://${order.path}`}/>}*/}
                             </div>
                         </li>
                     )

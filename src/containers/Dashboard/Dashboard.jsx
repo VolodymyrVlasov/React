@@ -6,19 +6,19 @@ import TaskCard from "../../components/TaskCard/TaskCard";
 
 const Dashboard = () => {
     const {data, error, loading, fetchData} = useFetch()
-    const [{tasks, makers, searchParams}, dispatch] = useTasks()
+    const [{orders, makers, searchParams}, dispatch] = useTasks()
 
     useEffect(() => fetchData("getAllTodos"), [])
 
     useEffect(() => {
-        !error && dispatch({type: "updateTaskList", payload: data})
+        !error && dispatch({type: "updateOrderList", payload: data})
     }, [data, error])
 
     if (loading) return (<Loading/>)
 
     return (
         <section className="container">
-            {tasks != null && tasks.map((t, i) => <TaskCard key={i} order={t}/>)}
+            {orders != null && orders.map(order => <TaskCard key={order.orderId} order={order}/>)}
         </section>
     )
 }
