@@ -7,6 +7,7 @@ import AddProduct from "../AddTask/AddProduct";
 import {useOrder} from "../../hooks/useOrder";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
+import CommentForm from "../CommentForm/CommentForm";
 
 const CreateOrder = () => {
 
@@ -19,8 +20,14 @@ const CreateOrder = () => {
         makersFetch('searchCustomersByRole', 'MAKER')
     }, [])
 
-    const maker = (maker) => {
-        dispatch({type: "addMaker", payload: maker})
+    const addMaker = (maker) => dispatch({type: "addMaker", payload: maker})
+
+    const addComment = (commentMessage) => {
+        const comment = {
+            author: {customerId: 1},
+            message: commentMessage
+        }
+        dispatch({type: "addComment", payload: comment})
     }
 
     const createOrder = () => {
@@ -47,12 +54,14 @@ const CreateOrder = () => {
             </div>
             <div id="maker" className="col col-gap create_order-maker_cnt">
                 <p>Maker</p>
-                <SearchSelect list={makers} handleSelected={maker}/>
+                <SearchSelect list={makers} handleSelected={addMaker}/>
             </div>
             <div className="col col-gap">
                 <p>Tasks</p>
                 <AddProduct/>
             </div>
+            <CommentForm addCommentCallback={addComment}/>
+
             {/*<div className="col col-gap">*/}
             {/*    <p>Comment</p>*/}
             {/*    <textarea name="" id="message" cols="30" rows="3"/>*/}

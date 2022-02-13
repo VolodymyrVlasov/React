@@ -14,7 +14,7 @@ const initialState = {
     // paymentType: "",
     // path: "",
     // status: "",
-    // comments: []
+    comments: []
 }
 
 const reducer = (state, {type, payload}) => {
@@ -33,7 +33,7 @@ const reducer = (state, {type, payload}) => {
             case "addPaid":
                 return {...state, paid: payload}
             case "addComment":
-                return {...state, comments: [...state.comments, payload]}
+                return {...state, comments: [payload]}
             default:
                 return new Error(`Invalid action: ${{type, payload}}`)
         }
@@ -45,10 +45,10 @@ const reducer = (state, {type, payload}) => {
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    // useEffect(() => {
-    //     console.clear()
-    //     console.log(state)
-    // }, [state])
+    useEffect(() => {
+        console.clear()
+        console.log(state)
+    }, [state])
 
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>

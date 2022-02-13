@@ -1,0 +1,14 @@
+.comment_form-disable {
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-bg-gray);
+}
+
+.comment_form-textarea {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+
+}

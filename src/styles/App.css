@@ -319,6 +319,11 @@ body {
   font-size: 12px;
 }
 
+.title {
+  font-family: 'Montserrat', 'sans-serif';
+  font-weight: bolder;
+}
+
 .text-label--name {
   font-size: 12px;
   margin-bottom: 6px;
