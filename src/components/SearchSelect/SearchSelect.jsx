@@ -47,6 +47,7 @@ const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
 
     const removeSelected = (event) => {
         event.stopPropagation()
+        handleSelected(null)
         setSelectedItem(null)
     }
 
@@ -74,21 +75,16 @@ const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
                 selectedItem != null && !clearSelected ?
                     <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
                     :
-                    <input type="text"
-                           ref={inputRef}
-                           className="select--input"
-                           placeholder="Start type to search"
+                    <input type="text" ref={inputRef} className="select--input" placeholder="Start type to search"
                            onInput={(event) => searchItem(event.target?.value)}/>
             }
 
             <Button onClickFunc={onButtonClick} type={"drop"}/>
 
-            {isDropDownVisible ?
-                <DropDownResult
-                    list={resultList ? resultList : list}
-                    setIsVisibleFunc={setIsDropDownVisible}
-                    setSelectedItemFunc={setSelected}/>
-                : null}
+            {isDropDownVisible && <DropDownResult list={resultList ? resultList : list}
+                                                  setIsVisibleFunc={setIsDropDownVisible}
+                                                  setSelectedItemFunc={setSelected}/>}
+
         </div>
     )
 }

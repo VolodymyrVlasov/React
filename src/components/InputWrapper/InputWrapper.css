@@ -1,0 +1,32 @@
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+.input_wrapper-label {
+    font-size: 8px;
+    color: var(--color-text-gray);
+}
+
+.input_wrapper-children {
+    display: flex;
+    min-width: 100px;
+    min-height: 24px;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-time);
+}
+
+/*.input_wrapper:focus-within {*/
+/*    background-color: var(--color-white);*/
+/*    !*border: 1px solid var(--color-purple);*!*/
+/*}*/
+
+.input_wrapper:focus-within input {
+    font-weight: bolder;
+    color: var(--color-purple);
+}
+

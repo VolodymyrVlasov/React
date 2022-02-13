@@ -11,6 +11,14 @@ const Button = ({onClickFunc, buttonText, type = "default"}) => {
                 setStyle("add")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("+")
                 break
+            case "plus":
+                setStyle("plus-minus")
+                buttonText && buttonText !== "" ? setText(buttonText) : setText("+")
+                break
+            case "minus":
+                setStyle("plus-minus")
+                buttonText && buttonText !== "" ? setText(buttonText) : setText("-")
+                break
             case "cancel":
                 setStyle("cancel")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("+")

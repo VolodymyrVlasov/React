@@ -1,11 +1,6 @@
 import {useEffect} from "react";
 
 const TaskList = ({order}) => {
-
-    useEffect(() => {
-        console.log(order)
-    }, [])
-
     return (
         <div className="col">
             <div className="row-h-center_v-spb">

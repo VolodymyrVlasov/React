@@ -3,28 +3,35 @@ import {createContext, useEffect, useReducer} from "react";
 export const OrderContext = createContext({})
 
 const initialState = {
-    orderId: "",
+    // orderId: "",
     customer: {},
-    manager: {},
+    // manager: {},
     maker: {},
-    tasks: [],
-    comments: []
+    cartItems: [],
+    // paid: 0,
+    // discount: 0,
+    // totalPrice: 0,
+    // paymentType: "",
+    // path: "",
+    // status: "",
+    // comments: []
 }
 
 const reducer = (state, {type, payload}) => {
     try {
         switch (type) {
-            case "addOrderId":
-                return {...state, orderId: payload}
             case "addCustomer":
                 return {...state, customer: payload}
             case "addManager":
                 return {...state, manager: payload}
             case "addMaker":
                 return {...state, maker: payload}
-            case "addTasks":
-                console.log("addTasks")
-                return {...state, tasks: payload}
+            case "addCartItems":
+                return {...state, cartItems: payload}
+            case "addDiscount":
+                return {...state, discount: payload}
+            case "addPaid":
+                return {...state, paid: payload}
             case "addComment":
                 return {...state, comments: [...state.comments, payload]}
             default:
@@ -38,10 +45,10 @@ const reducer = (state, {type, payload}) => {
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    useEffect(() => {
-        console.clear()
-        console.log(state)
-    }, [state])
+    // useEffect(() => {
+    //     console.clear()
+    //     console.log(state)
+    // }, [state])
 
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>

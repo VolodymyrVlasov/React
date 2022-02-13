@@ -62,5 +62,23 @@
     color: var(--color-purple);
 }
 
+.button-plus-minus {
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    outline: 0;
+    border: 0;
+    font-size: 18px;
+    transition: var(--transition-time);
+    cursor: pointer;
+}
+
+.button-plus-minus:hover,
+.button-plus-minus:focus {
+    transform: scale(1.5);
+    color: var(--color-purple);
+}
+
 
 

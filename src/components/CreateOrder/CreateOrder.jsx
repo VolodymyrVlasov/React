@@ -1,20 +1,19 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import useFetch from "../../hooks/useFetch";
 import AutoSearchSelect from "../AutoSearchSelect/AutoSearchSelect";
 import "./CreateOrder.css"
 import SearchSelect from "../SearchSelect/SearchSelect";
-import AddTask from "../AddTask/AddTask";
+import AddProduct from "../AddTask/AddProduct";
 import {useOrder} from "../../hooks/useOrder";
 import Button from "../Button/Button";
+import Loading from "../Loading/Loading";
 
 const CreateOrder = () => {
-    // const fetchMakers = useFetch()
 
     const {data: makers, loading: makersLoading, error: makersError, fetchData: makersFetch} = useFetch()
-    // const fetchOrder = useFetch()
-    // const [makers, setMakers] = useState([])
-    const [state, dispatch] = useOrder()
+    const {data: order, loading: orderLoading, error: orderError, fetchData: orderFetch} = useFetch()
 
+    const [state, dispatch] = useOrder()
 
     useEffect(() => {
         makersFetch('searchCustomersByRole', 'MAKER')
@@ -25,15 +24,18 @@ const CreateOrder = () => {
     }
 
     const createOrder = () => {
-        if (state.customer && state.maker && state.tasks) {
-            // fetchOrder.fetchData("createOrder", state)
+        if (state.customer && state.maker && state.cartItems) {
+            orderFetch("createOrder", state)
         }
     }
 
-    useEffect(() => {
-        console.log('In CreateOrder makers are: ', makers)
-    }, [makers])
+    if (orderLoading) {
+        return <Loading/>
+    }
 
+    if (order) {
+        return <div>Order #{order.orderId} saved</div>
+    }
 
     return (
         <div className="col col-gap">
@@ -49,38 +51,38 @@ const CreateOrder = () => {
             </div>
             <div className="col col-gap">
                 <p>Tasks</p>
-                <AddTask/>
+                <AddProduct/>
             </div>
-            <div className="col col-gap">
-                <p>Comment</p>
-                <textarea name="" id="message" cols="30" rows="3"/>
-            </div>
-            <div className="col col-gap">
-                <p>Summary</p>
-                <span>Total price: <strong>777</strong></span>
-                <label htmlFor="paid">
-                    <span>Paid</span>
-                    <input type="number" id="paid"/>
-                </label>
-                <select name="paymentType" id="payment-type">
-                    <option value="cash">cash</option>
-                        <option value="cash">liqpay</option>
-                        <option value="cash">iban</option>
-                        <option value="cash">cash</option>
-                    </select>
-                    <span>Payable: <strong>111</strong></span>
-                </div>
-                <div className="col col-gap">
-                    <p>Delivery</p>
-                    <select name="delivery" id="delivery">
-                        <option value="pick">pick</option>
-                        <option value="nova-poshta">nova poshta</option>
-                        <option value="uklon">uklon</option>
-                    </select>
-                </div>
+            {/*<div className="col col-gap">*/}
+            {/*    <p>Comment</p>*/}
+            {/*    <textarea name="" id="message" cols="30" rows="3"/>*/}
+            {/*</div>*/}
+            {/*<div className="col col-gap">*/}
+            {/*    <p>Summary</p>*/}
+            {/*    <span>Total price: <strong>777</strong></span>*/}
+            {/*    <label htmlFor="paid">*/}
+            {/*        <span>Paid</span>*/}
+            {/*        <input type="number" id="paid"/>*/}
+            {/*    </label>*/}
+            {/*    <select name="paymentType" id="payment-type">*/}
+            {/*        <option value="cash">cash</option>*/}
+            {/*            <option value="cash">liqpay</option>*/}
+            {/*            <option value="cash">iban</option>*/}
+            {/*            <option value="cash">cash</option>*/}
+            {/*        </select>*/}
+            {/*        <span>Payable: <strong>111</strong></span>*/}
+            {/*    </div>*/}
+            {/*    <div className="col col-gap">*/}
+            {/*        <p>Delivery</p>*/}
+            {/*        <select name="delivery" id="delivery">*/}
+            {/*            <option value="pick">pick</option>*/}
+            {/*            <option value="nova-poshta">nova poshta</option>*/}
+            {/*            <option value="uklon">uklon</option>*/}
+            {/*        </select>*/}
+            {/*    </div>*/}
 
             <Button onClickFunc={() => createOrder()} buttonText={"Create"}/>
-            </div>
+        </div>
     )
 }
 

@@ -17,7 +17,7 @@ const AutoSearchSelect = () => {
 
     const addCustomer = (customer) => setCustomer(customer)
 
-    const createCustomer = (customer) => fetchCustomers('addCustomer', customer)
+    const createCustomer = (customer) => fetchCustomers('createCustomer', customer)
 
     const deleteCustomer = () => setCustomer(null)
 

@@ -334,7 +334,8 @@ body {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  gap: 24px;
+  gap: var(--medium-gap);
+  flex-wrap: wrap;
 }
 
 

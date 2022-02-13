@@ -1,15 +1,8 @@
 import "./TaskCard.css"
-import RedirectTask from "../RedirectTask/RedirectTask";
-import StateButton from "../StateButton/StateButton";
 import TodoTaskList from "../TaskList/TaskList";
 import TodoInfo from "../TodoInfo/TodoInfo";
-import {useEffect} from "react";
 
 const TaskCard = ({order}) => {
-
-    useEffect(()=> {
-        console.log(order)
-    },[])
     return (
         <div className="task col col-gap">
             <div className="row-h-center_v-spb">

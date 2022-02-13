@@ -22,7 +22,7 @@ const Header = () => {
             </a>
             <Search/>
             <div className="row gap-24">
-                <Button text="Add order" onClickFunc={handleClose}/>
+                <Button buttonText="Add order" onClickFunc={handleClose}/>
                 <ProfileButton/>
             </div>
         </header>

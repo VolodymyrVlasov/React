@@ -1,0 +1,36 @@
+.input_number-wrapper {
+    display: flex;
+    flex-direction: row;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    /*border: 1px solid;*/
+}
+
+
+
+.input_number-input {
+    outline: none;
+    border: 0;
+    text-align: center;
+    padding: 4px 8px;
+    width: auto;
+    background-color: transparent;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

@@ -1,14 +1,7 @@
-import {useEffect, useState} from "react";
-import {
-    addCustomer,
-    createOrder,
-    getCustomers,
-    getTasks,
-    getTaskTypes,
-    getUsers,
-    searchCustomersByKey, searchCustomersByRole,
-    updateTask
-} from "../api/api";
+import {useState} from "react";
+import {createOrder, getOrders, updateOrder} from "../api/orderApi";
+import {createCustomer, getCustomers, searchCustomersByKey, searchCustomersByRole} from "../api/customerApi";
+import {createProduct, getProducts, updateProduct} from "../api/productApi";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -20,23 +13,8 @@ const useFetch = () => {
     const fetchData = async (type, payload) => {
         setLoading(true)
         switch (type) {
-            case 'createOrder': {
-                const [err, data] = await createOrder(payload);
-                setResult(err, data)
-                break
-            }
-            case 'getAllTodos': {
-                const [err, data] = await getTasks();
-                setResult(err, data)
-                break
-            }
-            case 'getUsers': {
-                const [err, data] = await getUsers();
-                setResult(err, data)
-                break
-            }
-            case 'addCustomer': {
-                const [err, data] = await addCustomer(payload)
+            case 'createCustomer': {
+                const [err, data] = await createCustomer(payload)
                 setResult(err, data)
                 break
             }
@@ -56,15 +34,37 @@ const useFetch = () => {
                 break
             }
 
-            case "updateTask": {
-                const [err, data] = await updateTask(payload)
+            case 'createOrder': {
+                const [err, data] = await createOrder(payload);
                 setResult(err, data)
                 break
             }
-            case "taskTypes":
-                const [err, data] = await getTaskTypes()
+            case 'getOrders': {
+                const [err, data] = await getOrders();
                 setResult(err, data)
                 break
+            }
+            case "updateOrder": {
+                const [err, data] = await updateOrder(payload)
+                setResult(err, data)
+                break
+            }
+
+            case 'createProduct': {
+                const [err, data] = await createProduct(payload);
+                setResult(err, data)
+                break
+            }
+            case 'getProducts': {
+                const [err, data] = await getProducts();
+                setResult(err, data)
+                break
+            }
+            case "updateProduct": {
+                const [err, data] = await updateProduct(payload)
+                setResult(err, data)
+                break
+            }
             default:
                 setResult(new Error(`Type "${type}" not found`))
         }

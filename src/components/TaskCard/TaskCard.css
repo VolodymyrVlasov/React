@@ -1,5 +1,7 @@
 .task {
-    width: 33%;
+    /*width: calc((100% / 3) - ( var(--medium-gap)));*/
+    width: 100%;
+    min-width: 30%;
     border-radius: var(--border-radius);
     padding: 24px;
     background: var(--color-bg-color);
