@@ -8,17 +8,26 @@ import {useOrder} from "../../hooks/useOrder";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 import CommentForm from "../CommentForm/CommentForm";
+import {getEnumNames} from "../../utils/utils";
 
 const CreateOrder = () => {
-
     const {data: makers, loading: makersLoading, error: makersError, fetchData: makersFetch} = useFetch()
     const {data: order, loading: orderLoading, error: orderError, fetchData: orderFetch} = useFetch()
-
+    const {data: deliveryTypes, fetchData: deliveryTypesFetch} = useFetch()
+    const {data: paymentTypes, fetchData: paymentTypesFetch} = useFetch()
+    const {data: orderStatusTypes, fetchData: orderStatusTypesFetch} = useFetch()
     const [state, dispatch] = useOrder()
 
     useEffect(() => {
         makersFetch('searchCustomersByRole', 'MAKER')
+        deliveryTypesFetch('getDeliveryTypes')
+        paymentTypesFetch('getPaymentTypes')
+        orderStatusTypesFetch('getOrderStatusTypes')
     }, [])
+
+    useEffect(() => {
+        getEnumNames(deliveryTypes)
+    }, [deliveryTypes])
 
     const addMaker = (maker) => dispatch({type: "addMaker", payload: maker})
 
@@ -29,6 +38,8 @@ const CreateOrder = () => {
         }
         dispatch({type: "addComment", payload: comment})
     }
+
+    const addDelivery = (deliveryType) => dispatch({type: "addDeliveryType", payload: deliveryType?.type})
 
     const createOrder = () => {
         if (state.customer && state.maker && state.cartItems) {
@@ -60,7 +71,22 @@ const CreateOrder = () => {
                 <p>Tasks</p>
                 <AddProduct/>
             </div>
-            <CommentForm addCommentCallback={addComment}/>
+            <div className="row w-100 gap-24">
+                <div className="col col-gap">
+                    <p>Delivery</p>
+                    <SearchSelect list={getEnumNames(deliveryTypes)} handleSelected={addDelivery}/>
+                </div>
+                <div className="col col-gap">
+                    <p>Payment</p>
+                    <SearchSelect list={getEnumNames(paymentTypes)} handleSelected={addDelivery}/>
+                </div>
+            </div>
+
+            <div className="col col-gap">
+                <p>Comment</p>
+                <CommentForm addCommentCallback={addComment}/>
+            </div>
+
 
             {/*<div className="col col-gap">*/}
             {/*    <p>Comment</p>*/}

@@ -30,6 +30,8 @@ const reducer = (state, {type, payload}) => {
                 return {...state, cartItems: payload}
             case "addDiscount":
                 return {...state, discount: payload}
+            case "addDeliveryType":
+                return {...state, delivery: payload}
             case "addPaid":
                 return {...state, paid: payload}
             case "addComment":

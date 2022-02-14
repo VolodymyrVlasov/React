@@ -2,6 +2,7 @@ import {useState} from "react";
 import {createOrder, getOrders, updateOrder} from "../api/orderApi";
 import {createCustomer, getCustomers, searchCustomersByKey, searchCustomersByRole} from "../api/customerApi";
 import {createProduct, getProducts, updateProduct} from "../api/productApi";
+import {getDeliveryTypes, getOrderStatusTypes, getPaymentTypes, getProductTypes, getRoleTypes} from "../api/typesApi";
 
 const useFetch = () => {
     const [data, setData] = useState(null);
@@ -62,6 +63,32 @@ const useFetch = () => {
             }
             case "updateProduct": {
                 const [err, data] = await updateProduct(payload)
+                setResult(err, data)
+                break
+            }
+
+            case "getPaymentTypes": {
+                const [err, data] = await getPaymentTypes()
+                setResult(err, data)
+                break
+            }
+            case "getRoleTypes": {
+                const [err, data] = await getRoleTypes()
+                setResult(err, data)
+                break
+            }
+            case "getDeliveryTypes": {
+                const [err, data] = await getDeliveryTypes()
+                setResult(err, data)
+                break
+            }
+            case "getOrderStatusTypes": {
+                const [err, data] = await getOrderStatusTypes()
+                setResult(err, data)
+                break
+            }
+            case "getProductTypes": {
+                const [err, data] = await getProductTypes()
                 setResult(err, data)
                 break
             }
