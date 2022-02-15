@@ -1,7 +1,7 @@
 const discountPoints = [5, 10, 20, 40, 50, 100, 200, 400, 500, 1000]
 const enumNames = {
     PICKUP: "Selfpick",
-    NOVA_POSHTA: "Nov poshta",
+    NOVA_POSHTA: "Nova poshta",
     UKLON: "Uklon",
     NEW: "New",
     IN_PROGRESS: "In progress",

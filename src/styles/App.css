@@ -267,6 +267,18 @@ table {
   gap: 24px;
 }
 
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
 .row-h-center_v-spb {
   display: flex;
   justify-content: space-between;
@@ -343,8 +355,9 @@ body {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  gap: var(--medium-gap);
+  gap: var(--small-gap);
   flex-wrap: wrap;
+  /*justify-content: space-between;*/
 }
 
 

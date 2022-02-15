@@ -11,7 +11,7 @@ const initialState = {
     // paid: 0,
     // discount: 0,
     // totalPrice: 0,
-    // paymentType: "",
+    paymentType: "",
     // path: "",
     // status: "",
     comments: []
@@ -31,7 +31,9 @@ const reducer = (state, {type, payload}) => {
             case "addDiscount":
                 return {...state, discount: payload}
             case "addDeliveryType":
-                return {...state, delivery: payload}
+                return {...state, deliveryType: payload}
+            case "addPaymentType":
+                return {...state, paymentType: payload}
             case "addPaid":
                 return {...state, paid: payload}
             case "addComment":

@@ -40,6 +40,7 @@ const CreateOrder = () => {
     }
 
     const addDelivery = (deliveryType) => dispatch({type: "addDeliveryType", payload: deliveryType?.type})
+    const addPayment = (paymentType) => dispatch({type: "addPaymentType", payload: paymentType?.type})
 
     const createOrder = () => {
         if (state.customer && state.maker && state.cartItems) {
@@ -59,17 +60,16 @@ const CreateOrder = () => {
         <div className="col col-gap">
             <h2 className="create_order-title">New order form</h2>
 
-            <div id="customer" className="col col-gap create_order-customer_cnt">
-                <p>Customer</p>
-                <AutoSearchSelect/>
-            </div>
-            <div id="maker" className="col col-gap create_order-maker_cnt">
-                <p>Maker</p>
-                <SearchSelect list={makers} handleSelected={addMaker}/>
-            </div>
-            <div className="col col-gap">
-                <p>Tasks</p>
-                <AddProduct/>
+
+            <div className="row w-100 gap-24">
+                <div id="maker" className="col col-gap create_order-maker_cnt">
+                    <p>Manager</p>
+                    <SearchSelect list={makers} handleSelected={addMaker}/>
+                </div>
+                <div id="maker" className="col col-gap create_order-maker_cnt">
+                    <p>Maker</p>
+                    <SearchSelect list={makers} handleSelected={addMaker}/>
+                </div>
             </div>
             <div className="row w-100 gap-24">
                 <div className="col col-gap">
@@ -78,9 +78,18 @@ const CreateOrder = () => {
                 </div>
                 <div className="col col-gap">
                     <p>Payment</p>
-                    <SearchSelect list={getEnumNames(paymentTypes)} handleSelected={addDelivery}/>
+                    <SearchSelect list={getEnumNames(paymentTypes)} handleSelected={addPayment}/>
                 </div>
             </div>
+            <div id="customer" className="col col-gap create_order-customer_cnt">
+                <p>Customer</p>
+                <AutoSearchSelect/>
+            </div>
+            <div className="col col-gap">
+                <p>Tasks</p>
+                <AddProduct/>
+            </div>
+
 
             <div className="col col-gap">
                 <p>Comment</p>
