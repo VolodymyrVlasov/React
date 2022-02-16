@@ -15,6 +15,7 @@
     border: 1px solid transparent;
 }
 
+
 .order_card:hover {
     /*transform: scale(1.015);*/
     /*background-color: var(--color-bg-gray);*/
@@ -27,4 +28,5 @@
     padding: var(--tag-padding);
     border-radius: 999px;
     text-align: center;
+    min-width: fit-content;
 }

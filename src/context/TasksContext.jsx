@@ -1,4 +1,4 @@
-import {createContext, useReducer} from "react";
+import {createContext, useEffect, useReducer} from "react";
 
 export const TasksContext = createContext([])
 
@@ -18,7 +18,6 @@ const reducer = (state, {type, payload}) => {
         switch (type) {
             case "updateOrderList":
                 return {...state, orders: payload}
-
             case "addTask":
                 return {...state, orders: [...state.orders, payload]}
 
@@ -45,9 +44,13 @@ const reducer = (state, {type, payload}) => {
 }
 
 const TasksProvider = ({children}) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [appContext, appDispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+        console.log(appContext.isNewTaskPopup)
+    }, [appContext.isNewTaskPopup])
     return (
-        <TasksContext.Provider value={[state, dispatch]}>{children}</TasksContext.Provider>
+        <TasksContext.Provider value={[appContext, appDispatch]}>{children}</TasksContext.Provider>
     )
 }
 

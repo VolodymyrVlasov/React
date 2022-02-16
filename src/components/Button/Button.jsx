@@ -1,7 +1,7 @@
 import "./Button.css"
 import {useEffect, useState} from "react";
 
-const Button = ({onClickFunc, buttonText, type = "default"}) => {
+const Button = ({onClickFunc, buttonText, type = "default", children}) => {
     const [style, setStyle] = useState(null)
     const [text, setText] = useState(null)
 
@@ -35,7 +35,7 @@ const Button = ({onClickFunc, buttonText, type = "default"}) => {
 
     return (
         <button onClick={(e) => onClickFunc(e)}
-                className={`button-${style}`}>{text}</button>
+                className={`button-${style}`}>{text ? text : children}</button>
     )
 }
 

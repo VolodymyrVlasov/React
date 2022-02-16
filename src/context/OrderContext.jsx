@@ -49,10 +49,10 @@ const reducer = (state, {type, payload}) => {
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    useEffect(() => {
-        console.clear()
-        console.log(state)
-    }, [state])
+    // useEffect(() => {
+    //     console.clear()
+    //     console.log(state)
+    // }, [state])
 
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>

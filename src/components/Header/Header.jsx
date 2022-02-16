@@ -6,10 +6,10 @@ import ProfileButton from "../ProfileButton/ProfileButton";
 import {useTasks} from "../../hooks/useTasks";
 
 const Header = () => {
-    const [{isNewTaskPopup}, dispatch] = useTasks()
+    const [{isNewTaskPopup}, appDispatch] = useTasks()
 
     const handleClose = () => {
-        dispatch({type: "changeNewTaskPopup"})
+        appDispatch({type: "changeNewTaskPopup"})
     }
 
     return (

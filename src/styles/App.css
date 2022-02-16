@@ -259,6 +259,13 @@ table {
   /*width: 100%;*/
 }
 
+.row-wrap {
+  display: flex;
+  height: auto;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -323,6 +330,7 @@ table {
 body {
   font-family: 'Montserrat', 'sans-serif';
   font-size: 12px;
+  font-weight: normal;
 }
 
 .text-label {
@@ -357,7 +365,13 @@ body {
   margin: 0 auto;
   gap: var(--small-gap);
   flex-wrap: wrap;
+
   /*justify-content: space-between;*/
+}
+
+.order-revert {
+  display: flex;
+  order: revert;
 }
 
 
