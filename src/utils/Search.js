@@ -1,11 +1,9 @@
 
 //should return array
 export const search = ({array, key}) => {
-    console.log("searchQuery", searchQuery)
-    if (orders && searchQuery && searchQuery !== "") {
-        const filteredOrders = orders.filter(order => {
-            console.table(order)
-            return Object.values(order).some(value => {
+    if (array && key) {
+        const filteredOrders = array.filter(object => {
+            return Object.values(object).some(value => {
                 if (value != null) {
                     // if (value instanceof Object && !(value instanceof Array)) {
                     //     // console.log("object -> ", value)
@@ -22,8 +20,7 @@ export const search = ({array, key}) => {
                     // }
 
                     if (typeof value === "string" || typeof value === "number") {
-                        console.info(value, searchQuery)
-                        return String(value).toLowerCase().includes(searchQuery.toLowerCase())
+                        return String(value).toLowerCase().includes(key.toLowerCase())
                     }
                     return false
                 }
@@ -31,11 +28,16 @@ export const search = ({array, key}) => {
         })
 
         if (filteredOrders.length > 0) {
-            setOrdersToRender(filteredOrders)
+            return {
+                resultArray: filteredOrders,
+                resultMessage: `Founded ${filteredOrders.length} items with key: ${key}`
+            }
+        } else {
+            return {resultArray: array, resultMessage: "No matches"}
         }
     }
-    if (searchQuery == null || searchQuery === "") {
-        setOrdersToRender(orders)
+    if (key == null || key === "") {
+        return {resultArray: array, resultMessage: `Invalid key: ${key}`}
     }
-
+    return console.error("All case was wrong")
 }

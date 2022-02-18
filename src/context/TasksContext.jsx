@@ -45,8 +45,8 @@ const TasksProvider = ({children}) => {
 
     useEffect(() => {
         // console.log("searchQuery -> ", appContext.searchQuery)
-        // console.log("appContext -> ", appContext)
-    }, [appContext.searchQuery])
+        console.log("orders -> ", appContext.orders)
+    }, [appContext])
     return (
         <TasksContext.Provider value={[appContext, appDispatch]}>{children}</TasksContext.Provider>
     )
