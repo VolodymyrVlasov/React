@@ -1,4 +1,4 @@
-import {createContext, useEffect, useReducer} from "react";
+import {createContext, useReducer} from "react";
 
 export const OrderContext = createContext({})
 
@@ -39,7 +39,7 @@ const reducer = (state, {type, payload}) => {
             case "addComment":
                 return {...state, comments: [payload]}
             default:
-                return new Error(`Invalid action: ${{type, payload}}`)
+                console.error(`Invalid action in Order Context: ${{type, payload}}`)
         }
     } catch (error) {
         console.error(error)
@@ -48,11 +48,6 @@ const reducer = (state, {type, payload}) => {
 
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
-
-    // useEffect(() => {
-    //     console.clear()
-    //     console.log(state)
-    // }, [state])
 
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>

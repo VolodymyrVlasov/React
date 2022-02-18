@@ -1,44 +1,53 @@
 import "./Searh.css"
 import {useTasks} from "../../hooks/useTasks";
-import {useEffect, useRef} from "react";
+import {useRef, useState} from "react";
 
-const Search = () => {
+const Search = ({onSearchQueryCallback}) => {
     const searchCnt = useRef(null)
     const [{searchQuery}, dispatch] = useTasks()
+    const [borderStyle, setBorderStyle] = useState("")
     let delayedSearch
-
-    useEffect(() => {searchCnt.current.style.border = "1px solid transparent"})
 
     const addToSearchParams = (e) => {
         let searchQuery = e?.target?.value
         clearTimeout(delayedSearch)
         if (searchQuery === "") {
-            if (searchQuery.length < 3) {
-                searchCnt.current.style.border = "1px solid red"
+            setBorderStyle("")
+            searchQuery = null
+        }
+
+        if (searchQuery) {
+            if (searchQuery.length > 0 && searchQuery.length < 2) {
+                setBorderStyle("search-warn")
+                dispatch({type: "addToSearchParams", payload: null})
                 return
             }
-            searchCnt.current.style.border = "1px solid transparent"
-            return
+            if (searchQuery.length >= 2) {
+                setBorderStyle("search-allow")
+                delayedSearch = setTimeout(() => {
+                    onSearchQueryCallback && onSearchQueryCallback(searchQuery)
+                    dispatch({type: "addToSearchParams", payload: searchQuery})
+                }, 1000)
+                return;
+            }
         }
-        searchCnt.current.style.border = "1px solid lightgreen"
 
-        delayedSearch = setTimeout(() => {
-            dispatch({type: "addToSearchParams", payload: e?.target?.value})
-        }, 1000)
+        if (searchQuery == null) {
+            dispatch({type: "addToSearchParams", payload: searchQuery})
+        }
     }
 
-    useEffect(() => {
-        //todo: call useFetch dispatch function to find some on backend and write it in Context
-    }, [searchQuery])
-
     return (
-        <div className="search" ref={searchCnt}>
+        <div className={`search ${borderStyle}`} ref={searchCnt}>
             <i className="search-ico"/>
-            <input onInput={(e) => addToSearchParams(e)}
-                   type="text" className="search-input"
+            <input onInput={(e) => {
+                addToSearchParams(e)
+            }}
+                   type="text" className={"search-input"}
                    placeholder="Номер заказа, товар или номер телефона заказчика..."/>
         </div>
     )
 }
+
 
 export default Search

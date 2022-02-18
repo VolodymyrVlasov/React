@@ -10,7 +10,19 @@
 }
 
 .search:focus-within {
-    border: 1px solid lightgreen;
+    border: 1px solid var(--color-purple);
+}
+
+.search:not(:focus-within) {
+    border: 1px solid transparent;
+}
+
+.search-warn {
+    border: 1px solid orangered !important;
+}
+
+.search-allow {
+    border: 1px solid lightgreen !important;
 }
 
 .search-ico {

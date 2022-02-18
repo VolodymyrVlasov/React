@@ -4,7 +4,8 @@ export const TasksContext = createContext([])
 
 const initialState = {
     orders: [],
-    makers: [],
+    makers: null,
+    manager: null,
     isNewTaskPopup: false,
     searchQuery: '',
     sortParams: {
@@ -20,19 +21,15 @@ const reducer = (state, {type, payload}) => {
                 return {...state, orders: payload}
             case "addTask":
                 return {...state, orders: [...state.orders, payload]}
-
             case "updateTask":
                 const index = state.orders.findIndex(payload.id)
                 const updatedTaskList = state.orders.splice(index, 1)
                 updatedTaskList.push(payload)
                 return {...state, tasks: updatedTaskList}
-
             case "updateMakers":
                 return {...state, makers: payload}
-
             case "addToSearchParams":
                 return {...state, searchQuery: payload}
-
             case "changeNewTaskPopup":
                 return {...state, isNewTaskPopup: !state.isNewTaskPopup}
             default:
@@ -47,8 +44,9 @@ const TasksProvider = ({children}) => {
     const [appContext, appDispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        console.log(appContext.isNewTaskPopup)
-    }, [appContext.isNewTaskPopup])
+        // console.log("searchQuery -> ", appContext.searchQuery)
+        // console.log("appContext -> ", appContext)
+    }, [appContext.searchQuery])
     return (
         <TasksContext.Provider value={[appContext, appDispatch]}>{children}</TasksContext.Provider>
     )

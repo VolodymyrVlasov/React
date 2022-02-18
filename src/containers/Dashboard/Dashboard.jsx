@@ -3,12 +3,13 @@ import Loading from "../../components/Loading/Loading";
 import {useEffect, useState} from "react";
 import {useTasks} from "../../hooks/useTasks";
 import "./Dashboard.css"
-import {getEnumNames} from "../../utils/utils";
+import {OrderCard} from "../../components/OrderCard/OrderCard";
 
 const Dashboard = () => {
     const {data, error, loading, fetchData} = useFetch()
-    const [{orders, makers, searchParams}, dispatch] = useTasks()
+    const [{orders, makers, searchQuery}, dispatch] = useTasks()
     const [refresh, setRefresh] = useState(false)
+    const [ordersToRender, setOrdersToRender] = useState(null)
 
     useEffect(() => {
         fetchData("getOrders")
@@ -22,6 +23,45 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
+        console.log("searchQuery", searchQuery)
+        if (orders && searchQuery && searchQuery !== "") {
+            const filteredOrders = orders.filter(order => {
+                console.table(order)
+                return Object.values(order).some(value => {
+                    if (value != null) {
+                        // if (value instanceof Object && !(value instanceof Array)) {
+                        //     // console.log("object -> ", value)
+                        // }
+                        //
+                        // if (value instanceof Array) {
+                        //     console.log("value is array", value)
+                        //
+                        //     value.filter(arrElement => {
+                        //         if (arrElement instanceof Object && !(arrElement instanceof Array)) {
+                        //             console.log("arrElement -> ", value)
+                        //         }
+                        //     })
+                        // }
+
+                        if (typeof value === "string" || typeof value === "number") {
+                            console.info(value, searchQuery)
+                            return String(value).toLowerCase().includes(searchQuery.toLowerCase())
+                        }
+                        return false
+                    }
+                })
+            })
+
+            if (filteredOrders.length > 0) {
+                setOrdersToRender(filteredOrders)
+            }
+        }
+        if (searchQuery == null || searchQuery === "") {
+            setOrdersToRender(orders)
+        }
+    }, [orders, searchQuery])
+
+    useEffect(() => {
         !error && dispatch({type: "updateOrderList", payload: data})
     }, [data, error])
 
@@ -29,53 +69,9 @@ const Dashboard = () => {
 
     return (
         <section className="container order-revert">
-            {orders != null && orders.reverse().map(order => <OrderCard key={order.orderId} order={order}/>)}
+            {ordersToRender != null && ordersToRender.map(order => <OrderCard key={order.orderId} order={order}/>)}
         </section>
     )
 }
 
 export default Dashboard
-
-export const OrderCard = ({order}) => {
-
-    const getProductTagSet = (array) => {
-        return Array.from(new Set(array.map(e => e.product.productType)))
-            .map(e => getEnumNames([e])[0]["name"])
-    }
-
-    return (
-        <div className="order_card col col-gap">
-            <p className="text">Order #{order.orderId}</p>
-            <div>
-                <p className="text-label">To do types</p>
-                <div className="row-wrap gap-8">{
-                    getProductTagSet(order.cartItems).map((cartItem, index) => {
-                            return (
-                                <span key={index} className="order_card-cart_item_tag">{cartItem}</span>
-                            )
-                        }
-                    )
-                }
-                </div>
-            </div>
-            <div>
-                <p className="text-label">Delivery</p>
-                <div className="row">
-                    {order?.deliveryType &&
-                        <span
-                            className="order_card-cart_item_tag">{getEnumNames([order?.deliveryType])[0]["name"]}</span>}
-                </div>
-            </div>
-            <div>
-                <p className="text-label">Payment</p>
-                <div className="row gap-8">
-                    {order?.paymentType &&
-                        <span
-                            className="order_card-cart_item_tag">{getEnumNames([order?.paymentType])[0]["name"]}</span>}
-                </div>
-            </div>
-
-
-        </div>
-    )
-}
