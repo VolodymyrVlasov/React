@@ -24,7 +24,15 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        setOrdersToRender(search({array: orders, key: searchQuery}).resultArray)
+        if (searchQuery) {
+            console.time("SEARCH")
+            setOrdersToRender(search({array: orders, key: searchQuery}).resultArray)
+            console.timeEnd("SEARCH")
+
+        }
+        if (orders && !searchQuery) {
+            setOrdersToRender(orders)
+        }
     }, [orders, searchQuery])
 
     useEffect(() => {

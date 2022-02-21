@@ -33,9 +33,11 @@ const CreateOrder = () => {
 
     const addMaker = (maker) => dispatch({type: "addMaker", payload: maker})
 
+    const addManager = (manager) => dispatch({type: "addManager", payload: manager})
+
     const addComment = (commentMessage) => {
         const comment = {
-            author: {customerId: 1},
+            author: state.manager,
             message: commentMessage
         }
         dispatch({type: "addComment", payload: comment})
@@ -67,7 +69,7 @@ const CreateOrder = () => {
             <div className="row w-100 gap-24">
                 <div id="maker" className="col col-gap create_order-maker_cnt">
                     <p>Manager</p>
-                    <SearchSelect list={makers} handleSelected={addMaker}/>
+                    <SearchSelect list={makers} handleSelected={addManager}/>
                 </div>
                 <div id="maker" className="col col-gap create_order-maker_cnt">
                     <p>Maker</p>

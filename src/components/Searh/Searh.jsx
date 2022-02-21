@@ -27,7 +27,7 @@ const Search = ({onSearchQueryCallback}) => {
                 delayedSearch = setTimeout(() => {
                     onSearchQueryCallback && onSearchQueryCallback(searchQuery)
                     dispatch({type: "addToSearchParams", payload: searchQuery})
-                }, 300)
+                }, 500)
                 return;
             }
         }
