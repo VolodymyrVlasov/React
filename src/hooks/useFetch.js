@@ -1,6 +1,12 @@
 import {useState} from "react";
 import {createOrder, getOrders, updateOrder} from "../api/orderApi";
-import {createCustomer, getCustomers, searchCustomersByKey, searchCustomersByRole} from "../api/customerApi";
+import {
+    createCustomer,
+    getCustomers,
+    getManagerByUid,
+    searchCustomersByKey,
+    searchCustomersByRole
+} from "../api/customerApi";
 import {createProduct, getProducts, updateProduct} from "../api/productApi";
 import {getDeliveryTypes, getOrderStatusTypes, getPaymentTypes, getProductTypes, getRoleTypes} from "../api/typesApi";
 
@@ -9,7 +15,21 @@ const useFetch = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const setResult = (err, data) => !err ? setData(data) : setError(err)
+    const setResult = (err, data) => {
+        // console.log("useFetch", err.response.status)
+        // !err ? setData(data) : setError(err)
+        if (!err) {
+            setData(data)
+        } else {
+            setData(null)
+        }
+
+        if (err) {
+            setError(err)
+        } else {
+            setError(null)
+        }
+    }
 
     const fetchData = async (type, payload) => {
         setLoading(true)
@@ -31,6 +51,11 @@ const useFetch = () => {
             }
             case 'getCustomers': {
                 const [err, data] = await getCustomers()
+                setResult(err, data)
+                break
+            }
+            case 'getManagerByUid': {
+                const [err, data] = await getManagerByUid(payload)
                 setResult(err, data)
                 break
             }

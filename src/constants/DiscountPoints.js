@@ -1,0 +1,1 @@
+export const discountPoints = [5, 10, 20, 40, 50, 100, 200, 400, 500, 1000]

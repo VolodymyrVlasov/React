@@ -2,7 +2,7 @@
     width: 100%;
     padding: 8px;
     border-radius: var(--border-radius);
-    background-color: var(--color-bg-gray);
+    background-color: var(--color-theme-backgroung--light);
 }
 
 .comment_form-textarea {

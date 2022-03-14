@@ -2,12 +2,12 @@
     min-width: 50px;
     font-weight: bolder;
     text-align: center;
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }
 
 .cart_item_form-sum {
     min-width: 50px;
     font-weight: bolder;
     text-align: center;
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }

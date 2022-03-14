@@ -21,9 +21,9 @@ const SearchCustomer = ({selectedCustomer}) => {
         }, 500)
     }
 
-    useEffect(() => {
+    useEffect(async () => {
         if (query && query !== "") {
-            fetchCustomers("searchCustomersByKey", query)
+            await fetchCustomers("searchCustomersByKey", query)
         }
         if (query === "" || query == null) {
             setIsResultDropVisible(false)

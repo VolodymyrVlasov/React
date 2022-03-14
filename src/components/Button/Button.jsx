@@ -1,7 +1,10 @@
 import "./Button.css"
 import {useEffect, useState} from "react";
 
-const Button = ({onClickFunc, buttonText, type = "default", children}) => {
+const Button = ({
+                    children, onClickFunc, buttonText, isLoading = false,
+                    type = "default", disabled = false
+                }) => {
     const [style, setStyle] = useState(null)
     const [text, setText] = useState(null)
 
@@ -35,7 +38,15 @@ const Button = ({onClickFunc, buttonText, type = "default", children}) => {
 
     return (
         <button onClick={(e) => onClickFunc(e)}
-                className={`button-${style}`}>{text ? text : children}</button>
+                className={`button-${style}`} disabled={disabled}>
+            {isLoading === false && <p>{text ? text : children}</p>}
+            {isLoading &&
+            <div className="row-center gap-8">
+                <i className="button-loading-animation"/>
+                <p>Loading</p>
+            </div>
+            }
+        </button>
     )
 }
 

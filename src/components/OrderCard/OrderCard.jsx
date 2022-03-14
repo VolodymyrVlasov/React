@@ -9,31 +9,42 @@ export const OrderCard = ({order}) => {
     }
 
     return (
-        <div className="order_card col col-gap">
-            <p className="text">Order #{order.orderId}</p>
-            <div>
+        <div className="theme-card order-card col-left gap-12" draggable={true}>
+            <p className="text-primary-p--bold">Order #{order.orderId}</p>
+            <div className="col-left gap-8">
                 <p className="text-label">To do types</p>
-                <div className="row-wrap gap-8">{
+                <div className="row-left wrap gap-8">{
                     getProductTagSet(order.cartItems).map((cartItem, index) => {
-                        return (<span key={index} className="order_card-cart_item_tag">{cartItem}</span>)
+                        return (<span key={index} className="item-tag">{cartItem}</span>)
                     })}
                 </div>
             </div>
-            <div>
-                <p className="text-label">Delivery</p>
-                <div className="row">
-                    {order?.deliveryType &&
-                        <span
-                            className="order_card-cart_item_tag">
-                            {getEnumNames([order?.deliveryType])[0]["name"]}</span>}
+            <div className="col-left gap-8  flex-1">
+                <p className="text-label">Customer</p>
+                <div className="row-left wrap gap-8">
+                    <span className="item-tag">{order?.customer?.name} {order?.customer?.lastName}</span>
                 </div>
             </div>
-            <div>
-                <p className="text-label">Payment</p>
-                <div className="row gap-8">
-                    {order?.paymentType &&
-                        <span
-                            className="order_card-cart_item_tag">{getEnumNames([order?.paymentType])[0]["name"]}</span>}
+            <div className="row-left gap-12 full-width">
+                <div className="col-left gap-8 flex-1">
+                    <p className="text-label">Delivery</p>
+                    <div className="row-left wrap gap-8">
+                        {order?.deliveryType &&
+                        <span className="item-tag">{getEnumNames([order?.deliveryType])[0]["name"]}</span>}
+                    </div>
+                </div>
+                <div className="col-left gap-8 flex-1">
+                    <p className="text-label">Payment</p>
+                    <div className="row-left wrap gap-8">
+                        {order?.paymentType &&
+                        <span className=" item-tag">{getEnumNames([order?.paymentType])[0]["name"]}</span>}
+                    </div>
+                </div>
+            </div>
+            <div className="col-left gap-8  flex-1">
+                <p className="text-label">Status</p>
+                <div className="row-left wrap gap-8">
+                    <span className="item-tag">{getEnumNames([order?.status])[0]["name"]}</span>
                 </div>
             </div>
         </div>

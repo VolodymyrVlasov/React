@@ -1,6 +1,6 @@
-import {createContext, useEffect, useReducer} from "react";
+import {createContext, useReducer} from "react";
 
-export const TasksContext = createContext([])
+export const AppContext = createContext(null)
 
 const initialState = {
     orders: [],
@@ -17,6 +17,8 @@ const initialState = {
 const reducer = (state, {type, payload}) => {
     try {
         switch (type) {
+            case 'setManager':
+                return {...state, manager: payload}
             case "updateOrderList":
                 return {...state, orders: payload}
             case "addTask":
@@ -43,12 +45,12 @@ const reducer = (state, {type, payload}) => {
 const TasksProvider = ({children}) => {
     const [appContext, appDispatch] = useReducer(reducer, initialState)
 
-    useEffect(() => {
-        // console.log("searchQuery -> ", appContext.searchQuery)
-        // console.log("orders -> ", appContext.orders)
-    }, [appContext])
+    // useEffect(() => {
+    //     // console.clear()
+    //     console.log("searchQuery", appContext.searchQuery)
+    // }, [appContext.searchQuery])
     return (
-        <TasksContext.Provider value={[appContext, appDispatch]}>{children}</TasksContext.Provider>
+        <AppContext.Provider value={[appContext, appDispatch]}>{children}</AppContext.Provider>
     )
 }
 

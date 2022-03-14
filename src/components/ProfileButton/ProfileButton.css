@@ -1,16 +1,30 @@
 .profile-cnt {
     position: relative;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-theme-primary--default);
+    padding: 1px;
+    border-radius: 999px;
 }
 
 .profile-button {
     width: 32px;
     height: 32px;
+    padding: 2px;
     border-radius: 999px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
+    background-clip: padding-box;
     outline: 0;
-    border: 0;
+    border: 1px solid transparent;
+    transition: var(--transition-time);
+}
+
+.profile-button:hover,
+.profile-button:focus {
+    border: 1px solid var(--color-theme-primary--default);
+    transform: scale(1.15);
 }
 
 .profile-point {
@@ -19,7 +33,8 @@
     height: 8px;
     border-radius: 999px;
     border: 1px solid white;
-    background: var(--gradient-purple);
+    background: var(--gradient-theme--default);
     top: 0;
     right: 0;
 }
+

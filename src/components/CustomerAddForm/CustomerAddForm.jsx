@@ -1,11 +1,11 @@
-import "./AddCustomer.css"
+import "./CustomerAddForm.css"
 import {createRef, useEffect, useState} from "react";
 import Button from "../Button/Button";
 
-const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
+const CustomerAddForm = ({addCustomer, setIsNewCustomer}) => {
     const [isBtnAdd, setIsBtnAdd] = useState(false)
     const [name, setName] = useState(null)
-    const [lastname, setLastname] = useState(null)
+    const [lastName, setLastName] = useState(null)
     const [phone, setPhone] = useState(null)
     const [email, setEmail] = useState(null)
 
@@ -17,15 +17,15 @@ const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
 
     useEffect(() => {
             if (isBtnAdd) {
-                if ((name && lastname) && (phone || email)) {
-                    addCustomer({name, lastname, phone, email})
+                if ((name && lastName) && (phone || email)) {
+                    addCustomer({name,lastName, phone, email})
                 } else {
                     if (!name) {
                         nameRef.current.style.border = "1px solid red"
                     } else {
                         lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
                     }
-                    if (!lastname) {
+                    if (!lastName) {
                         lastnameRef.current.style.border = "1px solid red"
                     } else {
                         lastnameRef.current.style.border = "1px solid var(--color-text-gray)"
@@ -62,8 +62,8 @@ const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
                     case "name":
                         setName(data)
                         break
-                    case "lastname":
-                        setLastname(data)
+                    case "lastName":
+                        setLastName(data)
                         break
                     case "phone":
                         setPhone(data)
@@ -93,7 +93,7 @@ const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
         }
         let newName = data.substring(0, 1).toUpperCase() + data.substring(1)
         lastnameRef.current.value = newName
-        addToState({data: newName, type: "lastname"})
+        addToState({data: newName, type: "lastName"})
     }
 
     const addPhone = () => {
@@ -128,9 +128,9 @@ const AddCustomer = ({addCustomer, setIsNewCustomer}) => {
             <input ref={emailRef} type="email" placeholder="e-mail" className="add_customer-input"
                    onInput={() => addEmail()}/>
             <button onClick={() => setIsNewCustomer(false)} className="add_customer-cancel_button">+</button>
-            <Button onClickFunc={() => setIsBtnAdd(true)} text={"Add"}/>
+            <Button onClickFunc={() => setIsBtnAdd(true)} buttonText={"Add"}/>
         </>
     )
 }
 
-export default AddCustomer
+export default CustomerAddForm

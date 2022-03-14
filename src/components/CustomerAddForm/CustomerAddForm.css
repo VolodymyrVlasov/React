@@ -1,7 +1,7 @@
 .add_customer-input {
     width: 100%;
     outline: 0;
-    border: 1px solid var(--color-text-gray);
+    border: 1px solid var(--color-text--light);
     padding: 8px 8px;
     border-radius: 999px;
 }
@@ -11,7 +11,7 @@
 }
 
 .add_customer-input:focus {
-    border: 1px solid var(--color-purple);
+    border: 1px solid var(--color-theme-primary--default);
 }
 
 .add_customer-cancel_button {
@@ -27,5 +27,5 @@
 .add_customer-cancel_button:hover,
 .add_customer-cancel_button:focus {
     transform: scale(1.5) rotateZ(135deg);
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }

@@ -1,22 +1,21 @@
 :root {
     --color-shadow: rgba(45, 83, 219, 0.1);
     --border-radius: 18px;
+    --border-radius-tablet: 999px;
     --small-gap: 12px;
     --medium-gap: 24px;
     --big-gap: 48px;
 
+    --border--transparent: 1px solid transparent;
+    --border--warn: 1px solid orangered !important;
+    --border--allow: 1px solid lightgreen !important;
+    --border--focus-within: 1px solid var(--color-theme-primary--default);
+
     --btn-padding: 3px 32px 3px 8px;
     --input-padding: 8px 16px;
     --tag-padding: 4px 8px;
-    --color-white: #fff;
-    --color-bg-color: #fff;
-    --color-bg-gray: #EFEFEF;
-    --color-text-gray: #B1B1B1;
-    --color-text-hover: #000;
-    --color-purple: #7A1DC4;
-    --gradient-purple: linear-gradient(60deg, #7A1DC4 25%, #FF579E 140%);
 
     --shadow: 0 4px 6px 3px var(--color-shadow);
 
-    --transition-time:300ms;
+    --transition-time: 300ms;
 }

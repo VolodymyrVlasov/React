@@ -1,35 +1,29 @@
 import {useEffect} from "react";
 import useFetch from "../../hooks/useFetch";
-import AutoSearchSelect from "../AutoSearchSelect/AutoSearchSelect";
 import "./CreateOrder.css"
 import SearchSelect from "../SearchSelect/SearchSelect";
-import AddProduct from "../AddTask/AddProduct";
+import AddProduct from "../AddProduct/AddProduct";
 import {useOrder} from "../../hooks/useOrder";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 import CommentForm from "../CommentForm/CommentForm";
-import {getEnumNames} from "../../utils/utils";
-import {useTasks} from "../../hooks/useTasks";
+import {useAppContext} from "../../hooks/useAppContext";
+import OrderSummary from "../OrderSummary/OrderSummary";
+import SearchWithDropDown from "../SearchWithDropDown/SearchWithDropDown";
 
 const CreateOrder = () => {
     const {data: makers, loading: makersLoading, error: makersError, fetchData: makersFetch} = useFetch()
+    const {data: managers, loading: managersLoading, error: managersError, fetchData: managersFetch} = useFetch()
     const {data: order, loading: orderLoading, error: orderError, fetchData: orderFetch} = useFetch()
-    const {data: deliveryTypes, fetchData: deliveryTypesFetch} = useFetch()
-    const {data: paymentTypes, fetchData: paymentTypesFetch} = useFetch()
-    const {data: orderStatusTypes, fetchData: orderStatusTypesFetch} = useFetch()
+
     const [state, dispatch] = useOrder()
-    const [appContext, appDispatch] = useTasks()
+    const [{manager}, appDispatch] = useAppContext()
 
-    useEffect(() => {
-        makersFetch('searchCustomersByRole', 'MAKER')
-        deliveryTypesFetch('getDeliveryTypes')
-        paymentTypesFetch('getPaymentTypes')
-        orderStatusTypesFetch('getOrderStatusTypes')
+    useEffect(async () => {
+        await makersFetch('searchCustomersByRole', 'MAKER')
+        await managersFetch('searchCustomersByRole', 'MANAGER')
+
     }, [])
-
-    useEffect(() => {
-        getEnumNames(deliveryTypes)
-    }, [deliveryTypes])
 
     const addMaker = (maker) => dispatch({type: "addMaker", payload: maker})
 
@@ -43,12 +37,9 @@ const CreateOrder = () => {
         dispatch({type: "addComment", payload: comment})
     }
 
-    const addDelivery = (deliveryType) => dispatch({type: "addDeliveryType", payload: deliveryType?.type})
-    const addPayment = (paymentType) => dispatch({type: "addPaymentType", payload: paymentType?.type})
-
-    const createOrder = () => {
+    const createOrder = async () => {
         if (state.customer && state.maker && state.cartItems) {
-            orderFetch("createOrder", state)
+            await orderFetch("createOrder", state)
         }
     }
 
@@ -57,48 +48,44 @@ const CreateOrder = () => {
     }
 
     if (order) {
-        return <div className="col col-gap">
-            <p className="create_order-title">Order #{order.orderId} saved</p>
+        return <div className="col-left gap-12">
+            <p className="DELETE">Order #{order.orderId} saved</p>
             <Button buttonText={"Okay"} onClickFunc={() => appDispatch({type: "changeNewTaskPopup"})}/>
         </div>
     }
 
     return (
-        <div className="col col-gap">
-            <h2 className="create_order-title">New order form</h2>
-            <div className="row w-100 gap-24">
-                <div id="maker" className="col col-gap create_order-maker_cnt">
+        <div className="create-order-card col-left gap-24 ">
+            <h2 className="text-h3--bold">New order form</h2>
+            <div className="row-left full-width gap-24">
+                <div id="maker" className="col-left gap-12 flex-1">
                     <p>Manager</p>
-                    <SearchSelect list={makers} handleSelected={addManager}/>
+                    <SearchSelect list={managers} handleSelected={addManager} defaultValue={manager}/>
                 </div>
-                <div id="maker" className="col col-gap create_order-maker_cnt">
+                <div id="maker" className="col-left gap-12 flex-1">
                     <p>Maker</p>
                     <SearchSelect list={makers} handleSelected={addMaker}/>
                 </div>
             </div>
-            <div className="row w-100 gap-24">
-                <div className="col col-gap">
-                    <p>Delivery</p>
-                    <SearchSelect list={getEnumNames(deliveryTypes)} handleSelected={addDelivery}/>
-                </div>
-                <div className="col col-gap">
-                    <p>Payment</p>
-                    <SearchSelect list={getEnumNames(paymentTypes)} handleSelected={addPayment}/>
-                </div>
-            </div>
-            <div id="customer" className="col col-gap create_order-customer_cnt">
+            <div id="customer" className="col-left gap-12 full-width">
                 <p>Customer</p>
-                <AutoSearchSelect/>
+                <SearchWithDropDown/>
             </div>
-            <div className="col col-gap">
+            <div className="col-left gap-12 full-width">
                 <p>Tasks</p>
                 <AddProduct/>
             </div>
-            <div className="col col-gap">
+            <div className="col-left gap-12 full-width">
                 <p>Comment</p>
                 <CommentForm addCommentCallback={addComment}/>
             </div>
-            <Button onClickFunc={() => createOrder()} buttonText={"Create"}/>
+            <div className="col-left gap-12">
+                <p className="text-h4--bold">Summary</p>
+                <OrderSummary/>
+            </div>
+            <div className="row-right full-width">
+                <Button onClickFunc={() => createOrder()} buttonText={"Create"}/>
+            </div>
         </div>
     )
 }

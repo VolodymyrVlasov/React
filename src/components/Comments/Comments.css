@@ -4,7 +4,7 @@
 }
 
 .comments-add-comment {
-    border: 1px solid var(--color-text-gray);
+    border: 1px solid var(--color-text--light);
     border-radius: 8px;
     width: 100%;
     min-height: 32px;

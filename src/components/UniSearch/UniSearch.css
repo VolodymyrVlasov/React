@@ -1,0 +1,55 @@
+.unisearch {
+    background: var(--color-theme-backgroung--default);
+    border-radius: var(--border-radius-tablet);
+    border: var(--border--transparent);
+    padding: 8px 16px;
+
+    position: relative;
+}
+
+.unisearch:focus-within {
+    background-color: var(--color-theme-monochrom--white);
+    border: var(--border--focus-within);
+}
+
+.unisearch:hover {
+    background-color: var(--color-theme-monochrom--white);
+    border: var(--border--focus-within) !important;
+}
+
+.unisearch:not(:focus-within) {
+    border: var(--border--transparent);
+}
+
+.unisearch-warn {
+    border: 1px solid orangered !important;
+    /*border: var(--border--warn);*/
+}
+
+.unisearch-allow {
+    border: 1px solid lightgreen !important;
+    /*border: var(--border--allow);*/
+}
+
+.unisearch-ico {
+    width: 18px;
+    height: 18px;
+    background-image: url("../../img/ico-search.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    /*margin-right: 8px;*/
+}
+
+.unisearch-input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+}
+
+/* `md` applies to medium devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .unisearch {
+        display: none;
+    }
+}

@@ -1,0 +1,70 @@
+.auth-card {
+    margin: 150px auto 0 auto;
+    width: 320px;
+    transition: var(--transition-time);
+    position: relative;
+}
+
+.auth-card-singup {
+    cursor: pointer;
+    transition: var(--transition-time);
+}
+
+.auth-card-singup:hover {
+    color: var(--color-theme-primary--default);
+}
+
+.auth-card-input-wrapper {
+    padding: 8px;
+    background-color: var(--color-theme-monochrom--white);
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow);
+}
+
+.auth-card-input-wrapper:focus-within,
+.auth-card-input-wrapper:hover {
+    border: var(--border--focus-within);
+}
+
+.auth-card-input {
+    min-width: 320px;
+    line-height: 2rem;
+    border: 0;
+    outline: 0;
+    border-radius: 12px;
+}
+
+.auth-card-error {
+    position: absolute;
+    z-index: 1000;
+    top: -60px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    min-width: 300px;
+    padding: 12px;
+    border: 1px solid red;
+    background: #ff9898;
+    color: var(--color-theme-primary--dark);
+}
+
+.auth-card-error-animation-enter {
+    transform: translateY(-100px);
+    opacity: 0;
+}
+
+.auth-card-error-animation-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms, transform 300ms;
+}
+
+.auth-card-error-animation-exit {
+    opacity: 1;
+}
+
+.auth-card-error-animation-exit-active {
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: opacity 300ms, transform 300ms;
+}

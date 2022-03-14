@@ -3,17 +3,15 @@ import {createContext, useEffect, useReducer} from "react";
 export const OrderContext = createContext({})
 
 const initialState = {
-    // orderId: "",
     customer: {},
-    // manager: {},
+    manager: {},
     maker: {},
     cartItems: [],
-    // paid: 0,
-    // discount: 0,
-    // totalPrice: 0,
+    paid: 0,
+    discount: 0,
+    totalPrice: 0,
     paymentType: "",
-    // path: "",
-    // status: "",
+    status: "",
     comments: []
 }
 
@@ -36,6 +34,10 @@ const reducer = (state, {type, payload}) => {
                 return {...state, paymentType: payload}
             case "addPaid":
                 return {...state, paid: payload}
+            case "addTotalPrice":
+                return {...state, totalPrice: payload}
+            case "addStatus":
+                return {...state, status: payload}
             case "addComment":
                 return {...state, comments: [payload]}
             default:

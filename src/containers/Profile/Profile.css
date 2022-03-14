@@ -1,0 +1,10 @@
+.profile-photo-wrapper {
+    width: 296px;
+    height: 296px;
+    border-radius: 50%;
+    clip-path: circle();
+}
+
+.profile-photo {
+
+}

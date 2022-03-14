@@ -1,12 +1,13 @@
-import {useEffect, useState} from "react";
-import "./AutoSearchSelect.css"
-import AddCustomer from "../AddCustomer/AddCustomer";
-import SearchCustomer from "../SearchCustomer/SearchCustomer";
-import SelectedItem from "../SelectedItem/SelectedItem";
 import {useOrder} from "../../hooks/useOrder";
+import {useEffect, useState} from "react";
 import useFetch from "../../hooks/useFetch";
+import SelectedItem from "../SelectedItem/SelectedItem";
+import CustomerAddForm from "../CustomerAddForm/CustomerAddForm";
 
-const AutoSearchSelect = () => {
+import "./SearchWithDropDown.css"
+import SearchCustomer from "../SearchCustomer/SearchCustomer";
+
+const SearchWithDropDown = () => {
     const [, dispatch] = useOrder()
     const [customer, setCustomer] = useState(null)
     const [isNewCustomer, setIsNewCustomer] = useState(false)
@@ -26,11 +27,11 @@ const AutoSearchSelect = () => {
     useEffect(() => dispatch({type: "addCustomer", payload: customer}), [customer])
 
     return (
-        <div className="auto-search" id="auto-search-customer">
+        <div className="customer-search row-left space-between full-width gap-12" id="auto-search-customer">
             {customer && <SelectedItem item={customer} deleteItem={deleteCustomer}/>}
             {!customer && (
                 <>
-                    {isNewCustomer && <AddCustomer addCustomer={createCustomer} setIsNewCustomer={setIsNewCustomer}/>}
+                    {isNewCustomer && <CustomerAddForm addCustomer={createCustomer} setIsNewCustomer={setIsNewCustomer}/>}
                     {!isNewCustomer && (
                         <>
                             <SearchCustomer selectedCustomer={addCustomer}/>
@@ -45,5 +46,5 @@ const AutoSearchSelect = () => {
     )
 }
 
-export default AutoSearchSelect
+export default SearchWithDropDown
 

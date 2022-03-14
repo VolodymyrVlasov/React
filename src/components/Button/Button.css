@@ -3,16 +3,17 @@
     border-radius: 999px;
     color: #fff;
     outline: 0;
-    background: var(--gradient-purple);
+    background: var(--gradient-theme--default);
     border: 1px solid transparent;
     transition: var(--transition-time);
+    cursor: pointer;
 }
 
 .button-default:hover,
 .button-default:focus {
-    border: 1px solid var(--color-purple);
+    border: 1px solid var(--color-theme-primary--default);
     background: #fff;
-    color: var(--color-purple)
+    color: var(--color-theme-primary--default)
 }
 
 .button-cancel {
@@ -28,7 +29,7 @@
 .button-cancel:hover,
 .button-cancel:focus {
     transform: scale(1.5) rotateZ(135deg);
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }
 
 .button-add {
@@ -43,7 +44,7 @@
 .button-add:hover,
 .button-add:focus {
     transform: scale(1.5) rotateZ(180deg);
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }
 
 .button-drop {
@@ -59,7 +60,7 @@
 .button-drop:hover,
 .button-drop:focus {
     transform: scale(1.5) rotateZ(90deg);
-    color: var(--color-purple);
+    color: var(--color-theme-primary--default);
 }
 
 .button-plus-minus {
@@ -76,9 +77,80 @@
 
 .button-plus-minus:hover,
 .button-plus-minus:focus {
-    transform: scale(1.5);
-    color: var(--color-purple);
+    transform: scale(2);
+    color: var(--color-theme-primary--default);
 }
+
+.button-default:disabled,
+.button-plus-minus:disabled,
+.button-drop:disabled,
+.button-add:disabled,
+.button-cancel:disabled {
+    background: var(--color-theme-monochrom--light-light);
+    color: var(--color-theme-monochrom--light);
+    border: 1px solid var(--color-theme-monochrom--light);
+    cursor: wait;
+}
+
+.button-loading-animation {
+    display: flex;
+    width: 12px;
+    height: 12px;
+    border: solid 2px var(--color-theme-monochrom--light-light);
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 1.0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    transition: all 0.5s ease-in;
+    animation-name: rotate;
+    animation-duration: 1.0s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.button-default:hover > .button-loading-animation,
+.button-plus-minus:hover > .button-loading-animation,
+.button-drop:hover > .button-loading-animation,
+.button-add:hover > .button-loading-animation,
+.button-cancel:hover > .button-loading-animation {
+    border: solid 2px var(--color-theme-primary--default);
+    border-bottom-color: transparent;
+}
+
+.button-default:disabled .button-loading-animation,
+.button-plus-minus:disabled .button-loading-animation,
+.button-drop:disabled .button-loading-animation,
+.button-add:disabled .button-loading-animation,
+.button-cancel:disabled .button-loading-animation {
+    border: 2px solid var(--color-theme-monochrom--light);
+    border-bottom-color: transparent;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+
+
 
 
 

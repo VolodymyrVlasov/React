@@ -2,15 +2,15 @@ import {useEffect} from "react";
 
 const TaskList = ({order}) => {
     return (
-        <div className="col">
+        <div className="col-left">
             <div className="row-h-center_v-spb">
                 <span className="half text-label">Задача</span>
                 <span className="half text-label">Тираж</span>
             </div>
-            <ul className="task--tasks-list col col-gap">
+            <ul className="task--tasks-list col-left gap-12">
                 {order.cartItems?.map(cartItem => {
                     return (
-                        <li key={cartItem.cartItemId} className="row">
+                        <li key={cartItem.cartItemId} className="row-left">
                             <span className="half">• {cartItem.product.name}</span>
                             <div className="half row-h-center_v-spb">
                                 <span>{cartItem.amount} шт</span>

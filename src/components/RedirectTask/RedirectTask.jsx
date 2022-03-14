@@ -1,11 +1,11 @@
 import "./RedirectTask.css"
 import {useEffect, useState} from "react";
-import {useTasks} from "../../hooks/useTasks";
+import {useAppContext} from "../../hooks/useAppContext";
 import useFetch from "../../hooks/useFetch";
 import defaultAvatar from "../../img/ico-default-avatar.webp"
 
 const RedirectTask = ({task}) => {
-    const [{items}, dispatch] = useTasks()
+    const [{items}, dispatch] = useAppContext()
     const {data, error, loading, fetchData} = useFetch()
     const [makers, setMakers] = useState(null)
     const [isVisibleDropDown, setIsVisibleDropDown] = useState(false)

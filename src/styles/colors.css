@@ -1,0 +1,36 @@
+:root {
+    --color-theme-primary--dark: #400072;
+    --color-theme-primary--default: #7A1DC4;
+    --color-theme-primary--light: #b589d9;
+    --color-theme-primary--light-light: #ddcbef;
+
+    --color-theme-secondary--dark: #791b42;
+    --color-theme-secondary--default: #FF579EFF;
+    --color-theme-secondary--light: #ffa5cc;
+    --color-theme-secondary--light-light: #ffe2ef;
+
+    --color-theme-monochrom--black: #000;
+    --color-theme-monochrom--dark: #212121;
+    --color-theme-monochrom--default: #414141;
+    --color-theme-monochrom--light: #B1B1B1;
+    --color-theme-monochrom--light-light: #EAEEF6;
+    --color-theme-monochrom--white: #fff;
+
+    --gradient-theme--dark: linear-gradient(60deg, var(--color-theme-primary--dark) 25%, var(--color-theme-secondary--dark) 140%);
+    --gradient-theme--default: linear-gradient(60deg, var(--color-theme-primary--default) 25%, var(--color-theme-secondary--default) 140%);;
+    --gradient-theme--light: linear-gradient(60deg, var(--color-theme-primary--light) 25%, var(--color-theme-secondary--light) 140%);;
+    --gradient-theme--light-light: linear-gradient(60deg, var(--color-theme-primary--light-light) 25%, var(--color-theme-secondary--light-light) 140%);;
+
+    --color-heading--dark: var(--color-theme-primary--dark);
+    --color-heading--default: var(--color-theme-primary--default);
+    --color-heading--light: var(--color-theme-primary--light);
+
+    --color-theme-backgroung--dark: var(--color-theme-monochrom--dark);
+    --color-theme-backgroung--default: var(--color-theme-monochrom--light-light);
+    --color-theme-backgroung--light: var(--color-theme-monochrom--white);
+
+    --color-text--dark: var(--color-theme-monochrom--black);
+    --color-text--default: var(--color-theme-monochrom--default);
+    --color-text--light: var(--color-theme-monochrom--light);
+    --color-text--light-light: var(--color-theme-monochrom--light-light);
+}

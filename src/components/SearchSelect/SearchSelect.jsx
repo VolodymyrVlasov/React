@@ -5,10 +5,10 @@ import SelectedItem from "../SelectedItem/SelectedItem";
 import Button from "../Button/Button";
 import {useOrder} from "../../hooks/useOrder";
 
-const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
+const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected}) => {
     const [, dispatch] = useOrder()
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
-    const [selectedItem, setSelectedItem] = useState(null)
+    const [selectedItem, setSelectedItem] = useState(defaultValue ? defaultValue : null)
     const [resultList, setResultList] = useState(null)
     const inputRef = createRef()
 
@@ -70,12 +70,12 @@ const SearchSelect = ({list = [], handleSelected, clearSelected}) => {
     }, [selectedItem])
 
     return (
-        <div className="select-cnt" onClick={() => onButtonClick()}>
+        <div className="select-cnt full-width gap-12" onClick={() => onButtonClick()}>
             {
                 selectedItem != null && !clearSelected ?
                     <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
                     :
-                    <input type="text" ref={inputRef} className="select--input" placeholder="Start type to search"
+                    <input type="text" ref={inputRef} className="select--input full-width" placeholder="Start type to search"
                            onInput={(event) => searchItem(event.target?.value)}/>
             }
 

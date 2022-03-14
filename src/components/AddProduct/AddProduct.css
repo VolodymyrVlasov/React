@@ -1,0 +1,51 @@
+.task-list-cnt {
+    width: 100%;
+    position: relative;
+}
+
+.task-label {
+    min-width: 80px;
+    text-align: center;
+    transition: var(--transition-time);
+    cursor: default;
+}
+
+.task-label:hover {
+    color: var(--color-theme-primary--default);
+}
+
+.task-list-cnt--content {
+    overflow-y: scroll;
+    width: 100%;
+    height: fit-content;
+    max-height: 20vh;
+    padding: 15px 0 22px 0;
+}
+
+.task-list-cnt--top, .task-list-cnt--bottom {
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.task-list-cnt--top {
+    height: 30px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.task-list-cnt--bottom {
+    bottom: 0;
+    height: 40px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.task-row {
+    padding: var(--input-padding);
+    border-radius: 999px;
+    transition: var(--transition-time);
+}
+
+.task-row:hover {
+    background-color: var(--color-theme-backgroung--light);
+}

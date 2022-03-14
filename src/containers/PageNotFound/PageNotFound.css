@@ -1,0 +1,23 @@
+.page-not-found-cnt {
+    height: 75vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-not-found-404 {
+    font-size: 250px;
+    font-weight: bolder;
+    background-image: var(--gradient-theme--default);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: initial;
+    -moz-text-fill-color: transparent;
+}
+
+.page-not-found-notfound {
+    color: var(--color-theme-backgroung--light-light);
+    font-size: 16px;
+    font-weight: bolder;
+    margin-top: -80px;
+    margin-bottom: 60px;
+}

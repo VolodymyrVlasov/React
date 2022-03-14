@@ -17,3 +17,5 @@ export const deleteAllCustomers = () => api.delete(ENDPOINT)
 export const searchCustomersByKey = (key) => api.get(`${ENDPOINT}/key=${key}`)
 
 export const searchCustomersByRole = (role) => api.get(`${ENDPOINT}/role=${role}`)
+
+export const getManagerByUid = (uid) => api.get(`${ENDPOINT}/uid=${uid}`)

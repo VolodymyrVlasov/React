@@ -1,21 +1,37 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 60px;
     position: sticky;
-    top: 24px;
-    background-color: #fff;
+    top: var(--medium-gap);
+    background-color: var(--color-theme-backgroung--light);
     z-index: 1000;
-    margin-bottom: 24px;
-    border-radius: 999px;
-    box-shadow: 0 4px 6px 3px var(--color-shadow);
-    padding: 0 24px;
+    margin-bottom: var(--big-gap) !important;
+    border-radius: var(--border-radius-tablet);
+    box-shadow: var(--shadow);
+    padding: 0 var(--medium-gap);
 }
 
-.logo {
-    width: 110px;
-    height: 42px;
-    object-fit: contain;
-    object-position: center;
+/* `xxl` applies to xx-large devices (large desktops, less than 1400px) */
+@media (max-width: 1399.98px) {
+}
+
+/*`xl` applies to x-large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* `lg` applies to large devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/*-------------------------------------------*/
+/* `md` applies to medium devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+}
+
+/* `sm` applies to small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+}
+
+/* `xsm` applies to x-small devices (iPhone 5/5s/SE, equals to 320px) */
+@media (max-width: 320px) {
+
 }
