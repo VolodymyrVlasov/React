@@ -13,36 +13,48 @@ const Dashboard = () => {
     const [refresh, setRefresh] = useState(false)
     const [ordersToRender, setOrdersToRender] = useState(null)
     const navigate = useNavigate()
+    let [isMount, setIsMount] = useState(true)
 
+    let loadingTimer, orderListUpdateTimer
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(orderListUpdateTimer)
+            clearTimeout(loadingTimer)
+            setIsMount(false)
+        }
+    }, [])
 
     useEffect(async () => {
-        await fetchData("getOrders")
-        const orderListUpdateTimer = setTimeout(() => {
-            setRefresh(!refresh)
-        }, 5000)
-
-        return () => clearTimeout(orderListUpdateTimer)
+        if (isMount) {
+            await fetchData("getOrders")
+            orderListUpdateTimer = setTimeout(() => {
+                setRefresh(!refresh)
+            }, 5000)
+        }
     }, [refresh])
 
     useEffect(() => {
-        if (searchQuery) {
-            setOrdersToRender(search({array: orders, key: searchQuery}).resultArray)
-        }
-        if (orders && !searchQuery) {
-            setOrdersToRender(orders)
+        if (isMount) {
+            if (searchQuery) {
+                setOrdersToRender(search({array: orders, key: searchQuery}).resultArray)
+            }
+            if (orders && !searchQuery) {
+                setOrdersToRender(orders)
+            }
         }
     }, [orders, searchQuery])
 
     useEffect(() => {
-        !error && dispatch({type: "updateOrderList", payload: data})
+        if (isMount) {
+            !error && dispatch({type: "updateOrderList", payload: data})
+        }
     }, [data, error])
 
     if (loading) {
-        const timer = setTimeout(() => {
+        loadingTimer = setTimeout(() => {
             return <Loading/>
         }, 100)
-
-
     }
 
     if (manager == null) {

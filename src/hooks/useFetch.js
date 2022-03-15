@@ -16,14 +16,11 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
 
     const setResult = (err, data) => {
-        // console.log("useFetch", err.response.status)
-        // !err ? setData(data) : setError(err)
         if (!err) {
             setData(data)
         } else {
             setData(null)
         }
-
         if (err) {
             setError(err)
         } else {

@@ -6,12 +6,8 @@ const RequireAuth = ({children}) => {
     const location = useLocation()
     const [context,] = useAppContext()
     const navigate = useNavigate()
-
     const user = useAuth()
 
-    // debugger
-
-    console.log(context)
     if (user == null && location.pathname !== '/login') {
         navigate('/login', {replace: true})
         return <></>

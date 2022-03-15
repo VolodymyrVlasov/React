@@ -3,46 +3,58 @@ import {useAppContext} from "../../hooks/useAppContext";
 import {useEffect, useState} from "react";
 import {createUserWithEmailPassword, logOut, signInWithEmailPassword, signInWithGoogle} from "../../utils/firebase";
 import {useAuth} from "../../hooks/useAuth";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Button from "../../components/Button/Button";
 
 import "./Auth.css"
-import Loading from "../../components/Loading/Loading";
 import {CSSTransition} from "react-transition-group";
 import GoogleButton from "../../components/GoogleButton/GoogleButton";
 
 const Auth = () => {
+    const {data: managerData, error: managerError, loading: managerLoading, fetchData: managerFetch} = useFetch()
     const [login, setLogin] = useState(null)
     const [password, setPassword] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [errorCardVisible, setErrorCardVisible] = useState(false)
     const [{manager}, appDispatch] = useAppContext()
-    const {data: managerData, error: managerError, loading: managerLoading, fetchData: managerFetch} = useFetch()
+    const [isMount, setIsMount] = useState(true)
     const user = useAuth()
+    const navigate = useNavigate()
+
+    let t
+
+    useEffect(() => {
+        return () => {
+            setIsMount(false)
+            clearTimeout(t)
+        }
+    }, [])
 
     useEffect(async () => {
-        setLoading(true)
-        try {
-            if (user && !managerData) {
-                await managerFetch('getManagerByUid', user.uid)
+        if (isMount) {
+            setLoading(true)
+            try {
+                if (user && !managerData) {
+                    await managerFetch('getManagerByUid', user.uid)
+                }
+                if (managerData && !manager && user) {
+                    appDispatch({type: 'setManager', payload: managerData})
+                }
+            } catch (error) {
+                setError(error)
+                setErrorCardVisible(true)
             }
-            if (managerData && !manager && user) {
-                appDispatch({type: 'setManager', payload: managerData})
+            if (error) {
+                console.error(error)
+                t = setTimeout(() => {
+                    setErrorCardVisible(false)
+                    setError(null)
+                }, 2000)
             }
-        } catch (error) {
-            setError(error)
-            setErrorCardVisible(true)
+            setLoading(false)
         }
-        if (error) {
-            console.error(error)
-            setTimeout(() => {
-                setErrorCardVisible(false)
-                setError(null)
-            }, 2000)
-        }
-        setLoading(false)
     }, [user, managerData, error])
 
     const handleAuth = async (e, type) => {
@@ -71,7 +83,8 @@ const Auth = () => {
     }
 
     if (manager) {
-        return <Navigate to={'/dashboard'}/>
+        navigate('/dashboard', {replace: true})
+        return <></>
     }
 
     return (
