@@ -62,7 +62,6 @@
     transition: var(--transition-time);
 }
 
-
 .item-tag {
     background: var(--gradient-theme--light-light);
     padding: var(--tag-padding);
@@ -74,15 +73,19 @@
 }
 
 .flex-1 {
-    flex: 1;
+    flex: 1 !important;
 }
 
 .flex-2 {
-    flex: 1;
+    flex: 2 !important;
 }
 
 .flex-3 {
-    flex: 3;
+    flex: 3 !important;
+}
+
+.flex-4 {
+    flex: 4 !important;
 }
 
 .gap-8 {
@@ -99,6 +102,23 @@
 
 .gap-24 {
     gap: 24px;
+}
+
+
+.padding-8 {
+    padding: 8px;
+}
+
+.padding-12 {
+    padding: 12px;
+}
+
+.padding-16 {
+    padding: 16px;
+}
+
+.padding-24 {
+    padding: 24px;
 }
 
 .center {

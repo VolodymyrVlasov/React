@@ -36,7 +36,7 @@ const AddProduct = () => {
             {cartItems.length > 0 &&
             <div className='task-list-cnt'>
                 <div className='task-list-cnt--top'/>
-                <ul className='task-list-cnt--content'>
+                <ul className='task-list-cnt--content col-left gap-8'>
                     {cartItems.map((cartItem, index) =>
                         <Task key={index} cartItem={cartItem} removeTaskFunk={() => onRemoveBtnClick(index)}/>)}
                 </ul>

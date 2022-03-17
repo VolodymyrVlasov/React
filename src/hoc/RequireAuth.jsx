@@ -1,10 +1,8 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {useAppContext} from "../hooks/useAppContext";
 import {useAuth} from "../hooks/useAuth";
 
 const RequireAuth = ({children}) => {
     const location = useLocation()
-    const [context,] = useAppContext()
     const navigate = useNavigate()
     const user = useAuth()
 

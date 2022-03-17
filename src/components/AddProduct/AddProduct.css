@@ -15,37 +15,51 @@
 }
 
 .task-list-cnt--content {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     width: 100%;
     height: fit-content;
     max-height: 20vh;
-    padding: 15px 0 22px 0;
+    padding: 4px 8px 8px 0;
 }
 
+.task-list-cnt--content::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+.task-list-cnt--content::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--gradient-theme--default);
+    height: 20px !important;
+    padding: 8px 0;
+}
+
+
 .task-list-cnt--top, .task-list-cnt--bottom {
-    width: 100%;
+    width: calc(100% - 12px);
     position: absolute;
     z-index: 100;
     pointer-events: none;
 }
 
 .task-list-cnt--top {
-    height: 30px;
+    height: 8px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.8) 100%);
 }
 
 .task-list-cnt--bottom {
     bottom: 0;
-    height: 40px;
+    height: 8px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 .task-row {
-    padding: var(--input-padding);
+    background: var(--color-theme-backgroung--default);
+    padding: 2px 12px;
     border-radius: 999px;
     transition: var(--transition-time);
 }
 
 .task-row:hover {
-    background-color: var(--color-theme-backgroung--light);
+    background: var(--gradient-theme--light-light);
 }

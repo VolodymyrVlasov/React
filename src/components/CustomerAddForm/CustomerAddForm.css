@@ -1,16 +1,25 @@
-.add_customer-input {
-    width: 100%;
+.add-customer-wrapper {
+    height: fit-content;
+}
+
+.add-customer-input {
+    width: 120px;
     outline: 0;
-    border: 1px solid var(--color-text--light);
+    border: 1px solid transparent;
+    background: var(--color-theme-backgroung--default);
     padding: 8px 8px;
     border-radius: 999px;
+    transition: var(--transition-time);
 }
 
-.add_customer-input:hover {
 
+.add-customer-input:hover,
+.add-customer-input:focus {
+    background: var(--color-theme-monochrom--white);
+    border: 1px solid var(--color-theme-primary--default);
 }
 
-.add_customer-input:focus {
+.add-customer-input:focus {
     border: 1px solid var(--color-theme-primary--default);
 }
 

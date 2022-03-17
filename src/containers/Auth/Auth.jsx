@@ -23,12 +23,12 @@ const Auth = () => {
     const user = useAuth()
     const navigate = useNavigate()
 
-    let t
+    let errorCardAnimationTimer
 
     useEffect(() => {
         return () => {
             setIsMount(false)
-            clearTimeout(t)
+            clearTimeout(errorCardAnimationTimer)
         }
     }, [])
 
@@ -48,7 +48,7 @@ const Auth = () => {
             }
             if (error) {
                 console.error(error)
-                t = setTimeout(() => {
+                errorCardAnimationTimer = setTimeout(() => {
                     setErrorCardVisible(false)
                     setError(null)
                 }, 2000)

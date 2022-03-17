@@ -41,15 +41,18 @@ const Customers = () => {
     return (
         <section className="container">
             <div className="col-left gap-24">
-                <div className="col-left gap-8 full-width">
-                    <p>Fast create</p>
-                    <div className="row-left gap-16 full-width">
+                <div className="col-left gap-16 full-width">
+                    <p className={"text-h3--bold"}>Fast create</p>
+                    <div className="theme-card row-left gap-16 full-width">
                         <CustomerAddForm addCustomer={createCustomer}/>
                     </div>
                 </div>
-                <div className="col-left gap-8 full-width">
-                    <p>Customers</p>
-                    {customersToRender && customersToRender.map(user => <UserCard key={user.customerId} user={user}/>)}
+                <div className="col-left gap-16 full-width">
+                    <p className={"text-h3--bold"}>Customers</p>
+                    <div className={"col-left gap-8 full-width"}>
+                        {customersToRender && customersToRender.map(user => <UserCard key={user.customerId}
+                                                                                      user={user}/>)}
+                    </div>
                 </div>
             </div>
         </section>

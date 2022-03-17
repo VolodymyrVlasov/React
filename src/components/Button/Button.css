@@ -1,6 +1,7 @@
 .button-default {
     padding: 8px 32px;
     border-radius: 999px;
+    height: auto;
     color: #fff;
     outline: 0;
     background: var(--gradient-theme--default);

@@ -5,7 +5,7 @@ import SelectedItem from "../SelectedItem/SelectedItem";
 import Button from "../Button/Button";
 import {useOrder} from "../../hooks/useOrder";
 
-const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected}) => {
+const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected, isFullWidth = false}) => {
     const [, dispatch] = useOrder()
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
     const [selectedItem, setSelectedItem] = useState(defaultValue ? defaultValue : null)
@@ -70,7 +70,7 @@ const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected}) 
     }, [selectedItem])
 
     return (
-        <div className="select-cnt full-width gap-12" onClick={() => onButtonClick()}>
+        <div className="select-cnt row-vertical-center full-width gap-12" onClick={() => onButtonClick()}>
             {
                 selectedItem != null && !clearSelected ?
                     <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
@@ -82,6 +82,7 @@ const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected}) 
             <Button onClickFunc={onButtonClick} type={"drop"}/>
 
             {isDropDownVisible && <DropDownResult list={resultList ? resultList : list}
+                                                  isFullWidth={isFullWidth}
                                                   setIsVisibleFunc={setIsDropDownVisible}
                                                   setSelectedItemFunc={setSelected}/>}
 

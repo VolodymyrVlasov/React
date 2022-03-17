@@ -13,17 +13,18 @@ const Header = () => {
     }
 
     return (
-        <header className="container header row-vertical-center">
-            <div className='row-left gap-24 flex-1'>
-                <Logo/>
-            </div>
-
-            <Search placeholder={"Номер заказа, товар или номер телефона заказчика..."}/>
-            <div className='row-right gap-24 flex-1'>
-                <Button buttonText="Add order" onClickFunc={handleClose}/>
-                <ProfileButton/>
-            </div>
-        </header>
+        <>
+            <header className="container header row-vertical-center">
+                <div className='row-left gap-24 flex-1'>
+                    <Logo/>
+                </div>
+                <Search placeholder={"Номер заказа, товар или номер телефона заказчика..."}/>
+                <div className='row-right gap-24 flex-1'>
+                    <Button buttonText="Add order" onClickFunc={handleClose}/>
+                    <ProfileButton/>
+                </div>
+            </header>
+        </>
     )
 }
 

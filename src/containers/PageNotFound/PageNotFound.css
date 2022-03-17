@@ -1,7 +1,5 @@
 .page-not-found-cnt {
-    height: 75vh;
-    align-items: center;
-    justify-content: center;
+    padding-top: 100px;
 }
 
 .page-not-found-404 {
@@ -15,9 +13,9 @@
 }
 
 .page-not-found-notfound {
-    color: var(--color-theme-backgroung--light-light);
+    color: var(--color-theme-monochrom--white);
     font-size: 16px;
     font-weight: bolder;
-    margin-top: -80px;
+    margin-top: -90px;
     margin-bottom: 60px;
 }

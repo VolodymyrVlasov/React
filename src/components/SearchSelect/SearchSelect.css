@@ -1,10 +1,9 @@
 .select-cnt {
-    display: flex;
-    justify-content: space-between;
     position: relative;
+    justify-content: space-between;
     background-color: var(--color-theme-backgroung--default);
     border-radius: var(--border-radius-tablet);
-    min-height: 48px;
+    height: 48px;
     padding: 2px 8px 2px 2px;
     border: 1px solid transparent;
 }

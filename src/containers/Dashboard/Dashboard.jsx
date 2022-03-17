@@ -9,7 +9,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
     const {data, error, loading, fetchData} = useFetch()
-    const [{orders, manager, searchQuery}, dispatch] = useAppContext()
+    const [{orders, manager, searchQuery, isNewTaskPopup}, dispatch] = useAppContext()
     const [refresh, setRefresh] = useState(false)
     const [ordersToRender, setOrdersToRender] = useState(null)
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Dashboard = () => {
     }, [])
 
     useEffect(async () => {
-        if (isMount) {
+        if (isMount && !isNewTaskPopup) {
             await fetchData("getOrders")
             orderListUpdateTimer = setTimeout(() => {
                 setRefresh(!refresh)

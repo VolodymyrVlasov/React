@@ -2,7 +2,7 @@ import "./CustomerAddForm.css"
 import {createRef, useEffect, useState} from "react";
 import Button from "../Button/Button";
 
-const CustomerAddForm = ({addCustomer, setIsNewCustomer}) => {
+const CustomerAddForm = ({addCustomer, setIsNewCustomer, isLoading = false}) => {
     const [isBtnAdd, setIsBtnAdd] = useState(false)
     const [name, setName] = useState(null)
     const [lastName, setLastName] = useState(null)
@@ -117,19 +117,93 @@ const CustomerAddForm = ({addCustomer, setIsNewCustomer}) => {
         }
     }
 
+    const createCustomer = (e) => {
+        e.preventDefault()
+        setIsBtnAdd(true)
+    }
+
+    useEffect(() => {
+        nameRef.current.focus()
+
+    }, [])
+
+
+    const [styleName, setStyleName] = useState("flex-1")
+    const [styleLastName, setStyleLastName] = useState("")
+    const [stylePhone, setStylePhone] = useState("")
+    const [styleEmail, setStyleEmail] = useState("")
+
+    const onfocus = (e) => {
+        if (e.target.name === "name") {
+            setStyleName("flex-1")
+            setStyleLastName("")
+            setStylePhone("")
+            setStyleEmail("")
+        }
+        if (e.target.name === "lastName") {
+            setStyleName("")
+            setStyleLastName("flex-1")
+            setStylePhone("")
+            setStyleEmail("")
+        }
+        if (e.target.name === "phone") {
+            setStyleName("")
+            setStyleLastName("")
+            setStylePhone("flex-1")
+            setStyleEmail("")
+        }
+        if (e.target.name === "email") {
+            setStyleName("")
+            setStyleLastName("")
+            setStylePhone("")
+            setStyleEmail("flex-1")
+        }
+    }
+
     return (
-        <>
-            <input ref={nameRef} type="text" placeholder="Name" className="add_customer-input"
-                   onInput={() => addName()}/>
-            <input ref={lastnameRef} type="text" placeholder="Lastname" className="add_customer-input"
-                   onInput={() => addLastname()}/>
-            <input ref={phoneRef} type="tel" placeholder="Phone" pattern="[0-9] {3} - [0-9] {2} - [0-9] {3}"
-                   onInput={() => addPhone()} className="add_customer-input"/>
-            <input ref={emailRef} type="email" placeholder="e-mail" className="add_customer-input"
-                   onInput={() => addEmail()}/>
-            <button onClick={() => setIsNewCustomer(false)} className="add_customer-cancel_button">+</button>
-            <Button onClickFunc={() => setIsBtnAdd(true)} buttonText={"Add"}/>
-        </>
+        <form
+            onSubmit={(e) => createCustomer(e)}
+            className={"add-customer-wrapper row-vertical-center gap-24 full-width"}>
+            <div className="row-left gap-8 full-width">
+                <input ref={nameRef}
+                       type="text"
+                       name={"name"}
+                       placeholder="Name"
+                       className={`add-customer-input ${styleName}`}
+                       onInput={() => addName()}
+                       onFocus={(e) => onfocus(e)}
+                />
+                <input ref={lastnameRef}
+                       type="text"
+                       name={"lastName"}
+                       placeholder="Lastname"
+                       className={`add-customer-input ${styleLastName}`}
+                       onInput={() => addLastname()}
+                       onFocus={(e) => onfocus(e)}
+                />
+                <input ref={phoneRef}
+                       type="tel"
+                       name={"phone"}
+                       placeholder="Phone"
+                       className={`add-customer-input ${stylePhone}`}
+                       pattern="[0-9] {3} - [0-9] {2} - [0-9] {3}"
+                       onInput={() => addPhone()}
+                       onFocus={(e) => onfocus(e)}
+                />
+                <input ref={emailRef}
+                       type="email"
+                       name={"email"}
+                       placeholder="e-mail"
+                       className={`add-customer-input ${styleEmail}`}
+                       onInput={() => addEmail()}
+                       onFocus={(e) => onfocus(e)}
+                />
+            </div>
+            <div className="row-right gap-24">
+                <Button onClickFunc={(e) => createCustomer(e)} isLoading={isLoading} buttonText={"Create"}/>
+                <Button onClickFunc={() => setIsNewCustomer(false)} type={"cancel"}/>
+            </div>
+        </form>
     )
 }
 

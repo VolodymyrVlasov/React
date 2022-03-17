@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 
 const FormRowWrapper = ({children, callback, buttonText = "+", buttonType = "add"}) => {
     return (
-        <div className="form_row-wrapper">
+        <div className="row-vertical-center gap-24 full-width">
             {children}
             {callback && <Button onClickFunc={callback} buttonText={buttonText} type={buttonType}/>}
         </div>

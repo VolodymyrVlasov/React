@@ -286,10 +286,12 @@
 
 .text-primary-p {
     font-size: var(--font-size-text-paragraph);
+    color: var(--color-theme-monochrom--black);
 }
 
 .text-primary-p--bold {
     font-size: var(--font-size-text-paragraph);
+    color: var(--color-theme-monochrom--black);
     font-weight: bold;
 }
 
@@ -306,10 +308,12 @@
 
 .text-primary-label {
     font-size: var(--font-size-text-label);
+    color: var(--color-theme-monochrom--black);
 }
 
 .text-primary-label--bold {
     font-size: var(--font-size-text-label);
+    color: var(--color-theme-monochrom--black);
     font-weight: bold;
 }
 

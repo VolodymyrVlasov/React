@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 
 const OrderSummary = () => {
     const [state, dispatch] = useOrder()
+    const [isMount, setIsMount] = useState(true)
     const [discount, setDiscount] = useState(0)
     const [paid, setPaid] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
@@ -16,17 +17,25 @@ const OrderSummary = () => {
     const {data: orderStatusTypes, fetchData: orderStatusTypesFetch} = useFetch()
     const {data: deliveryTypes, fetchData: deliveryTypesFetch} = useFetch()
 
-    useEffect(() => {
-        orderStatusTypesFetch("getOrderStatusTypes")
-        paymentTypesFetch('getPaymentTypes')
-        deliveryTypesFetch('getDeliveryTypes')
+    useEffect(async () => {
+        if (isMount) {
+            await orderStatusTypesFetch("getOrderStatusTypes")
+            await paymentTypesFetch('getPaymentTypes')
+            await deliveryTypesFetch('getDeliveryTypes')
+        }
+
+        return () => {
+            setIsMount(false)
+        }
     }, [])
 
     useEffect(() => {
-        calculateTotalPrice()
-        dispatch({type: 'addDiscount', payload: discount})
-        dispatch({type: 'addPaid', payload: paid})
-        dispatch({type: 'addStatus', payload: status.type})
+        if (isMount) {
+            calculateTotalPrice()
+            dispatch({type: 'addDiscount', payload: discount})
+            dispatch({type: 'addPaid', payload: paid})
+            dispatch({type: 'addStatus', payload: status.type})
+        }
     }, [discount, paid, status, state?.cartItems])
 
     useEffect(() => {
@@ -68,44 +77,51 @@ const OrderSummary = () => {
     const addPayment = (paymentType) => dispatch({type: "addPaymentType", payload: paymentType?.type})
 
     return (
-        <div className="col-left gap-24">
-            <div className="row-h-center_v-spb gap-24">
+        <div className="col-left gap-24 full-width">
+            <div className="row-left gap-24 full-width">
                 <div className="col-left gap-12 full-width">
-                    <p>Order status</p>
+                    <p className={"text-primary-label"}>Order status</p>
                     <SearchSelect list={getEnumNames(orderStatusTypes)}
                                   defaultValue={status} handleSelected={changeStatus}/>
                 </div>
-                <div className="col-left gap-12">
-                    <p>Delivery</p>
+                <div className="col-left gap-12 full-width">
+                    <p className={"text-primary-label"}>Delivery</p>
                     <SearchSelect list={getEnumNames(deliveryTypes)} handleSelected={addDelivery}/>
                 </div>
-                <div className="col-left gap-12">
-                    <p>Payment</p>
+                <div className="col-left gap-12 full-width">
+                    <p className={"text-primary-label"}>Payment</p>
                     <SearchSelect list={getEnumNames(paymentTypes)} handleSelected={addPayment}/>
                 </div>
             </div>
-            <div className="row-h-center_v-spb gap-24">
-                <div className="col-left gap-12 full-width">
-                    <div className="row-h-center_v-spb">
-                        <p>Discount</p>
-                        <InputNumber min={0} max={totalPrice - 1} valueSate={discount}
-                                     onChangeCallback={changeDiscount}/>
+            <div className="row-left gap-24 full-width">
+                <div className="col-left gap-12 flex-2">
+                    <div className="row-left full-width">
+                        <p className={"text-primary-label flex-1"}>Discount</p>
+                        <div className="flex-1"/>
+                        <div className="flex-1">
+                            <InputNumber min={0} max={totalPrice - 1} valueSate={discount}
+                                         onChangeCallback={changeDiscount}/>
+                        </div>
                     </div>
-                    <div className="row-h-center_v-spb">
-                        <p>Paid</p>
-                        <Button buttonText={"Paid"} onClickFunc={() => changePaid(totalPrice)}/>
-                        <InputNumber min={0} max={totalPrice} valueSate={paid}
-                                     onChangeCallback={changePaid}/>
+                    <div className="row-left full-width">
+                        <p className={"text-primary-label  flex-1"}>Paid</p>
+                        <div className="flex-1">
+                            <Button buttonText={"Paid"} onClickFunc={() => changePaid(totalPrice)}/>
+                        </div>
+                        <div className="flex-1">
+                            <InputNumber min={0} max={totalPrice} valueSate={paid}
+                                         onChangeCallback={changePaid}/>
+                        </div>
                     </div>
                 </div>
-                <div className="row-h-center_v-spb gap-24">
-                    <div className="col-left gap-12">
-                        <p>Total price</p>
-                        <p className="text-h4--bold">{totalPrice}</p>
+                <div className="row-left gap-24 flex-1">
+                    <div className="col-left gap-12 flex-1">
+                        <p className={"text-primary-label"}>Total price</p>
+                        <p className="text-h3--bold">{totalPrice}</p>
                     </div>
-                    <div className="col-left gap-12">
-                        <p>For pay</p>
-                        <p className="text-h4--bold">{totalPrice - paid}</p>
+                    <div className="col-left gap-12 flex-1">
+                        <p className={"text-primary-label"}>For pay</p>
+                        <p className="text-h3--bold">{totalPrice - paid}</p>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ const PageNotFound = () => {
     }
 
     return (
-        <section className='container col-left page-not-found-cnt'>
+        <section className='container col-center page-not-found-cnt'>
             <h1 className='page-not-found-404'>404</h1>
             <p className='page-not-found-notfound'>Not Found!</p>
             <Button buttonText='Go Home' onClickFunc={handleHomeButton}/>

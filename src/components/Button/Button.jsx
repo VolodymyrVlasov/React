@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 
 const Button = ({
                     children, onClickFunc, buttonText, isLoading = false,
-                    type = "default", disabled = false
+                    type = "default", disabled = false, buttonType = "button"
                 }) => {
     const [style, setStyle] = useState(null)
     const [text, setText] = useState(null)
@@ -38,12 +38,13 @@ const Button = ({
 
     return (
         <button onClick={(e) => onClickFunc(e)}
+                type={buttonType}
                 className={`button-${style}`} disabled={disabled}>
             {isLoading === false && <p>{text ? text : children}</p>}
             {isLoading &&
             <div className="row-center gap-8">
                 <i className="button-loading-animation"/>
-                <p>Loading</p>
+                <span>Loading</span>
             </div>
             }
         </button>

@@ -6,7 +6,7 @@ import DropDownResult from "../DropDownResult/DropDownResult";
 import SelectedItem from "../SelectedItem/SelectedItem";
 
 const UniSearch = ({
-                       onSelectItem, resultList,
+                       onSelectItem, resultList, defaultValue,
                        isShowSelectedItem = false,
                        isIcon = false,
                        isDropDown = false,
@@ -17,7 +17,7 @@ const UniSearch = ({
 
     const [, dispatch] = useAppContext()
     const [borderStyle, setBorderStyle] = useState("")
-    const [selectedItem, setSelectedItem] = useState(null)
+    const [selectedItem, setSelectedItem] = useState(defaultValue ? defaultValue : null)
     const [isResultDropVisible, setIsResultDropVisible] = useState()
 
     let delayedSearch
@@ -29,7 +29,9 @@ const UniSearch = ({
 
     const onOutSideClick = (e) => {
         if (searchCntRef.current && !searchCntRef.current?.contains(e.target)) {
-            inputRef.current.value = ""
+            // if (inputRef) {
+            //     inputRef.current?.value = ""
+            // }
             setBorderStyle("")
         }
     }
@@ -83,15 +85,15 @@ const UniSearch = ({
     }, [resultList])
 
     return (
-        <div className={`row-vertical-center full-width gap-8 unisearch ${borderStyle}`}
-             style={isShowSelectedItem ? {minHeight: "48px"} : {}} ref={searchCntRef}
+        <div className={`row-vertical-center full-width gap-8 uni-search ${borderStyle}`}
+             style={isShowSelectedItem ? {height: "48px"} : {}} ref={searchCntRef}
         >
-            {isIcon && <i className="unisearch-ico"/>}
+            {isIcon && <i className="uni-search-ico"/>}
             {isShowSelectedItem && selectedItem && <SelectedItem item={selectedItem} deleteItem={removeItem}/>}
             {!selectedItem &&
             <input ref={inputRef}
                    onInput={(e) => addToSearchParams(e)}
-                   type="text" className="unisearch-input"
+                   type="text" className="uni-search-input"
                    placeholder={placeholder && placeholder}
             />}
             {isDropDown && resultList && isResultDropVisible &&
