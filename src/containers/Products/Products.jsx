@@ -13,11 +13,11 @@ const Products = () => {
 
     const createProducts = (product) => fetchProducts('createCustomer', product)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!rawDataProducts) {
-            fetchProducts('getProducts')
+            await fetchProducts('getProducts')
         }
-        if (searchQuery && rawDataProducts.length > 0) {
+        if (searchQuery && rawDataProducts?.length > 0) {
             setProductsToRender(search({array: rawDataProducts, key: searchQuery}).resultArray)
         }
         if (rawDataProducts && !searchQuery) {

@@ -13,10 +13,10 @@ export const InnerEndpoints = [
         link: "products"
     },
     {
-        name: "Logout",
-        link: ""
-    },{
         name: "Theme style",
         link: "design"
+    },{
+        name: "Logout",
+        link: ""
     }
 ]

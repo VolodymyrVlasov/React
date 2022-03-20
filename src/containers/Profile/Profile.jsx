@@ -33,9 +33,7 @@ const Profile = () => {
                 <div className="flex-1">
                     <ProfileCard user={user} manager={manager}/>
                 </div>
-                <div className="flex-3">
-                    <ProfileCard user={user} manager={manager}/>
-                </div>
+
             </div>
         </section>
     )
@@ -64,7 +62,7 @@ const ProfileAnalytics = (manager) => {
 
 const ProfileCard = ({user, manager}) => {
 
-    const getLargeProfilePhoto = () => (user?.photoURL).split('=')[0] + '=s300-c'
+    const getLargeProfilePhoto = () => (user?.photoURL)?.split('=')[0] + '=s300-c'
 
     const formatPhone = (phone) => {
         const formatted = []
@@ -79,8 +77,8 @@ const ProfileCard = ({user, manager}) => {
     return (
         <div className={"theme-card col-left gap-24 padding-24"}>
             <div className='profile-photo-wrapper'>
-                <img className='profile-photo' src={getLargeProfilePhoto()} alt="photo profile" width='300'
-                     height='300'/>
+                <img className="profile-photo" src={getLargeProfilePhoto()} alt="photo profile" width="296px"
+                     height="296px"/>
             </div>
             <p className='text-h3--bold'>{manager?.name} {manager?.lastName}</p>
             <div className={"row-left gap-8"}>

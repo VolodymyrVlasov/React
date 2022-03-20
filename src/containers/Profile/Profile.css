@@ -3,6 +3,7 @@
     height: 296px;
     border-radius: 50%;
     clip-path: circle();
+    background: var(--gradient-theme--light-light);
 }
 
 .profile-photo {

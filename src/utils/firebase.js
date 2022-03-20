@@ -5,7 +5,6 @@ import {
     GoogleAuthProvider,
     signInWithEmailAndPassword,
     signInWithRedirect,
-    signInWithPopup,
     signOut
 } from "firebase/auth"
 
@@ -33,11 +32,6 @@ export const logOut = () => signOut(auth)
 
 export const signInWithGoogle = () => {
     return signInWithRedirect(auth, new GoogleAuthProvider())
-        .then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-        }).catch((error) => {
-            const credential = GoogleAuthProvider.credentialFromError(error);
-        });
 }
 
 

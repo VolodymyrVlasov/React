@@ -6,6 +6,7 @@ import "./Dashboard.css"
 import {OrderCard} from "../../components/OrderCard/OrderCard";
 import {search} from "../../utils/search";
 import {Navigate, useNavigate} from "react-router-dom";
+import LoadingError from "../../components/LoadingError/LoadingError";
 
 const Dashboard = () => {
     const {data, error, loading, fetchData} = useFetch()
@@ -29,6 +30,7 @@ const Dashboard = () => {
         if (isMount && !isNewTaskPopup) {
             await fetchData("getOrders")
             orderListUpdateTimer = setTimeout(() => {
+                console.count("dashboard refresh")
                 setRefresh(!refresh)
             }, 5000)
         }
@@ -62,9 +64,9 @@ const Dashboard = () => {
         return <Navigate to={'/login'}/>
     }
 
-    // if (error) {
-    //     return <LoadingError error={error}/>
-    // }
+    if (error) {
+        return <LoadingError error={error}/>
+    }
 
     return (
         <section className="container row-left wrap gap-12">

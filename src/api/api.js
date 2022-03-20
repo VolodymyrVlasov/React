@@ -1,7 +1,10 @@
 const axios = require("axios");
 
 // const HOST = '192.168.1.215'
-const HOST = '192.168.0.112'
+// const HOST = '192.168.0.112'
+// const HOST = 'localhost'
+const HOST = 'paperfox.store'
+// const HOST = '192.168.0.112'
 const PORT = 8080
 
 export const api = axios.create({

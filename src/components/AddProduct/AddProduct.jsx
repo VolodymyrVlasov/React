@@ -11,10 +11,10 @@ const AddProduct = () => {
     const [cartItems, setCartItems] = useState([])
     const {data: productsData, loading: productsLoading, error: productsError, fetchData: productsFetch} = useFetch()
 
-    useEffect(() => {
+    useEffect(async () => {
         dispatch({type: "addCartItems", payload: cartItems})
         if (cartItems.length === 0) {
-            productsFetch('getProducts')
+            await productsFetch('getProducts')
         }
     }, [cartItems])
 

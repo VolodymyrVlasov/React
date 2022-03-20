@@ -29,15 +29,11 @@ const UniSearch = ({
 
     const onOutSideClick = (e) => {
         if (searchCntRef.current && !searchCntRef.current?.contains(e.target)) {
-            // if (inputRef) {
-            //     inputRef.current?.value = ""
-            // }
             setBorderStyle("")
         }
     }
 
     const addToSearchParams = (e) => {
-        e.preventDefault()
         let searchQuery = e?.target?.value
         clearTimeout(delayedSearch)
         if (searchQuery === "") {
@@ -46,12 +42,12 @@ const UniSearch = ({
         }
         if (searchQuery) {
             if (searchQuery.length > 0 && searchQuery.length < 2) {
-                setBorderStyle("search-warn")
+                setBorderStyle("uni-search-warn")
                 dispatch({type: "addToSearchParams", payload: null})
                 return
             }
             if (searchQuery.length >= 2) {
-                setBorderStyle("search-allow")
+                setBorderStyle("uni-search-allow")
                 delayedSearch = setTimeout(() => {
                     dispatch({type: "addToSearchParams", payload: searchQuery})
                 }, 500)
@@ -86,10 +82,15 @@ const UniSearch = ({
 
     return (
         <div className={`row-vertical-center full-width gap-8 uni-search ${borderStyle}`}
-             style={isShowSelectedItem ? {height: "48px"} : {}} ref={searchCntRef}
+             style={isShowSelectedItem ? {height: "48px"} : {padding: "8px 16px"}} ref={searchCntRef}
         >
-            {isIcon && <i className="uni-search-ico"/>}
-            {isShowSelectedItem && selectedItem && <SelectedItem item={selectedItem} deleteItem={removeItem}/>}
+            {isIcon &&
+            <i className="uni-search-ico"
+               style={isShowSelectedItem ?  {marginLeft: "12px"} : {padding: "0"}}/>}
+            {isShowSelectedItem && selectedItem &&
+            <SelectedItem
+                item={selectedItem} deleteItem={removeItem}
+            />}
             {!selectedItem &&
             <input ref={inputRef}
                    onInput={(e) => addToSearchParams(e)}
