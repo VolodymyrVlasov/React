@@ -28,10 +28,14 @@ const Profile = () => {
     }
 
     return (
-        <section className='section container col-left'>
-            <div className='row-left gap-24 full-width'>
+        <section className=" section container col-left">
+            <div className="row-left gap-24 full-width">
                 <div className="flex-1">
                     <ProfileCard user={user} manager={manager}/>
+                </div>
+                <div className="flex-3 col-left gap-24">
+                    <ProfileAnalytics/>
+                    <ProfileOrders/>
                 </div>
 
             </div>
@@ -41,21 +45,81 @@ const Profile = () => {
 
 export default Profile
 
-const ProfileAnalytics = (manager) => {
-    /*
-    * time scope
-    *
-    * total orders count
-    * total design item count
-    * total design money flow
-    * total money flow
-    * most rated product group by money flow
-    * most rated product group by amount
-    *
-    * */
+const ProfileOrders = () => {
     return (
-        <>
-        </>
+        <div className="theme-card col-left gap-24 padding-24 full-width">
+            <h2 className="text-h2">Orders</h2>
+            <div className="row-left gap-24 full-width">
+                <dic className="col-left gap-8 flex-1">
+                    <p className="text-primary-p">To do</p>
+                    <p className="text-h3">9</p>
+                </dic>
+                <dic className="col-left gap-8 flex-1">
+                    <p className="text-primary-p">In procces</p>
+                    <p className="text-h3">4</p>
+                </dic>
+                <dic className="col-left gap-8 flex-1">
+                    <p className="text-primary-p">Done</p>
+                    <p className="text-h3">2</p>
+                </dic>
+                <dic className="col-left gap-8 flex-1">
+                    <p className="text-primary-p">Finiched</p>
+                    <p className="text-h3">293</p>
+                </dic>
+            </div>
+        </div>
+    )
+}
+
+const ProfileAnalytics = (manager) => {
+    return (
+        <div className="theme-card col-left gap-24 padding-24 full-width">
+            <h2 className="text-h2">Analytics</h2>
+            <div className="row-right full-width">
+                <div className="col-left gap-12 flex-1">
+                    <p className="text-primary-p">Your orders count</p>
+                    <p className="text-h3">2</p>
+                </div>
+                <div className="col-left gap-12 flex-1">
+                    <p className="text-primary-p">Your money flow</p>
+                    <p className="text-h3">3452</p>
+                </div>
+                <div className="col-left gap-12 flex-1">
+                    <p className="text-primary-p">Total orders</p>
+                    <p className="text-h2">9</p>
+                </div>
+                <div className="col-left gap-12 flex-1">
+                    <p className="text-primary-p">Total money flow</p>
+                    <p className="text-h3">19399</p>
+                </div>
+            </div>
+            <div className="col-left gap-12 full-width">
+                <p className="text-primary-p">Product group rating (ASC)</p>
+                <div className="row-left gap-8">
+                    <p className="item-tag">Digital stickers</p>
+                    <p className="item-tag">Cups</p>
+                    <p className="item-tag">T-shirts</p>
+                    <p className="item-tag">Digital stickers</p>
+                </div>
+            </div>
+            <div className="col-left gap-12 full-width">
+                <p className="text-primary-p">Product rating (ASC)</p>
+                <div className="col-left gap-8 full-width">
+                    <div className="item-tag row-left gap-12">
+                        <p className="text-primary-p">Паперова наліпка (Raflatac SRA3)</p>
+                        <p className="text-primary-p-bold">122 pcs</p>
+                    </div>
+                    <div className="item-tag row-left gap-12">
+                        <p className="text-primary-p">Поліестрова наліпка (Raflatac SRA3)</p>
+                        <p className="text-primary-p-bold">12 pcs</p>
+                    </div>
+                    <div className="item-tag row-left gap-12">
+                        <p className="text-primary-p">Горнятко з друком - біле (300 мл.)</p>
+                        <p className="text-primary-p-bold">32 pcs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 
 }
@@ -75,12 +139,15 @@ const ProfileCard = ({user, manager}) => {
     }
 
     return (
-        <div className={"theme-card col-left gap-24 padding-24"}>
-            <div className='profile-photo-wrapper'>
-                <img className="profile-photo" src={getLargeProfilePhoto()} alt="photo profile" width="296px"
-                     height="296px"/>
+        <div className={"col-left gap-24"}>
+            <div className="profile-photo-wrapper">
+                <img className="profile-photo"
+                     loading="lazy" src={getLargeProfilePhoto()}
+                     alt="photo profile"
+                     width="250px"
+                     height="250px"/>
             </div>
-            <p className='text-h3--bold'>{manager?.name} {manager?.lastName}</p>
+            <p className="text-h3--bold">{manager?.name} {manager?.lastName}</p>
             <div className={"row-left gap-8"}>
                 {manager?.role?.map((role, index) => <div key={index}
                                                           className={"item-tag"}>{getEnumNames([role])[0]["name"]}</div>)}

@@ -1,11 +1,22 @@
 .profile-photo-wrapper {
-    width: 296px;
-    height: 296px;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     clip-path: circle();
     background: var(--gradient-theme--light-light);
+    box-shadow: var(--shadow);
 }
 
 .profile-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    transition: var(--transition-time);
+}
 
+.profile-photo:hover {
+    transform: scale(1.1);
 }
