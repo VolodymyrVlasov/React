@@ -19,13 +19,14 @@ const CreateOrder = () => {
     const [state, dispatch] = useOrder()
     const [{manager}, appDispatch] = useAppContext()
     const [isMount, setIsMount] = useState(true)
+    // const user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(async () => {
         if (isMount) {
             await makersFetch('searchCustomersByRole', 'MAKER')
             await managersFetch('searchCustomersByRole', 'MANAGER')
+            dispatch({type: "addAuthor", payload: manager})
         }
-
         return () => {
             setIsMount(false)
         }

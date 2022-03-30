@@ -4,7 +4,7 @@ import {useAppContext} from "../../hooks/useAppContext";
 import useFetch from "../../hooks/useFetch";
 
 import "./Design.css"
-import GoogleButton from "../../components/GoogleButton/GoogleButton";
+import AuthProviderButton from "../../components/AuthProviderButton/AuthProviderButton";
 import Button from "../../components/Button/Button";
 
 const result = (list) => {
@@ -49,7 +49,7 @@ const Design = () => {
             <section className="section container row-left gap-24">
                 <div className="col-left full-width gap-24 theme-card">
                     <h1 className={"text-h2--bold"}>Auth provider button</h1>
-                    <GoogleButton/>
+                    <AuthProviderButton/>
                 </div>
                 <div className="col-left full-width gap-24 theme-card">
                     <h1 className={"text-h2--bold"}>Button</h1>

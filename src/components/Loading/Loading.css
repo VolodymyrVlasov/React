@@ -1,3 +1,12 @@
+.loading_cnt {
+    /*display: flex;*/
+    /*width: fit-content;*/
+    /*height: fit-content;*/
+    /*!*background: deepskyblue;*!*/
+    /*position: relative;*/
+    /*margin: 0 auto;*/
+}
+
 .cssload-dots {
     width: 0;
     height: 0;
@@ -38,8 +47,6 @@
     margin-left: -17.5px;
     margin-top: -17.5px;
 }
-
-
 
 .cssload-dot:nth-child(5):before {
     z-index: 100;

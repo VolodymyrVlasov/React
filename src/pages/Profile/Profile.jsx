@@ -1,45 +1,66 @@
 import {useAppContext} from "../../hooks/useAppContext";
-import {useAuth} from "../../hooks/useAuth";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Loading from "../../components/Loading/Loading";
 
 import "./Profile.css"
 import useFetch from "../../hooks/useFetch";
 import {getEnumNames} from "../../utils/utils";
+import {Link} from "react-router-dom";
+import LoadingError from "../../components/LoadingError/LoadingError";
 
 const Profile = () => {
     const {data: managerData, error: managerError, loading: managerLoading, fetchData: managerFetch} = useFetch()
     const [{manager}, appDispatch] = useAppContext()
-    const user = useAuth()
+    const user = JSON.parse(localStorage.getItem("user"))
+    const [isVisible, setIsVisible] = useState(false)
 
-    useEffect(async () => {
+
+    useEffect(() => {
         if (!manager && user) {
-            await managerFetch("getManagerByUid", user.uid)
+            managerFetch("getManagerByUid", user.uid)
         }
+    }, [])
 
-        if (managerData) {
+    useEffect(() => {
+        if (managerData && !manager) {
+            console.log("managerData", managerData)
             appDispatch({type: "setManager", payload: managerData})
         }
-    }, [user, manager, managerData])
+    }, [managerData])
+
+    useEffect(() => {
+        if (user && manager) {
+            console.log("user", user)
+            console.log("manager", manager)
+            setIsVisible(true)
+        }
+        return () => setIsVisible(false)
+    }, [user, manager])
 
 
-    if (!manager || user === undefined) {
+    if (managerError) {
+        return <LoadingError error={managerLoading}/>
+    }
+
+    if (!manager || !user || !isVisible || managerLoading) {
         return <Loading/>
     }
 
     return (
-        <section className=" section container col-left">
+        // <CSSTransition in={isVisible} timeout={700}
+        //                classNames="fade-animation" unmountOnExit>
+        <section className="container col-left">
             <div className="row-left gap-24 full-width">
                 <div className="flex-1">
                     <ProfileCard user={user} manager={manager}/>
                 </div>
-                <div className="flex-3 col-left gap-24">
+                <div className="flex-3 col-left gap-8">
                     <ProfileAnalytics/>
                     <ProfileOrders/>
                 </div>
-
             </div>
         </section>
+        // </CSSTransition>
     )
 }
 
@@ -52,19 +73,19 @@ const ProfileOrders = () => {
             <div className="row-left gap-24 full-width">
                 <dic className="col-left gap-8 flex-1">
                     <p className="text-primary-p">To do</p>
-                    <p className="text-h3">9</p>
+                    <Link to={"/orders/new"} className="text-h3">9</Link>
                 </dic>
                 <dic className="col-left gap-8 flex-1">
-                    <p className="text-primary-p">In procces</p>
-                    <p className="text-h3">4</p>
+                    <p className="text-primary-p">In progress</p>
+                    <Link to={"/orders/in_progress"} className="text-h3">4</Link>
                 </dic>
                 <dic className="col-left gap-8 flex-1">
                     <p className="text-primary-p">Done</p>
-                    <p className="text-h3">2</p>
+                    <Link to={"/orders/done"} className="text-h3">2</Link>
                 </dic>
                 <dic className="col-left gap-8 flex-1">
-                    <p className="text-primary-p">Finiched</p>
-                    <p className="text-h3">293</p>
+                    <p className="text-primary-p">Finished</p>
+                    <Link to={"/orders/finished"} className="text-h3">293</Link>
                 </dic>
             </div>
         </div>
@@ -86,7 +107,7 @@ const ProfileAnalytics = (manager) => {
                 </div>
                 <div className="col-left gap-12 flex-1">
                     <p className="text-primary-p">Total orders</p>
-                    <p className="text-h2">9</p>
+                    <p className="text-h3">9</p>
                 </div>
                 <div className="col-left gap-12 flex-1">
                     <p className="text-primary-p">Total money flow</p>
@@ -126,7 +147,7 @@ const ProfileAnalytics = (manager) => {
 
 const ProfileCard = ({user, manager}) => {
 
-    const getLargeProfilePhoto = () => (user?.photoURL)?.split('=')[0] + '=s300-c'
+    const getLargeProfilePhoto = () => ((user?.photoURL)?.split('=')[0] + '=s300-c')
 
     const formatPhone = (phone) => {
         const formatted = []
@@ -142,7 +163,8 @@ const ProfileCard = ({user, manager}) => {
         <div className={"col-left gap-24"}>
             <div className="profile-photo-wrapper">
                 <img className="profile-photo"
-                     loading="lazy" src={getLargeProfilePhoto()}
+
+                     src={getLargeProfilePhoto()}
                      alt="photo profile"
                      width="250px"
                      height="250px"/>
@@ -153,7 +175,7 @@ const ProfileCard = ({user, manager}) => {
                                                           className={"item-tag"}>{getEnumNames([role])[0]["name"]}</div>)}
             </div>
             <div className="col-left gap-8">
-                <a href={`tel:${manager?.phone}`} className={"text-primary-p"}>{formatPhone(manager?.phone)}</a>
+                <a href={`tel:${manager?.phone}`} className={"text-primary-p"}>{manager?.phone && formatPhone(manager?.phone)}</a>
                 <a href={`mailto:${manager?.email}`} className={"text-primary-p"}>{manager?.email}</a>
             </div>
         </div>

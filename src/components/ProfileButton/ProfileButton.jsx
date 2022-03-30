@@ -1,26 +1,25 @@
 import defaultAvatar from "../../img/ico-default-avatar.webp"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import DropDownResult from "../DropDownResult/DropDownResult";
 import {InnerEndpoints} from "../../constants/InnerEndpoints";
 import {useAppContext} from "../../hooks/useAppContext";
-import {logOut} from "../../utils/firebase";
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "../../hooks/useAuth";
 
 import "./ProfileButton.css"
+import {useAuth} from "../../hooks/useAuth";
 
 const ProfileButton = () => {
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
     const [{manager}, appDispatch] = useAppContext()
     const navigate = useNavigate()
-    const user = useAuth()
+    const authData = useAuth()
 
-    const openMenu = async (endpoint) => {
+    const openMenu = (endpoint) => {
         setIsDropDownVisible(false)
         if (endpoint.name === 'Logout') {
-            await logOut()
+            authData.signOut()
             appDispatch({type: 'setManager', payload: null})
-            navigate('login')
+            navigate('/login', {replace: true})
             return
         }
         navigate(endpoint.link)
@@ -32,11 +31,12 @@ const ProfileButton = () => {
                 <button
                     onMouseOver={() => setIsDropDownVisible(true)}
                     onClick={() => setIsDropDownVisible(true)}
-                    style={{backgroundImage: `url("${user?.photoURL || defaultAvatar}"`}}
+                    style={{backgroundImage: `url("${authData?.user?.photoURL || defaultAvatar}"`}}
                     className="profile-button"/>
                 <i className="profile-point"/>
             </div>
-            {isDropDownVisible && <DropDownResult
+            {isDropDownVisible &&
+            <DropDownResult
                 setIsVisibleFunc={setIsDropDownVisible}
                 list={InnerEndpoints}
                 position={'right'}

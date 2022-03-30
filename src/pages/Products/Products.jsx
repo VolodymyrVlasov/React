@@ -5,6 +5,7 @@ import LoadingError from "../../components/LoadingError/LoadingError";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import {useAppContext} from "../../hooks/useAppContext";
 import {search} from "../../utils/search";
+import {CSSTransition} from "react-transition-group";
 
 const Products = () => {
     const {data: rawDataProducts, error: errorProducts, loading: loadingProducts, fetchData: fetchProducts} = useFetch()
@@ -26,7 +27,12 @@ const Products = () => {
     }, [searchQuery, rawDataProducts])
 
     if (loadingProducts) {
-        return <Loading/>
+        return (
+            <CSSTransition in={!productsToRender} timeout={700}
+                           classNames="fade-animation" unmountOnExit>
+                <Loading/>
+            </CSSTransition>
+        )
     }
 
     if (errorProducts) {
@@ -34,24 +40,27 @@ const Products = () => {
     }
 
     return (
-        <section className="container">
-            <div className="col-left gap-24">
-                <div className="col-left gap-8 full-width">
-                    <p>Fast create</p>
-                    <div className="row-left gap-16 full-width">
-
-                    </div>
-                </div>
-                <div className="col-left gap-8 full-width">
-                    <p>Products</p>
+        <CSSTransition in={productsToRender} timeout={700}
+                       classNames="fade-animation" unmountOnExit>
+            <section className="container">
+                <div className="col-left gap-24">
                     <div className="col-left gap-8 full-width">
-                        {productsToRender &&
-                        productsToRender.map(product => <ProductCard key={product.productId} product={product}/>)
-                        }
+                        <p>Fast create</p>
+                        <div className="row-left gap-16 full-width">
+
+                        </div>
+                    </div>
+                    <div className="col-left gap-8 full-width">
+                        <p>Products</p>
+                        <div className="col-left gap-8 full-width">
+                            {productsToRender &&
+                            productsToRender.map(product => <ProductCard key={product.productId} product={product}/>)
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </CSSTransition>
     )
 }
 

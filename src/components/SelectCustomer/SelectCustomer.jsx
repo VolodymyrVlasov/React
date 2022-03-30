@@ -12,9 +12,9 @@ const result = (list) => {
     return list
 }
 
-const SelectCustomer = () => {
+const SelectCustomer = ({defaultValue}) => {
     const [isAddCustomer, setIsAddCustomer] = useState(false)
-    const [customer, setCustomer] = useState(null)
+    const [customer, setCustomer] = useState(defaultValue ? defaultValue : null)
 
     const {data: createdCustomer, loading: customerLoading, error: customerError, fetchData: customerFetch} = useFetch()
     const {data, error, fetchData} = useFetch()

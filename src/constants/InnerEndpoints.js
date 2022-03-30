@@ -1,13 +1,13 @@
 export const InnerEndpoints = [
     {
-        name: "Dashboard",
-        link: "dashboard"
+        name: "Orders",
+        link: "orders"
     }, {
         name: "My profile",
         link: "profile"
     }, {
-        name: "Users",
-        link: "users"
+        name: "Customers",
+        link: "customers"
     }, {
         name: "Products",
         link: "products"

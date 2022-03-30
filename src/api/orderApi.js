@@ -6,7 +6,7 @@ export const createOrder = (payload) => api.post(ENDPOINT, payload)
 
 export const getOrders = () => api.get(ENDPOINT)
 
-export const getOrderById = (id) => api.get(ENDPOINT, id)
+export const getOrderById = (id) => api.get(`${ENDPOINT}/${id}`)
 
 export const updateOrder = (payload) => api.patch(ENDPOINT, payload)
 

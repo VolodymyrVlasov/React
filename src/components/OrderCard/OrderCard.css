@@ -1,33 +1,39 @@
 .order-card {
     width: calc((100% - 12px * 3) / 4);
-    cursor: pointer;
 }
 
 /* `xxl` applies to xx-large devices (large desktops, less than 1400px) */
 @media (max-width: 1399.98px) {
+
 }
 
 /*`xl` applies to x-large devices (desktops, less than 1200px) */
 @media (max-width: 1199.98px) {
+    .order-card {
+        width: calc((100% - 12px * 2) / 3);
+    }
 }
 
 /* `lg` applies to large devices (tablets, less than 992px) */
 @media (max-width: 991.98px) {
+    .order-card {
+        width: calc((100% - 12px * 2) / 2);
+    }
 }
 
 /*-------------------------------------------*/
 /* `md` applies to medium devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
+
 }
 
 /* `sm` applies to small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
-    .order_card {
+    .order-card {
         width: 100%;
     }
 }
 
 /* `xsm` applies to x-small devices (iPhone 5/5s/SE, equals to 320px) */
 @media (max-width: 320px) {
-
 }

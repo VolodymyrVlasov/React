@@ -1,18 +1,15 @@
-import {useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "../hooks/useAuth";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 
 const RequireAuth = ({children}) => {
+    const usr = JSON.parse(localStorage.getItem("user"))
     const location = useLocation()
-    const navigate = useNavigate()
-    const user = useAuth()
 
-    if (user == null && location.pathname !== '/login') {
-        navigate('/login', {replace: true})
-        return <></>
+    if (usr && location.pathname !== "/login") {
+        return <>{children}</>
     }
 
-    if (user != null) {
-        return <>{children}</>
+    if (!usr && location.pathname !== "/login") {
+        return <Navigate to="/login" replace={true}/>
     }
 
     return <></>

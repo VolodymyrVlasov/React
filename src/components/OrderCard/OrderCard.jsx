@@ -1,5 +1,6 @@
 import {getEnumNames} from "../../utils/utils";
 import "./OrderCard.css"
+import {Link} from "react-router-dom";
 
 export const OrderCard = ({order}) => {
 
@@ -9,8 +10,12 @@ export const OrderCard = ({order}) => {
     }
 
     return (
-        <div className="theme-card order-card col-left gap-12" draggable={true}>
-            <p className="text-h4--bold">Order #{order.orderId}</p>
+        <div
+            className="theme-card order-card col-left gap-12" draggable={true}>
+            <Link className="text-h4--bold"
+                  to={`/orders/order/${order.orderId}`}>
+                <p>Order #{order.orderId}</p>
+            </Link>
             <div className="col-left gap-8">
                 <p className="text-secondary-label">To do types</p>
                 <div className="row-left wrap gap-8">{

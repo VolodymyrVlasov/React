@@ -1,38 +1,16 @@
 import {initializeApp} from "firebase/app";
-import {
-    createUserWithEmailAndPassword,
-    getAuth,
-    GoogleAuthProvider,
-    signInWithEmailAndPassword,
-    signInWithRedirect,
-    signOut
-} from "firebase/auth"
+import {getAuth} from "firebase/auth"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDyNZaBaKrHMOeSJk1zrxxjkIanVkkt_Og",
-    authDomain: "paperfoxorders-c3e9e.firebaseapp.com",
-    projectId: "paperfoxorders-c3e9e",
-    storageBucket: "paperfoxorders-c3e9e.appspot.com",
-    messagingSenderId: "765927901688",
-    appId: "1:765927901688:web:9603024e49879bbcbfee0d",
-    measurementId: "G-V9NFFPLGDD"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
 export const app = initializeApp(firebaseConfig)
 
 export const auth = getAuth()
-
-export const createUserWithEmailPassword = (email, password) => createUserWithEmailAndPassword(auth, email, password)
-
-export const signInWithEmailPassword = (email, password) => signInWithEmailAndPassword(auth, email, password)
-
-export const sendPasswordResetEmail = (email) => sendPasswordResetEmail(auth, email)
-
-export const logOut = () => signOut(auth)
-
-export const signInWithGoogle = () => {
-    return signInWithRedirect(auth, new GoogleAuthProvider())
-}
-
-
-

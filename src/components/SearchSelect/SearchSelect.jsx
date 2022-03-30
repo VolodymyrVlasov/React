@@ -29,6 +29,7 @@ const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected, i
     }
 
     const setSelected = (item) => {
+        console.log("setSelected", item)
         setSelectedItem(item)
         if (inputRef) {
             inputRef.current.value = item?.name

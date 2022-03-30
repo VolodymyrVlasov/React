@@ -6,6 +6,7 @@ const initialState = {
     orders: [],
     makers: null,
     manager: null,
+    orderStatusTypes: [],
     isNewTaskPopup: false,
     searchQuery: '',
     sortParams: {
@@ -19,8 +20,10 @@ const reducer = (state, {type, payload}) => {
         switch (type) {
             case 'setManager':
                 return {...state, manager: payload}
-            case "updateOrderList":
+            case 'setOrders':
                 return {...state, orders: payload}
+            case 'setOrderStatusTypes':
+                return {...state, orderStatusTypes: payload}
             case "addTask":
                 return {...state, orders: [...state.orders, payload]}
             case "updateTask":

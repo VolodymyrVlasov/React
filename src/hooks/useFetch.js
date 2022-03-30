@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {createOrder, getOrders, updateOrder} from "../api/orderApi";
+import {createOrder, getOrderById, getOrders, updateOrder} from "../api/orderApi";
 import {
     createCustomer,
     getCustomers,
@@ -64,6 +64,11 @@ const useFetch = () => {
             }
             case 'getOrders': {
                 const [err, data] = await getOrders();
+                setResult(err, data)
+                break
+            }
+            case 'getOrderById': {
+                const [err, data] = await getOrderById(payload);
                 setResult(err, data)
                 break
             }

@@ -1,0 +1,24 @@
+.fade-animation {
+    width: 100vw;
+    height: 100vh;
+}
+.fade-animation-enter {
+    transform: translateY(-500px) scale(0);
+    opacity: 0;
+}
+
+.fade-animation-enter-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 700ms, transform 300ms;
+}
+
+.fade-animation-exit {
+    opacity: 1;
+}
+
+.fade-animation-exit-active {
+    opacity: 0;
+    transform: translateY(-500px) scale(0);
+    transition: opacity 700ms, transform 300ms;
+}

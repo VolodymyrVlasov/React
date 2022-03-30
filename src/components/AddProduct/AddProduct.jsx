@@ -49,7 +49,7 @@ const AddProduct = () => {
 
 export default AddProduct
 
-const Task = ({cartItem, removeTaskFunk}) => {
+export const Task = ({cartItem, removeTaskFunk}) => {
     if (cartItem?.product !== undefined) {
         return (
             <li className="row-h-center_v-spb task-row">
