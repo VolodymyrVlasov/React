@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import useFetch from "../../hooks/useFetch";
 import {useOrder} from "../../hooks/useOrder";
 import Loading from "../Loading/Loading";
@@ -7,24 +7,16 @@ import CartItemForm from "../CartItemForm/CartItemForm";
 import "./AddProduct.css"
 
 const AddProduct = () => {
-    const [, dispatch] = useOrder()
-    const [cartItems, setCartItems] = useState([])
+    const [{cartItems}, dispatch] = useOrder()
     const {data: productsData, loading: productsLoading, error: productsError, fetchData: productsFetch} = useFetch()
 
     useEffect(async () => {
-        dispatch({type: "addCartItems", payload: cartItems})
-        if (cartItems.length === 0) {
-            await productsFetch('getProducts')
-        }
-    }, [cartItems])
+        await productsFetch('getProducts')
+    }, [])
 
-    const onRemoveBtnClick = (index) => {
-        const filteredTasks = [...cartItems]
-        filteredTasks.splice(index, 1)
-        filteredTasks.length === 0 ? setCartItems([]) : setCartItems(filteredTasks)
-    }
+    const onRemoveBtnClick = (index) => dispatch({type: "removeCartItemById", payload: index})
 
-    const addCartItem = (product) => setCartItems(prevState => [...prevState, product])
+    const addCartItem = (item) => dispatch({type: "addCartItem", payload: item})
 
     if (productsLoading) {
         return (<Loading/>)

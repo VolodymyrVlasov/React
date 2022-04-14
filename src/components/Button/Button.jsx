@@ -30,6 +30,10 @@ const Button = ({
                 setStyle("drop")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("›")
                 break
+            case "edit":
+                setStyle("edit")
+                buttonText && buttonText !== "" ? setText(buttonText) : setText("")
+                break
             default:
                 setStyle("default")
                 buttonText && buttonText !== "" ? setText(buttonText) : setText("click me")

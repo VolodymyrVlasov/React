@@ -124,7 +124,6 @@ const CustomerAddForm = ({addCustomer, setIsNewCustomer, isLoading = false}) => 
 
     useEffect(() => {
         nameRef.current.focus()
-
     }, [])
 
 

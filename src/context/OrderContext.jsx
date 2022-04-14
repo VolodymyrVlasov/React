@@ -1,8 +1,7 @@
 import {createContext, useEffect, useReducer} from "react";
 
-export const OrderContext = createContext({})
-
 const initialState = {
+    orderId: null,
     author: {},
     customer: {},
     manager: {},
@@ -11,10 +10,18 @@ const initialState = {
     paid: 0,
     discount: 0,
     totalPrice: 0,
+    deliveryType: "",
     paymentType: "",
     status: "",
-    comments: []
+    comments: [],
+    createdDate: "",
+    editedDate: "",
+    finishedDate: ""
 }
+
+// const [{orderId, manager, maker, customer, createdDate, editedDate, finishedDate, deliveryType, paymentType,status}, dispatch] = useOrder()
+
+export const OrderContext = createContext(initialState)
 
 const reducer = (state, {type, payload}) => {
     try {
@@ -31,6 +38,12 @@ const reducer = (state, {type, payload}) => {
                 return {...state, maker: payload}
             case "addCartItems":
                 return {...state, cartItems: payload}
+            case "addCartItem":
+                return {...state, cartItems: [...state.cartItems, payload]}
+            case "removeCartItemById":
+                const cartItems = [...state.cartItems]
+                cartItems.splice(payload, 1)
+                return {...state, cartItems: cartItems}
             case "addDiscount":
                 return {...state, discount: payload}
             case "addDeliveryType":
@@ -45,6 +58,8 @@ const reducer = (state, {type, payload}) => {
                 return {...state, status: payload}
             case "addComment":
                 return {...state, comments: [payload]}
+            case "addFinishedDate":
+                return {...state, finishedDate: payload}
             case "fillOrder":
                 return payload
             default:
@@ -57,9 +72,11 @@ const reducer = (state, {type, payload}) => {
 
 const OrderProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
-    useEffect(() => {
-        console.log("OrderContext", state)
-    }, [state])
+
+    // useEffect(() => {
+    //     console.dir(state)
+    // }, [state])
+
     return (
         <OrderContext.Provider value={[state, dispatch]}>{children}</OrderContext.Provider>
     )

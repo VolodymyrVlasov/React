@@ -1,16 +1,17 @@
 import defaultAvatar from "../../img/ico-default-avatar.webp"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import DropDownResult from "../DropDownResult/DropDownResult";
 import {InnerEndpoints} from "../../constants/InnerEndpoints";
 import {useAppContext} from "../../hooks/useAppContext";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../hooks/useAuth";
 
 import "./ProfileButton.css"
-import {useAuth} from "../../hooks/useAuth";
 
 const ProfileButton = () => {
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
-    const [{manager}, appDispatch] = useAppContext()
+    const user = JSON.parse(localStorage.getItem("user"))
+    const [, appDispatch] = useAppContext()
     const navigate = useNavigate()
     const authData = useAuth()
 
@@ -22,7 +23,7 @@ const ProfileButton = () => {
             navigate('/login', {replace: true})
             return
         }
-        navigate(endpoint.link)
+        navigate(endpoint.link, {replace: true})
     }
 
     return (
@@ -31,7 +32,7 @@ const ProfileButton = () => {
                 <button
                     onMouseOver={() => setIsDropDownVisible(true)}
                     onClick={() => setIsDropDownVisible(true)}
-                    style={{backgroundImage: `url("${authData?.user?.photoURL || defaultAvatar}"`}}
+                    style={{backgroundImage: `url("${user?.photoURL || defaultAvatar}"`}}
                     className="profile-button"/>
                 <i className="profile-point"/>
             </div>

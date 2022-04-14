@@ -7,15 +7,12 @@ const DropDownResult = ({
                             setIsVisibleFunc,
                             setSelectedItemFunc,
                             isFullWidth = false,
-                            position = 'left',
-                            isFound = true
+                            position = 'left'
                         }) => {
     const ref = useRef()
     const [isNoMatch, setIsNoMatch] = useState(false)
 
-    const getFullWidth = () => {
-        return isFullWidth ? "full-width" : ""
-    }
+    const getWidth = () => isFullWidth ? "full-width" : ""
 
     const onOutSideClick = (e) => {
         if (ref.current && !ref.current?.contains(e.target)) {
@@ -39,11 +36,10 @@ const DropDownResult = ({
         return () => clearTimeout(isShowNoMatch)
     }, [list])
 
-
     if (list?.length > 0) {
         return (
             <ul ref={ref}
-                className={`drop_down_result-dropdown ${getFullWidth()} drop_down_result-dropdown--${position}`}>{
+                className={`drop_down_result-dropdown ${getWidth()} drop_down_result-dropdown--${position}`}>{
                 list.map((item, index) => {
                     return (
                         <li key={index} onClick={() => setSelectedItemFunc(item)}

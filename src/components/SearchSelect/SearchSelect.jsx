@@ -3,63 +3,40 @@ import DropDownResult from "../DropDownResult/DropDownResult";
 import "./SearchSelect.css"
 import SelectedItem from "../SelectedItem/SelectedItem";
 import Button from "../Button/Button";
-import {useOrder} from "../../hooks/useOrder";
 
 const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected, isFullWidth = false}) => {
-    const [, dispatch] = useOrder()
     const [isDropDownVisible, setIsDropDownVisible] = useState(false)
     const [selectedItem, setSelectedItem] = useState(defaultValue ? defaultValue : null)
     const [resultList, setResultList] = useState(null)
+    const [inputValue, setInputValue] = useState("")
     const inputRef = createRef()
 
-    const searchItem = (target) => {
-        setIsDropDownVisible(true)
-        if (target) {
-            let result = list.filter(item => {
-                return item?.name?.toLowerCase().includes(target.toLowerCase()) ||
-                    item.lastName?.toLowerCase().includes(target.toLowerCase()) ||
-                    item.title?.toLowerCase().includes(target.toLowerCase()) ||
-                    item.phone?.toLowerCase().includes(target.toLowerCase()) ||
-                    item.email?.toLowerCase().includes(target.toLowerCase())
-            })
-            if (result?.length > 0) {
-                setResultList(result)
-            }
-        }
-    }
-
     const setSelected = (item) => {
-        console.log("setSelected", item)
         setSelectedItem(item)
-        if (inputRef) {
-            inputRef.current.value = item?.name
-        }
         setIsDropDownVisible(false)
         setResultList(null)
     }
 
-    const onButtonClick = () => {
-        if (!isDropDownVisible) {
-            setSelectedItem(null)
+    useEffect(() => {
+        if (inputValue) {
+            let result = list?.filter(item => {
+                return item?.name?.toUpperCase().includes(inputValue.toUpperCase()) ||
+                    item.lastName?.toUpperCase().includes(inputValue.toUpperCase()) ||
+                    item.title?.toUpperCase().includes(inputValue.toUpperCase()) ||
+                    item.phone?.toUpperCase().includes(inputValue.toUpperCase()) ||
+                    item.email?.toUpperCase().includes(inputValue.toUpperCase())
+            })
+            if (result?.length > 0) {
+                setIsDropDownVisible(true)
+                setResultList(result)
+            }
         }
+    }, [inputValue])
+
+    const onButtonClick = () => {
         setResultList(null)
         setIsDropDownVisible(!isDropDownVisible)
     }
-
-    const removeSelected = (event) => {
-        event.stopPropagation()
-        handleSelected(null)
-        setSelectedItem(null)
-    }
-
-    useEffect(() => {
-        if (clearSelected) {
-            setIsDropDownVisible(false)
-            setSelectedItem(null)
-            setResultList(null)
-            inputRef.current.value = null
-        }
-    }, [clearSelected])
 
     useEffect(() => {
         if (handleSelected) {
@@ -74,10 +51,15 @@ const SearchSelect = ({list = [], handleSelected, defaultValue, clearSelected, i
         <div className="select-cnt row-vertical-center full-width gap-12" onClick={() => onButtonClick()}>
             {
                 selectedItem != null && !clearSelected ?
-                    <SelectedItem item={selectedItem} deleteItem={removeSelected}/>
+                    <SelectedItem item={selectedItem} deleteItem={() => setSelectedItem(null)}/>
                     :
-                    <input type="text" ref={inputRef} className="select--input full-width" placeholder="Start type to search"
-                           onInput={(event) => searchItem(event.target?.value)}/>
+                    <input type="text"
+                           ref={inputRef}
+                           className="select--input full-width"
+                           placeholder="Start type to search"
+                           value={inputValue}
+                           onInput={(event) => setInputValue(event?.target.value)}
+                    />
             }
 
             <Button onClickFunc={onButtonClick} type={"drop"}/>

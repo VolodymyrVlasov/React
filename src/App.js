@@ -16,11 +16,42 @@ import Order from "./pages/Order/Order"
 
 import "./styles/index.css"
 import "./styles/App.css"
+import {useEffect} from "react";
+import useFetch from "./hooks/useFetch";
+import {getEnumNames} from "./utils/utils";
 
 const App = () => {
     const [{isNewTaskPopup}, dispatch] = useAppContext()
+    const {data: manager, fetchData: managerFetch} = useFetch()
+    const {data: makers, fetchData: makersFetch} = useFetch()
+    const {data: managers, fetchData: managersFetch} = useFetch()
+    const {data: paymentTypes, fetchData: paymentTypesFetch} = useFetch()
+    const {data: orderStatusTypes, fetchData: orderStatusTypesFetch} = useFetch()
+    const {data: deliveryTypes, fetchData: deliveryTypesFetch} = useFetch()
+    const [appContext, appDispatch] = useAppContext()
+    const user = JSON.parse(localStorage.getItem("user"))
+
 
     const handleClose = () => dispatch({type: "changeNewTaskPopup"})
+
+    useEffect(async () => {
+        console.count("FETCH IN APP")
+        await makersFetch('searchCustomersByRole', 'MAKER')
+        await managersFetch('searchCustomersByRole', 'MANAGER')
+        await managersFetch('getManagerByUid', user.uid)
+        await orderStatusTypesFetch("getOrderStatusTypes")
+        await paymentTypesFetch('getPaymentTypes')
+        await deliveryTypesFetch('getDeliveryTypes')
+    }, [])
+
+    useEffect(() => {
+        appDispatch({type: "addMakers", payload: makers})
+        appDispatch({type: "addManagers", payload: managers})
+        appDispatch({type: "addPaymentType", payload: getEnumNames(paymentTypes)})
+        appDispatch({type: "addStatus", payload: getEnumNames(orderStatusTypes)})
+        appDispatch({type: "addDeliveryType", payload: getEnumNames(deliveryTypes)})
+        appDispatch({type: "setManager", payload: manager})
+    }, [makers, manager, managers, paymentTypes, orderStatusTypes, deliveryTypes])
 
     return (
         <>{isNewTaskPopup &&

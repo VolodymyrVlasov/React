@@ -7,6 +7,7 @@ import {useAppContext} from "../../hooks/useAppContext";
 import {search} from "../../utils/search";
 import LoadingError from "../../components/LoadingError/LoadingError";
 import {CSSTransition} from "react-transition-group";
+import {Helmet} from "react-helmet";
 
 const Customers = () => {
     const {
@@ -47,26 +48,31 @@ const Customers = () => {
     }
 
     return (
-        <CSSTransition in={customersToRender} timeout={700}
-                       classNames="fade-animation" unmountOnExit>
-            <section className="container">
-                <div className="col-left gap-24">
-                    <div className="col-left gap-16 full-width">
-                        <p className={"text-h3--bold"}>Fast create</p>
-                        <div className="theme-card row-left gap-16 full-width">
-                            <CustomerAddForm addCustomer={createCustomer}/>
+        <>
+            <Helmet>
+                <title>{`Customers | PAPERFOX`}</title>
+            </Helmet>
+            <CSSTransition in={customersToRender} timeout={700}
+                           classNames="fade-animation" unmountOnExit>
+                <section className="container">
+                    <div className="col-left gap-24">
+                        <div className="col-left gap-16 full-width">
+                            <p className={"text-h3--bold"}>Fast create</p>
+                            <div className="theme-card row-left gap-16 full-width">
+                                <CustomerAddForm addCustomer={createCustomer}/>
+                            </div>
+                        </div>
+                        <div className="col-left gap-16 full-width">
+                            <p className={"text-h3--bold"}>Customers</p>
+                            <div className={"col-left gap-8 full-width"}>
+                                {customersToRender && customersToRender.map(user => <UserCard key={user.customerId}
+                                                                                              user={user}/>)}
+                            </div>
                         </div>
                     </div>
-                    <div className="col-left gap-16 full-width">
-                        <p className={"text-h3--bold"}>Customers</p>
-                        <div className={"col-left gap-8 full-width"}>
-                            {customersToRender && customersToRender.map(user => <UserCard key={user.customerId}
-                                                                                          user={user}/>)}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </CSSTransition>
+                </section>
+            </CSSTransition>
+        </>
     )
 }
 

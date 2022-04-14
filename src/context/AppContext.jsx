@@ -3,17 +3,20 @@ import {createContext, useReducer} from "react";
 export const AppContext = createContext(null)
 
 const initialState = {
+    manager: null,
     orders: [],
     makers: null,
-    manager: null,
-    orderStatusTypes: [],
+    managers: null,
+    paymentTypes: null,
+    orderStatusTypes: null,
+    deliveryTypes: null,
     isNewTaskPopup: false,
     searchQuery: '',
     sortParams: {
         key: 'state',
         order: 1
     }
-};
+}
 
 const reducer = (state, {type, payload}) => {
     try {
@@ -30,9 +33,19 @@ const reducer = (state, {type, payload}) => {
                 const index = state.orders.findIndex(payload.id)
                 const updatedTaskList = state.orders.splice(index, 1)
                 updatedTaskList.push(payload)
-                return {...state, tasks: updatedTaskList}
-            case "updateMakers":
+                return {...state, orders: updatedTaskList}
+
+            case "addMakers":
                 return {...state, makers: payload}
+            case "addManagers":
+                return {...state, managers: payload}
+            case "addPaymentType":
+                return {...state, paymentTypes: payload}
+            case "addStatus":
+                return {...state, orderStatusTypes: payload}
+            case "addDeliveryType":
+                return {...state, deliveryTypes: payload}
+
             case "addToSearchParams":
                 return {...state, searchQuery: payload}
             case "changeNewTaskPopup":
@@ -48,10 +61,6 @@ const reducer = (state, {type, payload}) => {
 const TasksProvider = ({children}) => {
     const [appContext, appDispatch] = useReducer(reducer, initialState)
 
-    // useEffect(() => {
-    //     // console.clear()
-    //     console.log("searchQuery", appContext.searchQuery)
-    // }, [appContext.searchQuery])
     return (
         <AppContext.Provider value={[appContext, appDispatch]}>{children}</AppContext.Provider>
     )

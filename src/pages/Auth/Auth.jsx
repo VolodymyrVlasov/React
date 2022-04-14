@@ -40,9 +40,6 @@ const Auth = () => {
         if (user && !managerData) {
             await managerFetch('getManagerByUid', user.uid)
         }
-        if (managerData && !manager && user) {
-            appDispatch({type: 'setManager', payload: managerData})
-        }
         if (manager) {
             navigate("/orders", {replace: true})
         }
@@ -58,7 +55,15 @@ const Auth = () => {
         }
     }, [user, managerData, manager, error])
 
-    if (loading) {
+    useEffect(() => {
+        appDispatch({type: 'setManager', payload: managerData})
+    }, [managerData])
+
+    if (manager) {
+        navigate("/orders", {replace: true})
+    }
+
+    if (loading || managerLoading) {
         return <Loading/>
     }
 
@@ -124,7 +129,9 @@ const ErrorAuthCard = ({error}) => {
     // }
 
     return (
-        <div className='auth-card-error'>{error && `Authentication failed: ${error}`}</div>
+        <>
+            {error && <div className='auth-card-error'>{`Authentication failed: ${error}`}</div>}
+        </>
     )
 
 }

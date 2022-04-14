@@ -27,7 +27,6 @@ const Orders = () => {
     }, [])
 
     useEffect(async () => {
-        console.log("status", status)
         await fetchData("getOrders")
         setTimeout(() => {
             setRefresh(!refresh)

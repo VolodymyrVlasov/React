@@ -7,13 +7,13 @@ import useFetch from "../../hooks/useFetch";
 import {getEnumNames} from "../../utils/utils";
 import {Link} from "react-router-dom";
 import LoadingError from "../../components/LoadingError/LoadingError";
+import {Helmet} from "react-helmet";
 
 const Profile = () => {
     const {data: managerData, error: managerError, loading: managerLoading, fetchData: managerFetch} = useFetch()
     const [{manager}, appDispatch] = useAppContext()
     const user = JSON.parse(localStorage.getItem("user"))
     const [isVisible, setIsVisible] = useState(false)
-
 
     useEffect(() => {
         if (!manager && user) {
@@ -23,23 +23,20 @@ const Profile = () => {
 
     useEffect(() => {
         if (managerData && !manager) {
-            console.log("managerData", managerData)
             appDispatch({type: "setManager", payload: managerData})
         }
     }, [managerData])
 
+
     useEffect(() => {
         if (user && manager) {
-            console.log("user", user)
-            console.log("manager", manager)
             setIsVisible(true)
         }
         return () => setIsVisible(false)
     }, [user, manager])
 
-
     if (managerError) {
-        return <LoadingError error={managerLoading}/>
+        return <LoadingError error={managerError}/>
     }
 
     if (!manager || !user || !isVisible || managerLoading) {
@@ -47,20 +44,22 @@ const Profile = () => {
     }
 
     return (
-        // <CSSTransition in={isVisible} timeout={700}
-        //                classNames="fade-animation" unmountOnExit>
-        <section className="container col-left">
-            <div className="row-left gap-24 full-width">
-                <div className="flex-1">
-                    <ProfileCard user={user} manager={manager}/>
+        <>
+            <Helmet>
+                <title>{`${manager?.name} ${manager?.lastName} | PAPERFOX`}</title>
+            </Helmet>
+            <section className="container col-left">
+                <div className="row-left gap-24 full-width">
+                    <div className="flex-1">
+                        <ProfileCard/>
+                    </div>
+                    <div className="flex-3 col-left gap-8">
+                        <ProfileAnalytics/>
+                        <ProfileOrders/>
+                    </div>
                 </div>
-                <div className="flex-3 col-left gap-8">
-                    <ProfileAnalytics/>
-                    <ProfileOrders/>
-                </div>
-            </div>
-        </section>
-        // </CSSTransition>
+            </section>
+        </>
     )
 }
 
@@ -145,7 +144,9 @@ const ProfileAnalytics = (manager) => {
 
 }
 
-const ProfileCard = ({user, manager}) => {
+const ProfileCard = () => {
+    const [{manager}] = useAppContext()
+    const user = JSON.parse(localStorage.getItem("user"))
 
     const getLargeProfilePhoto = () => ((user?.photoURL)?.split('=')[0] + '=s300-c')
 
@@ -163,19 +164,23 @@ const ProfileCard = ({user, manager}) => {
         <div className={"col-left gap-24"}>
             <div className="profile-photo-wrapper">
                 <img className="profile-photo"
-
                      src={getLargeProfilePhoto()}
                      alt="photo profile"
                      width="250px"
                      height="250px"/>
             </div>
-            <p className="text-h3--bold">{manager?.name} {manager?.lastName}</p>
+            <p className="text-h3--bold">{manager && manager.name} {manager && manager.lastName}</p>
             <div className={"row-left gap-8"}>
-                {manager?.role?.map((role, index) => <div key={index}
-                                                          className={"item-tag"}>{getEnumNames([role])[0]["name"]}</div>)}
+                {manager?.role?.map((role, index) =>
+                    <div key={index}
+                         className={"item-tag"}>
+                        {getEnumNames([role])[0]["name"]}
+                    </div>)
+                }
             </div>
             <div className="col-left gap-8">
-                <a href={`tel:${manager?.phone}`} className={"text-primary-p"}>{manager?.phone && formatPhone(manager?.phone)}</a>
+                <a href={`tel:${manager?.phone}`}
+                   className={"text-primary-p"}>{manager?.phone && formatPhone(manager?.phone)}</a>
                 <a href={`mailto:${manager?.email}`} className={"text-primary-p"}>{manager?.email}</a>
             </div>
         </div>

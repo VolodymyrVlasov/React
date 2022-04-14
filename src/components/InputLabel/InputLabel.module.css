@@ -1,0 +1,20 @@
+.input_label_cnt {
+}
+
+.input_label_label {
+    display: flex;
+    max-width: 100px;
+    font-size: 32px;
+    color: var(--color-theme-monochrom--dark);
+    background: transparent;
+}
+
+.input_label_cnt:focus-within > .input_label_label {
+    font-weight: bold;
+    background-image: var(--gradient-theme--default);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: initial;
+    -moz-text-fill-color: transparent;
+
+}

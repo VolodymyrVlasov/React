@@ -6,8 +6,6 @@ import InputWrapper from "../InputWrapper/InputWrapper";
 const InputNumber = ({onChangeCallback, min = 1, max = 100000, step = 1, valueSate, label}) => {
     const ref = createRef()
 
-    const [isOnFocus, setIsOnFocus] = useState(false)
-
     const onMinusClick = () => {
         if (ref.current.value > min) {
             onChangeValue(valueSate -= step)

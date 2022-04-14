@@ -16,3 +16,17 @@ export const getEnumNames = (enumList) => {
         .filter(obj => obj[0] === element))
         .map(arr => ({type: arr[0][0], name: arr[0][1]}))
 }
+
+export const formatDate = (raw) => {
+    const options = {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "numeric",
+        hour12: false
+    }
+    if (!raw) {
+        return "Not edited yet"
+    }
+    return new Date(raw).toLocaleString("en-gb", options)
+}

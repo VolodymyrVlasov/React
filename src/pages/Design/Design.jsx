@@ -6,6 +6,7 @@ import useFetch from "../../hooks/useFetch";
 import "./Design.css"
 import AuthProviderButton from "../../components/AuthProviderButton/AuthProviderButton";
 import Button from "../../components/Button/Button";
+import {Helmet} from "react-helmet";
 
 const result = (list) => {
     return list
@@ -34,6 +35,9 @@ const Design = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{`Design | PAPERFOX`}</title>
+            </Helmet>
             <section className="section container col-left gap-24">
                 <div className="col-left full-width gap-24 theme-card">
                     <h1 className={"text-h2--bold"}>UniSearch</h1>

@@ -93,6 +93,26 @@
     cursor: wait;
 }
 
+.button-edit {
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    background-image: url("../../img/ico-edit.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: center;
+    width: 16px;
+    height: 16px;
+    font-size: 18px;
+    transition: var(--transition-time);
+    cursor: pointer;
+}
+
+.button-edit:hover {
+    transform: scale(1.1);
+    color: var(--color-theme-primary--default);
+}
+
 .button-loading-animation {
     display: flex;
     width: 12px;
